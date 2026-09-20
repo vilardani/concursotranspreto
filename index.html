@@ -160,6 +160,11 @@
   .matbox ul{margin:6px 0 0;padding-left:18px}
   .matbox li{margin:5px 0}
   .matbox b{color:var(--ink);font-weight:600}
+  .txtbox{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:9px;padding:12px 14px;font-size:13px;line-height:1.65;color:var(--ink-soft);margin-bottom:12px;max-height:300px;overflow:auto}
+  .txtbox p{margin:0 0 8px}
+  .txtbox p:last-child{margin-bottom:0}
+  .txtbox .src{font-size:11px;color:var(--muted);font-style:italic}
+  .txtbox b,.txtbox i{color:var(--ink)}
   .areahead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:22px 0 4px}
   .areahead h3{font-size:16px}
 
@@ -343,9 +348,7 @@ cm:"'Before employees are allowed to operate' = a operação só é permitida ap
 {id:"en7",t:"en_compreensao",e:`In "automated valves can isolate the affected section, **limiting** the volume of any potential spill", the -ing form "limiting" expresses`,
 o:["a past habit.","a result/consequence of the action.","an obligation.","a hypothetical condition.","a question."],c:1,
 cm:"A forma em '-ing' aqui expressa consequência/resultado da ação de isolar a seção (limita o volume do derrame)."},
-{id:"en8",t:"en_gramatica",e:`Choose the option in which the word and its opposite (antonym) are correctly paired.`,
-o:["increase — reduce","allow — permit","expand — grow","detect — identify","remain — stay"],c:0,
-cm:"'Increase' (aumentar) x 'reduce' (reduzir) são antônimos. Os demais pares são sinônimos."},
+
 
 /* ----- ADMINISTRAÇÃO ----- */
 {id:"adm1",t:"adm_financeira",e:`Ao analisar um projeto de investimento pelo método do Valor Presente Líquido (VPL), a empresa deve, em regra,`,
@@ -390,15 +393,11 @@ cm:"Forças (strengths) e fraquezas (weaknesses) são fatores internos, control�
 {id:"adm14",t:"adm_estrategia",e:`No modelo das cinco forças competitivas de Porter, NÃO se inclui como uma das forças`,
 o:["a ameaça de novos entrantes.","o poder de barganha dos fornecedores.","o poder de barganha dos clientes.","a cultura organizacional interna da empresa.","a ameaça de produtos ou serviços substitutos."],c:3,
 cm:"As cinco forças de Porter são: novos entrantes, poder dos fornecedores, poder dos clientes, produtos substitutos e rivalidade entre concorrentes. A cultura interna não é uma das forças (é fator interno)."},
-{id:"adm15",t:"adm_marketing",e:`O composto de marketing tradicional (4 Ps) é formado por`,
-o:["produto, preço, praça e promoção.","pessoas, processos, produtividade e posicionamento.","planejamento, produção, publicidade e pós-venda.","preço, propaganda, patrocínio e público.","produto, propaganda, promoção e parceria."],c:0,
-cm:"Os 4 Ps de McCarthy/Kotler são Produto, Preço, Praça (distribuição) e Promoção. Em marketing de serviços, acrescentam-se Pessoas, Processos e Evidências físicas (7 Ps)."},
+
 {id:"adm16",t:"adm_marketing",e:`A segmentação de mercado consiste em`,
 o:["oferecer o mesmo produto, do mesmo modo, a todos os consumidores.","dividir o mercado em grupos com características e necessidades semelhantes.","eliminar concorrentes por meio de preços predatórios.","reduzir a variedade de produtos a um único modelo.","concentrar toda a comunicação em um único veículo de mídia."],c:1,
 cm:"Segmentar é agrupar consumidores por semelhanças (demográficas, geográficas, comportamentais etc.) para direcionar ofertas e comunicação — base para o posicionamento e para o marketing-alvo."},
-{id:"adm17",t:"adm_contabilidade",e:`A equação patrimonial básica da contabilidade estabelece que`,
-o:["Ativo = Receita − Despesa.","Ativo = Passivo + Patrimônio Líquido.","Patrimônio Líquido = Ativo + Passivo.","Passivo = Ativo + Patrimônio Líquido.","Receita = Ativo − Passivo."],c:1,
-cm:"O Ativo (bens e direitos) é financiado por capital de terceiros (Passivo) e capital próprio (Patrimônio Líquido): Ativo = Passivo + PL. Rearranjando, PL = Ativo − Passivo."},
+
 {id:"adm18",t:"adm_contabilidade",e:`Pelo regime de competência, as receitas e as despesas devem ser reconhecidas`,
 o:["somente quando há efetiva entrada ou saída de caixa.","no período em que ocorrem (são geradas ou incorridas), independentemente do recebimento ou pagamento.","apenas no encerramento do exercício.","de acordo com a preferência do gestor financeiro.","exclusivamente quando emitida a nota fiscal de venda."],c:1,
 cm:"No regime de competência, o fato gerador determina o reconhecimento no período em que ocorre, independentemente do fluxo de caixa. Reconhecer só pela entrada/saída de caixa é regime de caixa."},
@@ -408,9 +407,7 @@ cm:"Simon mostra que, diante de limites de informação, tempo e cognição, os 
 {id:"adm20",t:"adm_decisao",e:`A tendência de valorizar excessivamente a primeira informação recebida ao tomar uma decisão, usando-a como referência para os julgamentos seguintes, é o viés de`,
 o:["confirmação.","ancoragem.","disponibilidade.","aversão à perda.","representatividade."],c:1,
 cm:"O viés de ancoragem faz o decisor apegar-se a um valor/informação inicial. O de confirmação busca dados que confirmem a crença prévia; o de disponibilidade superestima o que é mais lembrado."},
-{id:"adm21",t:"adm_rh",e:`Na gestão por competências, a sigla CHA representa`,
-o:["Cargo, Hierarquia e Autoridade.","Conhecimentos, Habilidades e Atitudes.","Contratação, Homologação e Admissão.","Capacidade, Honestidade e Assiduidade.","Competência, Hierarquia e Avaliação."],c:1,
-cm:"Competência costuma ser descrita pela tríade CHA: Conhecimentos (saber), Habilidades (saber fazer) e Atitudes (querer fazer/como agir)."},
+
 {id:"adm22",t:"adm_rh",e:`No ciclo de Treinamento e Desenvolvimento (T&D), a primeira etapa é`,
 o:["a avaliação dos resultados do treinamento.","o levantamento (diagnóstico) das necessidades de treinamento.","a execução das atividades instrucionais.","a certificação dos participantes.","a definição do orçamento anual da empresa."],c:1,
 cm:"O ciclo de T&D começa pelo Levantamento de Necessidades de Treinamento (LNT), seguido de planejamento/desenho, execução e avaliação dos resultados."},
@@ -420,15 +417,9 @@ cm:"A negação de 'todo A é B' é 'existe pelo menos um A que não é B'. 'Nen
 {id:"adm24",t:"adm_logica",e:`Considere a condicional "Se o sistema falhar, então o alarme será acionado". A proposição logicamente equivalente é`,
 o:["Se o alarme for acionado, então o sistema falhou.","Se o sistema não falhar, então o alarme não será acionado.","Se o alarme não for acionado, então o sistema não falhou.","O sistema falhou e o alarme não foi acionado.","O sistema não falha e o alarme é acionado."],c:2,
 cm:"A equivalente de 'se P então Q' é a contrapositiva 'se não Q então não P'. A letra A é a recíproca e a B, a inversa — nenhuma equivalente."},
-{id:"adm25",t:"adm_estatistica",e:`Considere o conjunto de dados: 2, 3, 3, 6, 11. A média, a mediana e a moda desse conjunto são, respectivamente,`,
-o:["5, 3 e 3.","3, 3 e 5.","5, 6 e 3.","6, 3 e 3.","5, 3 e 6."],c:0,
-cm:"Média = (2+3+3+6+11)/5 = 25/5 = 5; mediana = valor central do rol (2,3,3,6,11) = 3; moda = valor mais frequente = 3."},
-{id:"adm26",t:"adm_estatistica",e:`O desvio padrão é uma medida estatística de`,
-o:["tendência central dos dados.","dispersão dos dados em torno da média.","posição relativa de um valor no conjunto.","correlação entre duas variáveis.","frequência acumulada de uma classe."],c:1,
-cm:"O desvio padrão mede a dispersão (variabilidade) dos dados em relação à média: quanto maior, mais espalhados os valores. Média, mediana e moda são de tendência central."},
-{id:"adm27",t:"adm_esg",e:`A sigla ESG, cada vez mais presente na gestão corporativa, corresponde a`,
-o:["Economia, Sustentabilidade e Governo.","Ambiental (Environmental), Social e Governança (Governance).","Estratégia, Segurança e Gestão.","Eficiência, Serviço e Qualidade.","Ecologia, Sociedade e Grupo."],c:1,
-cm:"ESG reúne os pilares Ambiental (Environmental), Social e de Governança (Governance) — critérios usados para avaliar a sustentabilidade e a responsabilidade das organizações."},
+
+
+
 {id:"adm28",t:"adm_esg",e:`O termo 'greenwashing' refere-se à prática de`,
 o:["adotar metas ambientais auditadas e transparentes.","comunicar uma imagem ambientalmente responsável que não corresponde às práticas reais da empresa.","reciclar integralmente os resíduos da produção.","substituir fontes fósseis por energias renováveis.","publicar relatórios de sustentabilidade certificados."],c:1,
 cm:"Greenwashing ('maquiagem verde') é criar uma aparência de responsabilidade ambiental sem lastro em práticas reais — o oposto de transparência e de metas efetivamente cumpridas."},
@@ -604,12 +595,8 @@ cm:"De Morgan: ¬(P ∧ Q) ≡ ¬P ∨ ¬Q. A negação de uma conjunção é a 
 {id:"adm64",t:"adm_logica",e:`Uma proposição disjuntiva inclusiva "P ou Q" é FALSA somente quando`,
 o:["P é verdadeira e Q é falsa.","ambas, P e Q, são falsas.","ambas, P e Q, são verdadeiras.","P é falsa e Q é verdadeira.","pelo menos uma delas é verdadeira."],c:1,
 cm:"A disjunção inclusiva (P ∨ Q) só é falsa quando as duas proposições são falsas; em qualquer outro caso é verdadeira. (Diferente da conjunção, que só é verdadeira quando ambas são verdadeiras.)"},
-{id:"adm65",t:"adm_estatistica",e:`Ao lançar um dado honesto de seis faces, a probabilidade de sair um número par é`,
-o:["1/6.","1/3.","1/2.","2/3.","5/6."],c:2,
-cm:"Há três resultados pares (2, 4, 6) em seis possíveis: P = 3/6 = 1/2. Probabilidade é casos favoráveis sobre casos possíveis, em espaço equiprovável."},
-{id:"adm66",t:"adm_estatistica",e:`Considere o conjunto ordenado de valores: 4, 7, 9, 12. A mediana desse conjunto é`,
-o:["7.","8.","9.","9,5.","10,5."],c:1,
-cm:"Com número par de elementos, a mediana é a média dos dois valores centrais: (7 + 9)/2 = 8. A mediana não exige que o valor pertença ao conjunto."},
+
+
 {id:"adm67",t:"adm_estatistica",e:`Em uma avaliação, a prova objetiva vale peso 3 e a prova discursiva peso 2. Um candidato obteve 8,0 na objetiva e 6,0 na discursiva. Sua média ponderada é`,
 o:["6,8.","7,0.","7,2.","7,5.","8,0."],c:2,
 cm:"Média ponderada = (8×3 + 6×2)/(3+2) = (24 + 12)/5 = 36/5 = 7,2. Cada nota é multiplicada pelo seu peso e a soma é dividida pela soma dos pesos."},
@@ -619,9 +606,7 @@ cm:"Governança trata de como a organização é dirigida e controlada: conselho
 {id:"adm69",t:"adm_esg",e:`A norma ISO 26000 caracteriza-se por`,
 o:["ser uma norma certificável de sistema de gestão.","oferecer diretrizes (orientações) sobre responsabilidade social, sem fins de certificação.","tratar exclusivamente de gestão da qualidade.","substituir a legislação ambiental brasileira.","aplicar-se apenas a órgãos públicos."],c:1,
 cm:"A ISO 26000 fornece DIRETRIZES sobre responsabilidade social (temas centrais como governança, direitos humanos, meio ambiente etc.), mas NÃO é certificável — diferentemente da ISO 9001 (qualidade) ou 14001 (ambiental)."},
-{id:"adm70",t:"adm_esg",e:`No contexto da sustentabilidade e da responsabilidade socioambiental, o termo 'stakeholders' designa`,
-o:["apenas os acionistas da empresa.","as partes interessadas que afetam ou são afetadas pela organização (clientes, empregados, comunidade, fornecedores, governo etc.).","somente os concorrentes diretos.","os fornecedores de matéria-prima, exclusivamente.","os órgãos de imprensa."],c:1,
-cm:"Stakeholders são todas as partes interessadas — internas e externas — que afetam ou são afetadas pela organização. Difere de 'shareholders' (apenas os acionistas). A gestão sustentável busca equilibrar esses interesses."},
+
 
 /* ===== EXPANSÃO — PSICOLOGIA (mais difíceis) ===== */
 {id:"psi21",t:"psi_etica",e:`Um psicólogo atua em equipe multiprofissional de saúde do trabalhador. Quanto ao sigilo, de acordo com o Código de Ética, ele deve`,
@@ -819,9 +804,7 @@ cm:"Tautologia é a proposição sempre verdadeira em todas as linhas da tabela-
 {id:"adm94",t:"adm_logica",e:`Se 4 operadores inspecionam 60 dutos em 3 horas, mantendo o mesmo ritmo, quantos dutos 6 operadores inspecionam em 2 horas?`,
 o:["40 dutos.","45 dutos.","60 dutos.","72 dutos.","90 dutos."],c:2,
 cm:"Regra de três composta: a produção é proporcional a operadores e a horas. 60 × (6/4) × (2/3) = 60 × 1,5 × 0,666... = 60. Aumentar operadores em 50% e reduzir o tempo a 2/3 compensa-se, resultando em 60 dutos."},
-{id:"adm95",t:"adm_estatistica",e:`Em um conjunto de dados, a moda é`,
-o:["o valor que ocupa a posição central.","o valor (ou valores) que aparece com maior frequência.","a média aritmética dos valores.","a diferença entre o maior e o menor valor.","a raiz quadrada da variância."],c:1,
-cm:"A moda é o valor mais frequente. Um conjunto pode ser amodal (sem moda), bimodal ou multimodal. A posição central é a mediana; a diferença entre extremos é a amplitude; a raiz da variância é o desvio padrão."},
+
 {id:"adm96",t:"adm_estatistica",e:`Sendo P(A) = 0,5, P(B) = 0,4 e P(A∩B) = 0,2, a probabilidade da união P(A∪B) é`,
 o:["0,6.","0,7.","0,8.","0,9.","1,1."],c:1,
 cm:"P(A∪B) = P(A) + P(B) − P(A∩B) = 0,5 + 0,4 − 0,2 = 0,7. Subtrai-se a interseção para não contá-la duas vezes. Somar sem subtrair (0,9) é o erro típico."},
@@ -941,7 +924,241 @@ o:["realizar quaisquer procedimentos, mesmo sem formação específica.","atuar 
 cm:"O psicólogo deve atuar com responsabilidade técnica, dentro dos limites de sua competência e formação, buscando aprimoramento contínuo, e não realizar procedimentos para os quais não esteja capacitado — resguardando a qualidade e a segurança do serviço."},
 {id:"psi68",t:"psi_organizacional",e:`O Desenvolvimento Organizacional (DO) pode ser compreendido como`,
 o:["uma mudança pontual e improvisada de setores isolados.","uma abordagem planejada e sistêmica de mudança, voltada à melhoria de processos, cultura e desempenho das pessoas e da organização.","a simples troca de tecnologia, sem envolver pessoas.","um método exclusivamente financeiro.","a redução de pessoal como fim em si."],c:1,
-cm:"O DO é uma estratégia planejada e de longo prazo de mudança organizacional, com base nas ciências do comportamento, que atua sobre cultura, processos, equipes e pessoas para aumentar a efetividade e a capacidade de adaptação da organização."}
+cm:"O DO é uma estratégia planejada e de longo prazo de mudança organizacional, com base nas ciências do comportamento, que atua sobre cultura, processos, equipes e pessoas para aumentar a efetividade e a capacidade de adaptação da organização."},
+
+/* ===== EXPANSÃO 4 — CURADORIA (inéditas, alta dificuldade, padrão Cesgranrio) ===== */
+/* Português */
+{id:"pt27",t:"pt_compreensao",e:`Texto:\n"Automatizar tarefas repetitivas libera tempo humano para o que máquinas ainda não fazem bem: julgar contextos ambíguos, negociar sentidos, decidir sob incerteza. O risco não está na automação em si, mas em confundi-la com dispensa de julgamento."\n\nInfere-se do texto que o autor considera a automação`,
+o:["um substituto integral do trabalho humano de julgamento.","desejável quando amplia o tempo para tarefas que exigem discernimento humano, sem eliminar o julgamento.","um risco que deve ser evitado em qualquer circunstância.","incompatível com decisões sob incerteza.","irrelevante para a produtividade das organizações."],c:1,
+cm:"O autor vê valor na automação de tarefas repetitivas para liberar o humano ao julgamento; o risco apontado é confundir automação com 'dispensa de julgamento'. As alternativas extremas (substituir tudo/evitar sempre) contrariam o texto."},
+{id:"pt28",t:"pt_compreensao",e:`Texto:\n"Que grande novidade: descobriram, enfim, que reuniões sem pauta consomem horas e não decidem nada."\n\nO efeito de sentido produzido pela expressão "Que grande novidade" é de`,
+o:["elogio sincero à descoberta.","ironia, sugerindo que a constatação é óbvia e tardia.","dúvida quanto à veracidade do fato.","neutralidade descritiva.","surpresa genuína do autor."],c:1,
+cm:"A expressão, seguida de uma constatação banal, produz ironia: diz-se o contrário do que se pensa para criticar a obviedade e o atraso da 'descoberta'. Reconhecer a ironia depende do contexto, não do sentido literal."},
+{id:"pt29",t:"pt_compreensao",e:`Em um texto argumentativo, um parágrafo iniciado por "Um exemplo disso ocorreu quando..." cumpre, tipicamente, a função de`,
+o:["apresentar a tese central pela primeira vez.","ilustrar/exemplificar uma afirmação anterior, dando-lhe concretude.","negar tudo o que foi dito antes.","introduzir um tema sem relação com o anterior.","encerrar o texto com uma conclusão."],c:1,
+cm:"O conectivo 'Um exemplo disso' sinaliza exemplificação: o parágrafo concretiza uma ideia já enunciada, reforçando a argumentação. Identificar a função das partes do texto é habilidade central de compreensão."},
+{id:"pt30",t:"pt_ortografia",e:`Assinale a opção em que a expressão destacada está empregada corretamente.`,
+o:["A operadora estava <b>a par</b> de todos os procedimentos de segurança.","A operadora estava <b>ao par</b> de todos os procedimentos de segurança.","<b>Há</b> dois quilômetros daqui fica o terminal (indicando distância).","Isso vai <b>de encontro</b> aos nossos interesses (querendo dizer que os favorece).","Ela chegou <b>afim</b> de resolver o problema."],c:0,
+cm:"'Estar a par' = estar informado (‘ao par’ é do câmbio/finanças). Distância usa-se 'a' ('a dois quilômetros'), não 'há'; 'ir de encontro a' = opor-se (não favorecer); e finalidade é 'a fim de'."},
+{id:"pt31",t:"pt_ortografia",e:`Assinale a opção em que as duas palavras estão empregadas com o sentido correto.`,
+o:["O gerente foi <b>eminente</b> (prestes a acontecer) e a decisão, <b>iminente</b> (ilustre).","É preciso <b>descriminar</b> (detalhar) as despesas sem <b>discriminar</b> (retirar o caráter criminoso) ninguém.","É preciso <b>discriminar</b> (detalhar/separar) as despesas, sem <b>discriminar</b> (tratar com preconceito) pessoas.","O risco <b>eminente</b> (iminente) exigia ação.","Ele foi <b>discriminado</b> (elogiado) pela chefia."],c:2,
+cm:"'Discriminar' tem os sentidos de detalhar/separar e de tratar com preconceito — ambos com 'sc'. 'Descriminar' (com 'des') = retirar o caráter criminoso. 'Iminente' = prestes a ocorrer; 'eminente' = ilustre/elevado."},
+{id:"pt32",t:"pt_coesao",e:`No período "O supervisor conversou com o estagiário quando ele terminou o relatório", a ambiguidade decorre de`,
+o:["um erro de concordância verbal.","o pronome 'ele' poder referir-se tanto ao supervisor quanto ao estagiário.","um problema de regência nominal.","o uso indevido de crase.","uma inadequação de pontuação."],c:1,
+cm:"A ambiguidade é referencial: 'ele' pode retomar 'supervisor' ou 'estagiário'. Para desfazê-la, reescreve-se o período ou explicita-se o referente — problema de coesão, não de concordância ou regência."},
+{id:"pt33",t:"pt_coesao",e:`Na frase "À medida que os testes avançavam, a confiança da equipe aumentava", a expressão destacada estabelece relação de`,
+o:["oposição.","proporção.","concessão.","finalidade.","condição."],c:1,
+cm:"'À medida que' exprime proporcionalidade (à proporção que): duas ações crescem juntas. Não confundir com 'na medida em que', que tem valor causal/explicativo."},
+{id:"pt34",t:"pt_semantica",e:`Na frase "O terminal recebeu três navios ontem", há uma figura de linguagem em que o local designa quem nele atua. Essa figura é a`,
+o:["metáfora.","metonímia.","hipérbole.","eufemismo.","antítese."],c:1,
+cm:"Trata-se de metonímia: 'o terminal' (o lugar) substitui as pessoas que ali trabalham (a equipe do terminal recebeu os navios). A metonímia troca um termo por outro com o qual tem relação de contiguidade."},
+{id:"pt35",t:"pt_semantica",e:`Considere: (I) "O banco aprovou o financiamento." (II) "Sentei-me no banco da praça." A relação entre os dois empregos de "banco" é de`,
+o:["sinonímia.","antonímia.","polissemia/homonímia (mesma forma, sentidos distintos).","paronímia.","hiperonímia."],c:2,
+cm:"A mesma forma ('banco') com sentidos diferentes conforme o contexto caracteriza polissemia/homonímia. Paronímia seria entre palavras parecidas mas distintas (ex.: tráfego/tráfico); sinonímia, sentidos próximos."},
+{id:"pt36",t:"pt_verbos",e:`A transposição da frase "A comissão avaliará as propostas" para a voz passiva analítica resulta em`,
+o:["As propostas avaliarão a comissão.","As propostas serão avaliadas pela comissão.","Avaliar-se-ão as propostas pela comissão.","A comissão será avaliada pelas propostas.","As propostas seriam avaliadas."],c:1,
+cm:"Na passiva analítica, o objeto direto ('as propostas') vira sujeito e o verbo assume 'ser' + particípio no mesmo tempo (futuro): 'serão avaliadas'; o sujeito da ativa vira agente da passiva ('pela comissão')."},
+{id:"pt37",t:"pt_verbos",e:`Assinale a opção em que o emprego do modo verbal está correto na oração concessiva.`,
+o:["Ainda que a proposta é boa, foi rejeitada.","Ainda que a proposta seja boa, foi rejeitada.","Mesmo que a proposta será boa, foi rejeitada.","Embora a proposta é boa, será rejeitada.","Conquanto a proposta é boa, foi rejeitada."],c:1,
+cm:"Conjunções concessivas (ainda que, embora, conquanto, mesmo que) exigem o verbo no subjuntivo: 'ainda que a proposta seja boa'. Usar o indicativo ('é/será') nessas orações fere a norma-padrão."},
+{id:"pt38",t:"pt_classes",e:`Na frase "Não se sabe se haverá prorrogação", as duas ocorrências de "se" são, respectivamente,`,
+o:["conjunção integrante e partícula apassivadora.","índice de indeterminação do sujeito e conjunção integrante (condicional/integrante).","pronome reflexivo e conjunção condicional.","partícula apassivadora e pronome reflexivo.","conjunção integrante e pronome reflexivo."],c:1,
+cm:"No 1º 'se' ('Não se sabe'), o sujeito é indeterminado (índice de indeterminação do sujeito, com verbo na 3ª pessoa do singular). O 2º 'se' introduz a oração 'se haverá prorrogação' (conjunção). Analisar a função na oração define a classe."},
+{id:"pt39",t:"pt_classes",e:`Assinale a opção em que "onde" foi empregado de acordo com a norma-padrão.`,
+o:["A reunião onde definimos as metas foi produtiva.","Este é o setor onde ocorreram as falhas.","Chegamos a uma situação onde não há saída.","O relatório onde constam os dados está pronto.","O momento onde tudo mudou foi decisivo."],c:1,
+cm:"'Onde' indica lugar físico. Cabe em 'o setor onde ocorreram as falhas'. Para reunião, situação, relatório e momento (não são lugares), usa-se 'em que/no qual'. 'Aonde' indica destino (ideia de movimento)."},
+{id:"pt40",t:"pt_coord_subord",e:`Na frase "Concluído o relatório, a equipe encerrou o expediente", a oração destacada é uma reduzida de particípio com valor`,
+o:["causal, apenas.","temporal (equivale a 'quando/depois que o relatório foi concluído').","concessivo.","final.","comparativo."],c:1,
+cm:"A reduzida de particípio 'Concluído o relatório' equivale a uma temporal ('depois que o relatório foi concluído'). Orações reduzidas não têm conjunção e trazem o verbo em forma nominal (infinitivo, gerúndio ou particípio)."},
+{id:"pt41",t:"pt_coord_subord",e:`Em "O barulho era tão intenso que ninguém conseguia se concentrar", a segunda oração é subordinada adverbial`,
+o:["causal.","consecutiva.","concessiva.","condicional.","proporcional."],c:1,
+cm:"A estrutura 'tão... que' exprime consequência: a intensidade do barulho leva ao resultado (ninguém se concentrava). É oração subordinada adverbial consecutiva."},
+{id:"pt42",t:"pt_pontuacao",e:`Assinale a opção corretamente pontuada.`,
+o:["A proposta era boa, mas, o prazo era curto.","A proposta era boa, mas o prazo era curto.","A proposta era boa mas, o prazo era curto.","A proposta, era boa mas o prazo era curto.","A proposta era boa mas o prazo, era curto."],c:1,
+cm:"Antes da conjunção adversativa 'mas' usa-se vírgula ('boa, mas o prazo...'); não se coloca vírgula depois dela sem motivo, nem se separa sujeito de verbo ('o prazo, era')."},
+{id:"pt43",t:"pt_pontuacao",e:`Assinale a opção em que o ponto e vírgula foi empregado adequadamente.`,
+o:["Compareceram: o gerente; e o supervisor.","Havia três pendências: revisar o contrato; conferir os prazos; e alinhar a equipe.","O relatório; estava pronto.","Ele chegou cedo; e saiu tarde sem motivo para a pausa.","A reunião; foi produtiva."],c:1,
+cm:"O ponto e vírgula separa itens de uma enumeração (sobretudo após dois-pontos, em itens com alguma extensão): 'revisar o contrato; conferir os prazos; e alinhar a equipe'. Não se separa sujeito do verbo com ponto e vírgula."},
+{id:"pt44",t:"pt_concordancia",e:`Assinale a opção correta quanto à concordância.`,
+o:["Precisa-se de operadores experientes.","Precisam-se de operadores experientes.","Aluga-se salas comerciais.","Vende-se apartamentos novos.","Trata-se de questões urgentes; portanto tratam-se de prioridades."],c:0,
+cm:"Com verbo transitivo indireto + 'se' (índice de indeterminação do sujeito), o verbo fica no singular: 'Precisa-se de operadores'. Já 'alugam-se salas' e 'vendem-se apartamentos' (partícula apassivadora, sujeito paciente no plural) exigem plural; 'trata-se de' é sempre singular."},
+{id:"pt45",t:"pt_concordancia",e:`Na frase "______ providências urgentes para regularizar a situação", assinale a forma que completa corretamente segundo a norma-padrão.`,
+o:["Fazem-se necessário","Faz-se necessárias","Fazem-se necessárias","Faz-se necessário","Fazem-se necessário"],c:2,
+cm:"'Providências' é o sujeito (plural), então o verbo e o predicativo concordam no plural: 'Fazem-se necessárias providências'. Aqui 'fazer' não é impessoal — é 'fazer-se necessário' com sujeito determinado."},
+{id:"pt46",t:"pt_regencia",e:`Assinale a opção em que a regência verbal está de acordo com a norma-padrão.`,
+o:["O projeto visa o aumento da eficiência (no sentido de ter por objetivo).","O projeto visa ao aumento da eficiência (no sentido de ter por objetivo).","Esqueci de trazer os documentos.","Ele namora com a colega há dois anos.","Cheguei no terminal atrasado."],c:1,
+cm:"'Visar', no sentido de 'ter por objetivo', é transitivo indireto: 'visa ao aumento'. 'Esquecer' pronominal pede preposição ('esqueci-me de'); 'namorar' é transitivo direto ('namora a colega'); e o correto é 'cheguei ao terminal'."},
+{id:"pt47",t:"pt_regencia",e:`Assinale a opção em que a regência nominal está correta.`,
+o:["Ele tem acesso no sistema e respeito com as normas.","Ela tem acesso ao sistema e respeito às normas.","O funcionário é apto para o cargo e ávido de resultados, sem preposição alguma.","A empresa é cumpridora com as leis.","O relatório está em conformidade com as normas e apto à divulgação, mas ansioso de aprovação."],c:1,
+cm:"'Acesso' rege a preposição 'a' ('acesso ao sistema'); 'respeito' também ('respeito às normas'). Os nomes exigem preposições específicas — 'apto a/para', 'ávido de/por', 'em conformidade com' —, e a opção B é a que respeita todas as regências."},
+{id:"pt48",t:"pt_crase",e:`Assinale a opção em que o uso da crase está de acordo com a norma-padrão.`,
+o:["Na medida em que os custos subiam, cortavam-se despesas.","À medida em que os custos subiam, cortavam-se despesas.","Na medida que os custos subiam, cortavam-se despesas.","A medida em que os custos subiam, cortavam-se despesas.","À medida em que os custos subiam, cortava-se despesas."],c:0,
+cm:"São corretas 'à medida que' (proporção, com crase e sem 'em') e 'na medida em que' (causa, sem crase e com 'em'). A forma híbrida 'à medida em que' é incorreta. Aqui, com sentido de causa, a correta é 'na medida em que'."},
+{id:"pt49",t:"pt_crase",e:`Assinale a opção em que a crase é facultativa.`,
+o:["Refiro-me à empresa contratada.","Entreguei o processo à Vossa Senhoria.","Cheguei à mesma conclusão.","Enviei o e-mail à sua supervisora / a sua supervisora.","Assisti à reunião de ontem."],c:3,
+cm:"Antes de pronome possessivo feminino singular a crase é facultativa ('à/a sua supervisora'). Antes de pronomes de tratamento como 'Vossa Senhoria' não há crase; nas demais (referir-se a, chegar a conclusão, assistir a) a crase é obrigatória."},
+{id:"pt50",t:"pt_pronomes",e:`Assinale a opção em que a colocação pronominal está de acordo com a norma-padrão.`,
+o:["Informaram que entregar-me-iam o relatório.","Informaram que me entregariam o relatório.","Quando chegou, apresentou-se-me o problema, mas ninguém me avisou nada.","Tudo se resolverá, disseram-me, embora me disseram pouco.","Se apresentou o relatório na reunião."],c:1,
+cm:"A conjunção subordinativa 'que' atrai o pronome: exige próclise — 'que me entregariam'. Não se usa mesóclise havendo palavra atrativa, nem se inicia oração com pronome átono ('Se apresentou' → 'Apresentou-se')."},
+{id:"pt51",t:"pt_pronomes",e:`Assinale a opção em que a combinação ou a colocação pronominal está correta na norma-padrão.`,
+o:["Dá-me o documento; se possível, entrega-mo hoje.","Me dá o documento; se possível, entrega ele hoje.","Dá o documento para mim; entrega-lo hoje.","Dá-me ele; entrega-me ele hoje.","Entrega-me-o não, deixa para amanhã."],c:0,
+cm:"No imperativo afirmativo usa-se ênclise ('dá-me'); a combinação de 'me' + 'o' resulta em 'mo' ('entrega-mo' = entrega-o a mim). Não se usa pronome reto ('ele') como objeto direto na norma culta, nem próclise sem atrativo em início de oração."},
+{id:"pt52",t:"pt_compreensao",e:`Texto:\n"A padronização de processos reduz erros. É verdade, porém, que padronizar em excesso pode engessar a resposta a situações novas."\n\nA relação entre as duas afirmações do texto é de`,
+o:["mera repetição da mesma ideia.","ressalva/contraposição: reconhece um benefício e, em seguida, aponta um limite.","causa e efeito direto sem contraste.","exemplificação da primeira ideia.","conclusão que anula a primeira afirmação."],c:1,
+cm:"O conectivo 'porém' introduz uma ressalva: admite-se o benefício (reduz erros) e contrapõe-se um limite (excesso engessa). Não há repetição nem anulação — é uma contraposição que matiza a primeira ideia."},
+/* Inglês */
+{id:"en12",t:"en_compreensao",e:`Read the text:\n"All personnel entering the tank farm must wear the required personal protective equipment. Supervisors are responsible for checking compliance, and no exceptions are granted during loading operations."\n\nAccording to the text, during loading operations,`,
+o:["personnel may skip the protective equipment.","no exceptions to wearing the required equipment are allowed.","supervisors wear the equipment on behalf of the workers.","the tank farm is closed to all personnel.","compliance checking is optional."],c:1,
+cm:"O texto afirma que 'no exceptions are granted during loading operations' — nenhuma exceção é permitida ao uso do EPI durante as operações de carregamento. As demais contrariam o texto."},
+{id:"en13",t:"en_compreensao",e:`In the text, the word "compliance" is closest in meaning to`,
+o:["complaint","conformity/adherence to the rules","competition","complexity","completion"],c:1,
+cm:"'Compliance' = conformidade/cumprimento das regras. Cuidado com 'complaint' (reclamação), um falso amigo próximo na forma."},
+{id:"en14",t:"en_gramatica",e:`In "no exceptions are granted", the verb form "are granted" is`,
+o:["present continuous, active.","simple present, passive voice.","past perfect, active.","future, active.","imperative."],c:1,
+cm:"'Are granted' = presente simples na voz passiva (be + particípio). O foco é na ação (conceder exceções), não em quem concede."},
+{id:"en15",t:"en_compreensao",e:`Read the text:\n"The company has pledged to cut its carbon emissions by 40% by 2035. To achieve this, it will invest in cleaner fuels and modernize its fleet, even though these measures raise short-term costs."\n\nAccording to the text, the company's target is to`,
+o:["increase emissions by 40% by 2035.","reduce carbon emissions by 40% by 2035.","stop all operations by 2035.","cut costs by 40% immediately.","sell its fleet by 2035."],c:1,
+cm:"'Pledged to cut its carbon emissions by 40% by 2035' = comprometeu-se a reduzir as emissões em 40% até 2035. 'Cut' aqui é reduzir."},
+{id:"en16",t:"en_gramatica",e:`In the same text, the expression "even though" introduces an idea of`,
+o:["cause.","concession/contrast (despite something).","purpose.","time.","addition."],c:1,
+cm:"'Even though' = ainda que/embora: introduz concessão/contraste — a empresa investe apesar de os custos de curto prazo subirem."},
+{id:"en17",t:"en_compreensao",e:`It can be inferred from the text that the described measures`,
+o:["have no financial impact at all.","may be more expensive in the short term but support a long-term goal.","will reduce costs immediately.","are optional for the company.","have already been abandoned."],c:1,
+cm:"O texto diz que as medidas 'raise short-term costs' (elevam custos de curto prazo), mas servem à meta de 2035 — logo, infere-se um custo maior no curto prazo em favor de um objetivo de longo prazo."},
+{id:"en18",t:"en_compreensao",e:`Read: "Delays at the port can ripple through the whole supply chain, affecting delivery times and increasing storage costs."\nThe expression "ripple through" is closest in meaning to`,
+o:["stop completely","spread across / affect the whole","reduce gradually","have no effect on","stay contained in one point"],c:1,
+cm:"'Ripple through' = propagar-se/espalhar-se por (como ondas). Os atrasos se propagam por toda a cadeia, afetando prazos e custos."},
+{id:"en19",t:"en_compreensao",e:`According to the same text, one consequence of delays at the port is`,
+o:["lower storage costs.","higher storage costs.","faster delivery times.","fewer parties involved.","the end of the supply chain."],c:1,
+cm:"O texto afirma 'increasing storage costs' — os atrasos aumentam os custos de armazenagem. 'Storage' = armazenagem/estocagem."},
+{id:"en20",t:"en_gramatica",e:`Choose the sentence that is grammatically correct in the passive voice.`,
+o:["The report was wrote by the analyst.","The report was written by the analyst.","The report were written by the analyst.","The report is write by the analyst.","The report has wrote by the analyst."],c:1,
+cm:"A passiva exige 'be' + particípio passado: 'was written'. 'Wrote' é passado simples (ativa); o particípio de 'write' é 'written'."},
+{id:"en21",t:"en_gramatica",e:`Read: "You ______ enter the restricted area without authorization." Choose the modal that expresses prohibition.`,
+o:["must","may","must not","could","might"],c:2,
+cm:"'Must not' expressa proibição (é proibido entrar sem autorização). 'Must' seria obrigação; 'may/might/could' indicam permissão/possibilidade."},
+{id:"en22",t:"en_gramatica",e:`The noun form of the adjective "safe" is`,
+o:["safely","safety","safen","safeness only in informal use","saving"],c:1,
+cm:"O substantivo de 'safe' (seguro) é 'safety' (segurança). 'Safely' é advérbio. Reconhecer a formação de palavras (sufixos) ajuda na compreensão do texto."},
+{id:"en23",t:"en_gramatica",e:`Read: "The valve was faulty; ______, the operation was suspended." Choose the connector that expresses consequence.`,
+o:["however","therefore","although","meanwhile","whereas"],c:1,
+cm:"'Therefore' = portanto (consequência): a válvula estava com defeito, portanto a operação foi suspensa. 'However' e 'whereas' são de contraste."},
+{id:"en24",t:"en_gramatica",e:`Read: "I didn't understand the manual; actually, I found it quite confusing." In this sentence, "actually" means`,
+o:["currently / nowadays.","in fact / really.","actively.","eventually.","occasionally."],c:1,
+cm:"'Actually' é falso amigo: significa 'na verdade/de fato', NÃO 'atualmente' (que é 'currently/nowadays'). Aqui reforça a constatação de que o manual era confuso."},
+{id:"en25",t:"en_compreensao",e:`Read: "Global demand for energy is expected to rise steadily over the next decades." The word "rise" is closest in meaning to`,
+o:["fall","increase","remain stable","disappear","fluctuate randomly"],c:1,
+cm:"'Rise' = subir/aumentar. A demanda deve aumentar de forma constante ('steadily'). 'Fall' é o oposto."},
+/* Administração */
+{id:"adm111",t:"adm_estrategia",e:`Na Matriz de Ansoff, a estratégia de oferecer produtos totalmente novos a mercados também novos é denominada`,
+o:["penetração de mercado.","desenvolvimento de mercado.","desenvolvimento de produto.","diversificação.","fidelização."],c:3,
+cm:"A Matriz de Ansoff cruza produtos e mercados (atuais/novos): penetração (produto atual/mercado atual), desenvolvimento de mercado (produto atual/mercado novo), desenvolvimento de produto (produto novo/mercado atual) e diversificação (produto novo/mercado novo) — a de maior risco."},
+{id:"adm112",t:"adm_projetos",e:`Em um cronograma de projeto, o caminho crítico é`,
+o:["a sequência de atividades de menor duração.","a sequência mais longa de atividades dependentes, que determina a duração mínima do projeto.","a lista de atividades opcionais.","o conjunto de tarefas com maior folga.","o orçamento total do projeto."],c:1,
+cm:"O caminho crítico é a sequência de atividades dependentes cuja soma de durações é a maior, definindo o menor tempo possível do projeto. Atrasos em atividades do caminho crítico (folga zero) atrasam o projeto inteiro."},
+{id:"adm113",t:"adm_decisao",e:`A Matriz GUT, usada para priorização, avalia cada problema segundo três critérios, que são`,
+o:["Ganho, Utilidade e Tempo.","Gravidade, Urgência e Tendência.","Gestão, Undade e Total.","Grau, Utilização e Técnica.","Global, Único e Temporário."],c:1,
+cm:"A Matriz GUT prioriza problemas pela Gravidade (impacto), Urgência (prazo para agir) e Tendência (piora ao longo do tempo). Multiplicam-se as notas para ordenar as prioridades."},
+{id:"adm114",t:"adm_estatistica",e:`O coeficiente de variação (CV) é uma medida de dispersão relativa, obtida pela relação entre`,
+o:["a média e a mediana.","o desvio padrão e a média (geralmente em %).","a moda e a amplitude.","a variância e a mediana.","o maior e o menor valor."],c:1,
+cm:"CV = desvio padrão / média (×100 para %). Por ser relativo, permite comparar a dispersão de conjuntos com médias ou unidades diferentes: quanto maior o CV, mais heterogêneo o conjunto."},
+{id:"adm115",t:"adm_financeira",e:`A estrutura de capital de uma empresa refere-se`,
+o:["à composição entre capital próprio e capital de terceiros que financia seus ativos.","apenas ao valor do estoque.","ao número de ações negociadas na bolsa.","ao total de despesas operacionais.","à quantidade de funcionários."],c:0,
+cm:"A estrutura de capital é a proporção entre capital próprio (PL) e capital de terceiros (dívidas) usada para financiar os ativos. Sua definição afeta o risco e o custo de capital (WACC) da empresa."},
+{id:"adm116",t:"adm_contabilidade",e:`O índice de endividamento (participação de capital de terceiros) indica`,
+o:["a rentabilidade do patrimônio líquido.","a proporção dos recursos de terceiros em relação ao total de recursos (ou ao capital próprio).","a liquidez imediata da empresa.","o giro do estoque.","a margem de lucro sobre vendas."],c:1,
+cm:"O índice de endividamento mede quanto a empresa usa de capital de terceiros frente ao total (ou ao capital próprio). Endividamento elevado aumenta o risco financeiro, mas pode potencializar o retorno (alavancagem)."},
+{id:"adm117",t:"adm_financeira",e:`A principal diferença entre juros simples e juros compostos é que, nos juros compostos,`,
+o:["os juros incidem sempre apenas sobre o capital inicial.","os juros de cada período passam a integrar a base de cálculo dos juros seguintes (juros sobre juros).","não há incidência de juros.","a taxa é sempre menor que nos juros simples.","o montante cresce de forma linear."],c:1,
+cm:"Nos juros compostos, os juros de cada período são incorporados ao capital, e os juros seguintes incidem sobre esse novo montante (juros sobre juros), gerando crescimento exponencial. Nos simples, incidem sempre sobre o capital inicial (crescimento linear)."},
+{id:"adm118",t:"adm_rh",e:`A remuneração por competências caracteriza-se por`,
+o:["pagar exclusivamente pelo tempo de casa do empregado.","vincular a remuneração ao conjunto de competências (conhecimentos, habilidades e atitudes) que o profissional desenvolve e aplica.","desconsiderar o desempenho e a entrega.","ser igual para todos, independentemente da função.","basear-se apenas na negociação individual informal."],c:1,
+cm:"A remuneração por competências recompensa o desenvolvimento e a aplicação de competências (CHA) alinhadas à estratégia, estimulando a qualificação contínua — diferente de remunerar apenas por cargo ou tempo de serviço."},
+/* Psicologia */
+{id:"psi69",t:"psi_organizacional",e:`Segundo a Teoria X e Y de McGregor, o gestor que adota pressupostos da Teoria Y acredita que as pessoas`,
+o:["são naturalmente preguiçosas e precisam ser controladas e coagidas.","podem ver o trabalho como algo natural, buscando responsabilidade e autonomia quando as condições favorecem.","só trabalham por punição.","não são capazes de criatividade.","devem ser vigiadas permanentemente."],c:1,
+cm:"A Teoria X pressupõe aversão ao trabalho, exigindo controle e coerção; a Teoria Y pressupõe que as pessoas podem gostar do trabalho, buscar responsabilidade e se autodirigir, favorecendo estilos participativos de gestão."},
+{id:"psi70",t:"psi_diagnostico",e:`No mapeamento de competências, o chamado 'gap' (lacuna) de competências corresponde`,
+o:["ao excesso de competências da equipe.","à diferença entre as competências requeridas pela estratégia/cargo e as competências atualmente disponíveis.","ao número de vagas em aberto.","ao tempo de casa dos empregados.","à folha de pagamento da área."],c:1,
+cm:"O gap de competências é a diferença entre o que a organização precisa (competências requeridas) e o que efetivamente possui (competências existentes). Identificá-lo orienta ações de recrutamento, T&D e gestão de carreira."},
+{id:"psi71",t:"psi_social",e:`No feedback e na comunicação interpessoal, a Comunicação Não Violenta (Rosenberg) propõe uma sequência baseada em`,
+o:["julgamento, crítica, punição e ordem.","observação, sentimento, necessidade e pedido.","ameaça, cobrança, sanção e controle.","silêncio, evitação e distanciamento.","comparação, ironia, rótulo e conselho."],c:1,
+cm:"A CNV estrutura-se em quatro componentes: observar sem julgar, expressar o sentimento, identificar a necessidade e formular um pedido claro. Favorece feedbacks respeitosos e reduz reações defensivas."},
+{id:"psi72",t:"psi_saude",e:`Diferentemente do assédio moral, o assédio sexual no trabalho caracteriza-se, essencialmente, por`,
+o:["condutas repetitivas de humilhação sem conotação sexual.","constrangimento com conotação sexual, mediante conduta indesejada, podendo configurar-se inclusive por chantagem (favorecimento) ou por ambiente hostil.","qualquer cobrança de metas pela chefia.","conflitos esporádicos entre colegas.","a avaliação de desempenho formal."],c:1,
+cm:"O assédio sexual envolve conduta de conotação sexual indesejada, seja por chantagem (assédio por intimidação/quid pro quo) seja pela criação de ambiente hostil. Distingue-se do assédio moral (humilhação reiterada, sem necessariamente teor sexual) e tem implicações legais próprias."},
+{id:"psi73",t:"psi_etica",e:`Na atuação em pesquisa, o psicólogo deve observar como princípio ético fundamental`,
+o:["dispensar qualquer autorização dos participantes.","obter o consentimento livre e esclarecido dos participantes, garantindo sigilo e o direito de recusa/retirada.","divulgar dados identificáveis para dar transparência.","priorizar os interesses do financiador sobre os participantes.","omitir os objetivos da pesquisa em todos os casos."],c:1,
+cm:"A ética em pesquisa exige consentimento livre e esclarecido, sigilo, proteção dos participantes e respeito ao direito de recusar ou retirar-se a qualquer momento, sem prejuízo. A dignidade e o bem-estar dos participantes prevalecem sobre interesses de terceiros."},
+{id:"psi74",t:"psi_organizacional",e:`O comprometimento organizacional afetivo, na literatura de comportamento organizacional, refere-se`,
+o:["à permanência do empregado apenas por falta de alternativas.","ao vínculo emocional e à identificação do empregado com a organização, levando-o a permanecer porque deseja.","à obrigação moral de permanecer.","ao cumprimento estrito de ordens por medo.","à ausência de qualquer vínculo com a empresa."],c:1,
+cm:"No modelo de comprometimento (Meyer e Allen), o componente afetivo é o vínculo emocional e a identificação com a organização — a pessoa permanece porque quer. Diferencia-se do instrumental (permanece por necessidade/custos de sair) e do normativo (por obrigação/dever)."},
+
+/* ===== EXPANSÃO 5 — LEITURA ANCORADA EM TEXTO (formato da prova) ===== */
+/* Português — Texto 1 */
+{id:"pt53",t:"pt_compreensao",tx:"pt_t1",e:`De acordo com o texto, a pergunta "e daí?", anotada pelo antigo chefe, representava, para o autor,`,
+o:["um sinal de grosseria gratuita, sem propósito.","um convite a transformar os dados em decisão, atribuindo-lhes sentido.","uma ordem para reduzir o tamanho dos relatórios.","uma crítica ao estilo de escrita do autor.","um elogio ao trabalho apresentado."],c:1,
+cm:"O texto diz que a pergunta, 'aparentemente rude, era um convite — obrigava-me a transformar dados em decisão'. Portanto, o sentido é o de estimular a passagem do dado à decisão, e não grosseria, ordem ou elogio."},
+{id:"pt54",t:"pt_semantica",tx:"pt_t1",e:`No trecho "aquela pergunta, aparentemente rude", a palavra "rude" pode ser substituída, sem alteração de sentido no contexto, por`,
+o:["delicada.","áspera.","elegante.","tímida.","confusa."],c:1,
+cm:"No contexto, 'rude' tem o sentido de áspera/grosseira. 'Delicada' e 'elegante' são antônimos; a escolha do sinônimo depende do sentido que a palavra assume na frase."},
+{id:"pt55",t:"pt_coesao",tx:"pt_t1",e:`A expressão "aquela pergunta" (no texto) retoma, por coesão,`,
+o:["a anotação de que o chefe não gostava.","a pergunta 'e daí?' feita pelo chefe.","o relatório entregue pelo autor.","a decisão tomada pelo autor.","a voz do chefe no presente."],c:1,
+cm:"'Aquela pergunta' é um elemento de coesão referencial (anáfora) que retoma a pergunta 'e daí?' mencionada antes. Identificar o antecedente é essencial para a compreensão."},
+{id:"pt56",t:"pt_pontuacao",tx:"pt_t1",e:`No trecho "era um convite — obrigava-me a transformar dados em decisão", o travessão foi empregado para`,
+o:["separar o sujeito do verbo.","introduzir um esclarecimento/ênfase ao que se afirmou antes.","marcar a fala de um personagem em diálogo.","indicar dúvida do narrador.","isolar um vocativo."],c:1,
+cm:"O travessão, aqui, introduz um esclarecimento enfático do que significa 'um convite'. Também é usado para marcar diálogos ou intercalar termos, mas neste caso a função é explicativa/enfática."},
+{id:"pt57",t:"pt_verbos",tx:"pt_t1",e:`Em "Hoje, quando um número me impressiona, ouço a voz dele e desconfio", os verbos no presente exprimem`,
+o:["uma ação concluída no passado.","um hábito, uma ação que se repete no presente.","uma ordem dada a alguém.","uma hipótese localizada no futuro.","um desejo não realizado."],c:1,
+cm:"O presente do indicativo, com o marcador 'Hoje' e a conjunção 'quando', exprime um hábito/ação recorrente (sempre que um número o impressiona, ele desconfia)."},
+/* Português — Texto 2 */
+{id:"pt58",t:"pt_compreensao",tx:"pt_t2",e:`Segundo o texto, para a avó do narrador, "trabalho bom" é aquele que`,
+o:["exige muitos anos de estudo.","se entende apenas ao observar.","é mais bem remunerado.","se realiza perto do mar.","ninguém consegue compreender."],c:1,
+cm:"O texto afirma: a avó 'dizia que trabalho bom é aquele que a gente entende só de olhar'. As demais opções não têm respaldo no texto."},
+{id:"pt59",t:"pt_semantica",tx:"pt_t2",e:`No trecho "os guindastes do porto se moverem como garças pacientes", há`,
+o:["uma metáfora, sem termo comparativo.","uma comparação (símile), marcada por 'como'.","uma hipérbole (exagero).","uma metonímia.","um eufemismo."],c:1,
+cm:"O termo comparativo 'como' caracteriza a comparação (símile) explícita entre os guindastes e as garças. Na metáfora, a comparação seria implícita, sem 'como'."},
+{id:"pt60",t:"pt_coord_subord",tx:"pt_t2",e:`Em "nada ali era simples, embora tudo parecesse", a oração iniciada por "embora" é subordinada adverbial`,
+o:["causal.","concessiva.","condicional.","final.","consecutiva."],c:1,
+cm:"'Embora' introduz concessão: admite-se um fato (tudo parecia simples) que contraria a afirmação principal (nada era simples). Causal seria 'porque'; condicional, 'se'."},
+{id:"pt61",t:"pt_verbos",tx:"pt_t2",e:`Em "ela talvez tivesse razão", o emprego do modo subjuntivo ("tivesse") deve-se à ideia de`,
+o:["certeza plena.","dúvida/possibilidade.","ordem.","tempo futuro determinado.","comparação."],c:1,
+cm:"O advérbio 'talvez' expressa dúvida/possibilidade e exige o subjuntivo ('tivesse'). O subjuntivo é o modo da hipótese e da incerteza."},
+{id:"pt62",t:"pt_classes",tx:"pt_t2",e:`Em "Minha avó, que nunca vira o mar, dizia...", a palavra "que" classifica-se como`,
+o:["conjunção integrante.","pronome relativo, retomando 'avó'.","advérbio de intensidade.","preposição.","interjeição."],c:1,
+cm:"'Que' retoma o antecedente 'avó' e introduz oração adjetiva explicativa (entre vírgulas), exercendo função sintática — é pronome relativo. (Observe ainda que 'vira' é mais-que-perfeito: 'tinha visto'.)"},
+/* Inglês — Texto 1 */
+{id:"en26",t:"en_compreensao",tx:"en_t1",e:`The main idea of the text is that ports`,
+o:["are reducing their activities to save money.","are testing cleaner technologies that cut emissions without slowing operations.","should stop using shore power immediately.","have already solved all their environmental problems.","are forbidden from electrifying their equipment."],c:1,
+cm:"O texto apresenta os portos como 'testing grounds for cleaner technologies' que reduzem emissões 'without slowing operations'. As demais contrariam ou extrapolam o texto."},
+{id:"en27",t:"en_gramatica",tx:"en_t1",e:`In "However, the upfront investment remains a barrier", the word "However" introduces an idea of`,
+o:["addition.","contrast/opposition.","conclusion.","cause.","time."],c:1,
+cm:"'However' marca contraste: apesar dos benefícios citados, o investimento inicial ainda é uma barreira. É conectivo adversativo."},
+{id:"en28",t:"en_compreensao",tx:"en_t1",e:`In the text, the expression "upfront investment" is closest in meaning to`,
+o:["a final payment made at the end.","an initial investment, paid in advance.","an optional and refundable cost.","a hidden fee.","a government subsidy."],c:1,
+cm:"'Upfront' = adiantado/inicial. 'Upfront investment' é o investimento inicial necessário antes de obter os benefícios, apontado como barreira."},
+{id:"en29",t:"en_compreensao",tx:"en_t1",e:`According to the text, lower fuel use also leads to`,
+o:["higher emissions.","lower costs.","slower operations.","fewer clear rules.","more barriers to investment."],c:1,
+cm:"O texto afirma: 'lower fuel use also means lower costs'. Ou seja, além do ganho ambiental, há redução de custos."},
+{id:"en30",t:"en_compreensao",tx:"en_t1",e:`It can be inferred from the text that many operators are still waiting because they`,
+o:["do not have access to any technology.","want clearer rules before committing.","have already reduced all their emissions.","are closing their terminals.","get their fuel for free."],c:1,
+cm:"O texto diz que os operadores estão 'waiting for clearer rules before committing' — esperam regras mais claras antes de investir. Infere-se que a indefinição regulatória é o motivo da espera."},
+/* Inglês — Texto 2 */
+{id:"en31",t:"en_compreensao",tx:"en_t2",e:`The main idea of the text is that the shift to low-carbon fuels`,
+o:["will be immediate and simple.","is gradual, and many companies are betting on a mix of solutions.","depends only on batteries.","is no longer necessary.","has already been completed."],c:1,
+cm:"O texto diz que a transição 'will not happen overnight' e que as empresas apostam 'on a mix of solutions rather than on a single technology'. A ideia central é a de uma transição gradual e diversificada."},
+{id:"en32",t:"en_gramatica",tx:"en_t2",e:`In "Although demand for cleaner options is rising, the infrastructure ... is still limited", the word "Although" expresses`,
+o:["cause.","concession/contrast.","purpose.","addition.","condition."],c:1,
+cm:"'Although' = embora/ainda que: introduz concessão. Reconhece-se o aumento da demanda, mas contrapõe-se a limitação da infraestrutura."},
+{id:"en33",t:"en_gramatica",tx:"en_t2",e:`In "batteries alone may not be enough, which is why many companies are betting on a mix of solutions", the expression "which is why" introduces`,
+o:["a contrast.","a consequence/reason for what was said.","a condition.","a point in time.","an example that contradicts the sentence."],c:1,
+cm:"'Which is why' introduz a consequência/razão decorrente do que foi dito: como as baterias podem não bastar, por isso as empresas apostam numa combinação de soluções."},
+{id:"en34",t:"en_compreensao",tx:"en_t2",e:`In "The shift to low-carbon fuels will not happen overnight", the word "overnight" means`,
+o:["over many years.","very quickly / suddenly.","never.","only at night, at the port.","very slowly and carefully."],c:1,
+cm:"'Overnight' significa 'da noite para o dia', ou seja, muito rapidamente. Dizer que 'will not happen overnight' é afirmar que a mudança não será imediata."},
+{id:"en35",t:"en_compreensao",tx:"en_t2",e:`Regarding heavy transport, the text suggests that`,
+o:["batteries alone may not be sufficient, so other solutions are needed.","batteries are the best and only option.","transport will have to stop completely.","no solution will ever exist.","infrastructure is unnecessary."],c:0,
+cm:"O texto afirma que, para o transporte pesado, 'batteries alone may not be enough', o que motiva a aposta em uma combinação de soluções. Logo, sugere-se que só baterias podem não bastar."}
 ];
 
 /* ---------------- MATERIAL DE ESTUDO (resumos originais por tópico) ---------------- */
@@ -980,6 +1197,14 @@ psi_organizacional:`<p>Comportamento e gestão nas organizações.</p><ul><li><b
 psi_diagnostico:`<p>Subsistemas de gestão de pessoas.</p><ul><li><b>Recrutamento e seleção</b> por competências (entrevista comportamental/STAR).</li><li><b>Integração/onboarding</b>: socialização do novo empregado; <b>plano de sucessão</b>: preparar sucessores.</li><li><b>T&D</b> (LNT em três níveis; avaliação de Kirkpatrick: reação, aprendizagem, comportamento, resultados).</li><li><b>Avaliação de desempenho</b>, <b>desligamento</b> (entrevista de saída) e <b>diversidade/ações afirmativas</b>.</li></ul>`,
 psi_social:`<p>Grupos, liderança e comunicação.</p><ul><li><b>Liderança</b>: estilos de Lewin (autocrática, democrática, liberal); transacional x transformacional; situacional (adapta ao liderado).</li><li><b>Grupos</b>: fases de Tuckman (forming, storming, norming, performing); coesão; conflito funcional x disfuncional.</li><li><b>Comunicação</b>: emissor–canal–receptor, ruídos, feedback e assertividade.</li><li>Intervenção em crise/catástrofe: <b>primeiros cuidados psicológicos</b> (acolhimento, segurança, rede de apoio).</li></ul>`,
 psi_saude:`<p>Saúde mental e do trabalhador.</p><ul><li><b>NRs</b>: NR-1 (GRO/PGR, com <b>riscos psicossociais</b>), NR-5 (CIPA), NR-7 (PCMSO), NR-17 (ergonomia).</li><li><b>Nexo causal</b> (NTEP) entre doença e trabalho; doenças relacionadas ao trabalho.</li><li><b>Burnout</b> (CID-11): exaustão, distanciamento/cinismo e queda de eficácia. <b>Estresse</b> (Selye: alarme, resistência, exaustão).</li><li><b>Assédio moral</b>: condutas abusivas, repetitivas e prolongadas; QVT e prevenção.</li></ul>`
+};
+
+/* ---------------- TEXTOS-BASE (originais) para questões de leitura ---------------- */
+const TEXTS={
+pt_t1:`<p>Aprendi, tarde, que ler um relatório não é decifrar palavras, mas escutar o que elas evitam dizer. Meu antigo chefe, homem de poucas frases, devolvia os documentos com uma única anotação à margem: <i>e daí?</i>. Levei anos para entender que aquela pergunta, aparentemente rude, era um convite — obrigava-me a transformar dados em decisão. Hoje, quando um número me impressiona, ouço a voz dele e desconfio.</p><p class="src">Texto autoral, para fins de estudo.</p>`,
+pt_t2:`<p>A cidade acordava devagar. Do sétimo andar, eu via os guindastes do porto se moverem como garças pacientes, erguendo contêineres que, de longe, pareciam brinquedos. Minha avó, que nunca vira o mar, dizia que trabalho bom é aquele que a gente entende só de olhar. Sorri: nada ali era simples, embora tudo parecesse. Foi então que percebi — ela talvez tivesse razão, ainda que por engano.</p><p class="src">Texto autoral, para fins de estudo.</p>`,
+en_t1:`<p>Ports are quietly becoming testing grounds for cleaner technologies. By electrifying cranes and connecting docked ships to shore power, terminals can cut emissions without slowing operations. The benefits are not only environmental: lower fuel use also means lower costs. However, the upfront investment remains a barrier, and many operators are still waiting for clearer rules before committing.</p><p class="src">Original text, for study purposes.</p>`,
+en_t2:`<p>The shift to low-carbon fuels will not happen overnight. Although demand for cleaner options is rising, the infrastructure to produce and distribute them is still limited. For heavy transport, in particular, batteries alone may not be enough, which is why many companies are betting on a mix of solutions rather than on a single technology.</p><p class="src">Original text, for study purposes.</p>`
 };
 
 const MASTER_TARGET=8;
@@ -1180,6 +1405,7 @@ function renderRun(){
       <div class="small muted" style="font-family:var(--mono);white-space:nowrap">${RUN.i+1}/${RUN.qs.length}</div>
     </div>
     <div class="card pad">
+      ${q.tx&&TEXTS[q.tx]?`<div class="txtbox">${TEXTS[q.tx]}</div>`:""}
       <div class="qmeta">
         <span class="badge">${AREAS[area].tag}</span>
         <span class="small muted">${esc(TOPICS[q.t].label)}</span>
@@ -1274,6 +1500,7 @@ function reviewCard(d){
       <span class="t"><strong>${AREAS[TOPICS[q.t].area].tag}</strong> · ${esc(TOPICS[q.t].label)}<br>${esc(q.e.split("\n")[0]).slice(0,110)}${q.e.length>110?"…":""}</span>
     </div>
     <div class="qrbody" hidden>
+      ${q.tx&&TEXTS[q.tx]?`<div class="txtbox">${TEXTS[q.tx]}</div>`:""}
       <div class="ans"><span class="k">Sua resposta:</span> ${chosen} &nbsp;·&nbsp; <span class="k">Gabarito:</span> ${corr}) ${esc(q.o[q.c])}</div>
       <div class="small muted">Fonte: ${esc(fonteOf(q))}</div>
       <div class="small">${esc(q.cm)}</div>

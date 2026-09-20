@@ -155,6 +155,11 @@
   .trbar{height:6px;border-radius:99px;background:var(--novo-soft);margin-top:9px;overflow:hidden}
   .trbar>i{display:block;height:100%;border-radius:99px;transition:width .5s}
   .trstudy{margin-top:10px;font-size:13px;color:var(--ink-soft);background:var(--surface-2);border-radius:9px;padding:11px 13px;line-height:1.55}
+  .matbox{font-size:13.5px;color:var(--ink-soft);line-height:1.6}
+  .matbox p{margin:0 0 8px}
+  .matbox ul{margin:6px 0 0;padding-left:18px}
+  .matbox li{margin:5px 0}
+  .matbox b{color:var(--ink);font-weight:600}
   .areahead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:22px 0 4px}
   .areahead h3{font-size:16px}
 
@@ -172,6 +177,9 @@
 
   /* data panel */
   .datapanel textarea{width:100%;height:120px;font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:9px;padding:10px;background:var(--surface-2);color:var(--ink);resize:vertical}
+  .datapanel select{padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink);font-size:13px;max-width:100%}
+  .datapanel input{font-size:13px}
+  #qEnun,#qOpts,#qCom{font-family:var(--sans);font-size:13px;height:80px}
 
   .stack{display:flex;flex-direction:column;gap:16px}
   .row{display:flex;gap:10px;flex-wrap:wrap}
@@ -201,6 +209,7 @@
     <nav id="nav" role="tablist">
       <button class="tab" role="tab" data-view="painel" aria-selected="true">Painel</button>
       <button class="tab" role="tab" data-view="simulado" aria-selected="false">Simulado</button>
+      <button class="tab" role="tab" data-view="estudar" aria-selected="false">Estudar</button>
       <button class="tab" role="tab" data-view="evolucao" aria-selected="false">Evolução</button>
       <button class="tab" role="tab" data-view="rotina" aria-selected="false">Rotina</button>
     </nav>
@@ -210,6 +219,7 @@
 <main class="wrap">
   <section id="v-painel"></section>
   <section id="v-simulado" hidden></section>
+  <section id="v-estudar" hidden></section>
   <section id="v-evolucao" hidden></section>
   <section id="v-rotina" hidden></section>
   <section id="v-data" hidden></section>
@@ -483,19 +493,510 @@ o:["padronizar salários sem considerar entregas.","alinhar as competências das
 cm:"A gestão por competências integra os subsistemas de RH (seleção, T&D, avaliação, carreira) em torno das competências necessárias à estratégia, considerando conhecimentos, habilidades e atitudes."},
 {id:"psi20",t:"psi_diagnostico",e:`As políticas de diversidade e ações afirmativas nas organizações têm como objetivo`,
 o:["homogeneizar os perfis dos trabalhadores.","promover a inclusão e a equidade de grupos histórica ou socialmente desfavorecidos no ambiente de trabalho.","reduzir a representatividade de minorias.","dispensar critérios técnicos de seleção.","restringir-se a exigências legais sem impacto na cultura."],c:1,
-cm:"Diversidade e ações afirmativas buscam inclusão e equidade, ampliando a participação de grupos sub-representados e transformando a cultura organizacional, sem abandonar critérios técnicos — combinando justiça social e efetividade."}
+cm:"Diversidade e ações afirmativas buscam inclusão e equidade, ampliando a participação de grupos sub-representados e transformando a cultura organizacional, sem abandonar critérios técnicos — combinando justiça social e efetividade."},
+
+/* ===== EXPANSÃO — ADMINISTRAÇÃO (mais difíceis) ===== */
+{id:"adm29",t:"adm_financeira",e:`Um analista compara dois projetos mutuamente excludentes com o mesmo investimento inicial. A Taxa Mínima de Atratividade (TMA) da empresa é de 12% ao ano. O Projeto X apresenta TIR de 10% e o Projeto Y, TIR de 15%. Considerando apenas esse critério, a decisão correta é`,
+o:["aceitar ambos, pois toda TIR positiva indica viabilidade.","rejeitar ambos, pois a TIR deve ser sempre superior a 20%.","aceitar o Projeto X, por ter a menor TIR e, portanto, menor risco.","aceitar o Projeto Y e rejeitar o Projeto X, pois só Y supera a TMA.","escolher pelo menor investimento, independentemente da TIR."],c:3,
+cm:"Um projeto é atrativo quando a TIR supera a TMA. Y (15%) supera os 12% e deve ser aceito; X (10%) fica abaixo da TMA e é rejeitado. TIR menor não significa menor risco, e não há regra de 'TIR > 20%'."},
+{id:"adm30",t:"adm_financeira",e:`Sobre os métodos de análise de investimentos, é correto afirmar que o payback simples`,
+o:["considera integralmente o valor do dinheiro no tempo.","mede o tempo necessário para recuperar o investimento, mas ignora o valor do dinheiro no tempo.","é sempre superior ao payback descontado para o mesmo projeto.","equivale ao Valor Presente Líquido do projeto.","desconsidera os fluxos de caixa após a recuperação do capital, assim como o payback descontado, sendo por isso idêntico a ele."],c:1,
+cm:"O payback simples calcula em quanto tempo o investimento é recuperado, mas NÃO desconta os fluxos (ignora o valor do dinheiro no tempo). O payback descontado corrige essa limitação; por isso o descontado tende a ser maior (mais realista), não menor."},
+{id:"adm31",t:"adm_financeira",e:`O Capital Circulante Líquido (CCL) de uma empresa é obtido pela diferença entre`,
+o:["o Ativo Total e o Passivo Total.","o Ativo Circulante e o Passivo Circulante.","o Patrimônio Líquido e o Ativo Permanente.","as Receitas e as Despesas do período.","o Lucro Bruto e as Despesas Operacionais."],c:1,
+cm:"CCL = Ativo Circulante − Passivo Circulante. Um CCL positivo indica folga financeira de curto prazo (recursos de longo prazo financiando parte do circulante)."},
+{id:"adm32",t:"adm_producao",e:`A classificação de estoques pela Curva ABC baseia-se no princípio de Pareto. Nessa lógica, os itens da classe A caracterizam-se por serem`,
+o:["muitos itens que, somados, representam pequeno valor financeiro.","poucos itens que representam a maior parcela do valor financeiro do estoque.","itens de reposição automática, sem necessidade de controle.","itens obsoletos que devem ser descartados prioritariamente.","itens de menor custo unitário e alto giro."],c:1,
+cm:"Na Curva ABC, a classe A reúne poucos itens (cerca de 20%) que concentram a maior parte do valor (cerca de 80%), exigindo controle rigoroso. A classe C é o inverso: muitos itens de baixo valor."},
+{id:"adm33",t:"adm_producao",e:`O Lote Econômico de Compra (LEC) é a quantidade de pedido que`,
+o:["maximiza o volume de estoque mantido.","minimiza a soma dos custos de pedido e dos custos de manutenção de estoque.","elimina totalmente a necessidade de estoque de segurança.","iguala a demanda anual ao tempo de reposição.","garante o menor preço unitário junto ao fornecedor."],c:1,
+cm:"O LEC (EOQ) equilibra dois custos que variam em sentidos opostos: quanto maior o lote, menor o custo de pedido, porém maior o custo de manutenção. O ponto ótimo minimiza a soma dos dois."},
+{id:"adm34",t:"adm_producao",e:`O MRP (Material Requirements Planning) calcula as necessidades de materiais a partir, principalmente,`,
+o:["da intuição do gerente de compras.","do plano mestre de produção, da lista de materiais (BOM) e das posições de estoque.","exclusivamente do histórico de vendas do ano anterior.","apenas do lote econômico de compra.","da curva ABC dos fornecedores."],c:1,
+cm:"O MRP parte do Plano Mestre de Produção (o que e quando produzir), explode a estrutura do produto (BOM) e considera os estoques disponíveis para calcular o que comprar/produzir e quando."},
+{id:"adm35",t:"adm_contratacao",e:`Na Lei nº 13.303/2016, a contratação por inexigibilidade de licitação ocorre quando`,
+o:["a administração simplesmente prefere não licitar.","há inviabilidade de competição, como no caso de fornecedor exclusivo.","o valor do contrato é muito baixo.","há urgência decorrente de calamidade.","o prazo para licitar é considerado insuficiente."],c:1,
+cm:"A inexigibilidade pressupõe INVIABILIDADE DE COMPETIÇÃO (fornecedor/produtor exclusivo, serviço técnico singular com notória especialização). Situações de baixo valor ou urgência são hipóteses de DISPENSA, não de inexigibilidade."},
+{id:"adm36",t:"adm_contratacao",e:`A Lei Complementar nº 123/2006 assegura às microempresas e empresas de pequeno porte, nas licitações, tratamento diferenciado que inclui`,
+o:["a dispensa de apresentar qualquer documento de habilitação.","a preferência de contratação em situações de empate ficto.","a isenção total de tributos sobre o contrato.","a garantia de vencer independentemente do preço.","a proibição de participação de grandes empresas."],c:1,
+cm:"A LC 123/2006 prevê, entre outros benefícios, o 'empate ficto': quando a proposta da ME/EPP for até 10% (5% no pregão) superior à melhor, é dada a ela a chance de cobrir a oferta. Não há isenção de habilitação nem vitória garantida."},
+{id:"adm37",t:"adm_contratacao",e:`A Lei nº 12.846/2013 (Lei Anticorrupção) prevê, quanto à responsabilização da pessoa jurídica por atos lesivos à administração pública,`,
+o:["responsabilidade apenas penal e individual dos sócios.","responsabilidade objetiva, nas esferas administrativa e civil.","isenção da empresa caso o ato tenha sido praticado por empregado.","responsabilidade condicionada à comprovação de dolo da diretoria.","aplicação somente a empresas estrangeiras."],c:1,
+cm:"A Lei 12.846/2013 estabelece a responsabilização OBJETIVA (independe de dolo/culpa) da pessoa jurídica nas esferas administrativa e civil por atos lesivos à administração, inclusive por atos de seus empregados e prepostos em seu interesse."},
+{id:"adm38",t:"adm_projetos",e:`No Scrum, a respeito dos eventos (cerimônias), é correto afirmar que`,
+o:["a Sprint pode durar o tempo que o time desejar, sem limite.","a Daily Scrum é um evento diário e com tempo delimitado (timebox), de cerca de 15 minutos.","a Sprint Review ocorre antes do início da Sprint.","a Retrospectiva serve para planejar o backlog do produto.","não existe limite de duração para nenhum evento."],c:1,
+cm:"Todos os eventos do Scrum têm timebox. A Daily é diária e curta (~15 min), voltada à sincronização do time. A Sprint tem duração fixa de até um mês; a Review ocorre ao fim da Sprint e a Retrospectiva foca a melhoria do processo."},
+{id:"adm39",t:"adm_projetos",e:`Uma prática central do método Kanban é`,
+o:["eliminar qualquer forma de quadro visual.","limitar a quantidade de trabalho em progresso (WIP).","impedir mudanças de prioridade a qualquer tempo.","trabalhar sempre com lotes máximos de tarefas.","substituir o fluxo puxado pelo empurrado."],c:1,
+cm:"O Kanban usa quadro visual, fluxo puxado e, sobretudo, LIMITES DE WIP (work in progress) para evitar sobrecarga, reduzir gargalos e melhorar o fluxo de entrega."},
+{id:"adm40",t:"adm_projetos",e:`Uma diferença conceitual importante entre gestão de projetos e gestão de produtos é que`,
+o:["projeto e produto são exatamente a mesma coisa.","o projeto é um esforço temporário, com início e fim definidos; o produto tem ciclo de vida contínuo.","o produto sempre termina antes do projeto.","projeto não possui escopo definido.","gestão de produto não envolve stakeholders."],c:1,
+cm:"Projeto é um esforço TEMPORÁRIO para criar um resultado único (tem início e fim); o produto tem ciclo de vida contínuo, evoluindo por várias entregas. Por isso a gestão de produto é orientada a valor de longo prazo."},
+{id:"adm41",t:"adm_negociacao",e:`Em uma negociação, a ZOPA (Zona de Possível Acordo) corresponde`,
+o:["ao ponto em que uma parte impõe suas condições à outra.","à faixa de sobreposição entre os limites aceitáveis das partes, na qual um acordo é possível.","à ausência total de alternativas para os negociadores.","ao valor máximo que só uma das partes aceita.","ao momento de encerramento sem acordo."],c:1,
+cm:"A ZOPA é o intervalo em que os limites (preços de reserva) das partes se sobrepõem — a região onde um acordo é viável. Quando não há sobreposição, não existe ZOPA e o acordo tende a fracassar."},
+{id:"adm42",t:"adm_negociacao",e:`A negociação distributiva difere da integrativa porque`,
+o:["a distributiva sempre gera ganho mútuo.","a distributiva trata de recursos fixos (soma zero), enquanto a integrativa busca ampliar o valor para ganho mútuo.","a integrativa é sempre mais rápida e simples.","a distributiva dispensa qualquer preparação.","não há diferença prática entre elas."],c:1,
+cm:"Na negociação distributiva (ganha-perde), disputa-se uma 'torta fixa' (soma zero). Na integrativa (ganha-ganha), busca-se ampliar o valor e atender interesses de ambos, criando soluções conjuntas."},
+{id:"adm43",t:"adm_negociacao",e:`No modelo de Thomas-Kilmann, o estilo de administração de conflitos marcado por baixa assertividade e baixa cooperação é a`,
+o:["colaboração.","competição.","evitação (fuga).","acomodação.","transigência (compromisso)."],c:2,
+cm:"A evitação combina baixa assertividade e baixa cooperação: a pessoa se esquiva do conflito. Pode ser útil para ganhar tempo, mas não resolve a questão de fundo."},
+{id:"adm44",t:"adm_si",e:`Os Sistemas de Apoio à Decisão (SAD/DSS) distinguem-se dos Sistemas de Processamento de Transações (SPT) porque`,
+o:["os SAD apenas registram operações rotineiras.","os SAD apoiam decisões semiestruturadas e não estruturadas, com uso de modelos e análise de cenários.","os SPT são voltados ao nível estratégico da organização.","os SAD substituem completamente o julgamento humano.","não há diferença de nível organizacional entre eles."],c:1,
+cm:"O SPT automatiza transações operacionais rotineiras. O SAD apoia decisões semi/não estruturadas nos níveis tático e estratégico, oferecendo modelos, simulações e análises de cenários — apoiando, não substituindo, o decisor."},
+{id:"adm45",t:"adm_si",e:`Entre os benefícios esperados da implantação de um ERP está`,
+o:["a fragmentação das informações em bases isoladas por setor.","a integração dos processos e a existência de uma base de dados única e consistente.","a eliminação da necessidade de gestão de mudanças.","a garantia de sucesso independentemente do engajamento das pessoas.","o fim da necessidade de treinamento dos usuários."],c:1,
+cm:"O ERP integra processos em uma base única e consistente, reduzindo redundância. Contudo, sua implantação é complexa e depende fortemente de gestão de mudanças, treinamento e engajamento — não os dispensa."},
+{id:"adm46",t:"adm_si",e:`No contexto de Business Intelligence (BI), o data warehouse é`,
+o:["um sistema de digitação de notas fiscais.","um repositório integrado e orientado a assunto, voltado à análise e ao apoio à decisão.","um antivírus corporativo.","uma rede social interna.","um software de folha de pagamento."],c:1,
+cm:"O data warehouse é um repositório de dados integrado, orientado a assunto, não volátil e histórico, otimizado para consultas analíticas e para alimentar ferramentas de BI que apoiam a decisão."},
+{id:"adm47",t:"adm_estrategia",e:`Segundo Michael Porter, as estratégias competitivas genéricas são`,
+o:["crescimento, estabilidade e retração.","liderança em custo, diferenciação e foco (enfoque).","planejamento, organização e controle.","penetração, desenvolvimento e diversificação.","centralização, descentralização e terceirização."],c:1,
+cm:"Porter propõe três estratégias genéricas: liderança em custo, diferenciação e foco (custo ou diferenciação num segmento específico). Ficar 'no meio-termo' sem definição tende a comprometer a vantagem competitiva."},
+{id:"adm48",t:"adm_estrategia",e:`O Balanced Scorecard (BSC) organiza os objetivos estratégicos em quatro perspectivas, que são`,
+o:["financeira, de clientes, de processos internos e de aprendizado e crescimento.","operacional, tática, estratégica e normativa.","forças, fraquezas, oportunidades e ameaças.","curto, médio, longo e longuíssimo prazo.","produto, preço, praça e promoção."],c:0,
+cm:"O BSC de Kaplan e Norton equilibra quatro perspectivas: financeira, clientes, processos internos e aprendizado e crescimento — traduzindo a estratégia em objetivos, indicadores e metas relacionados por causa e efeito."},
+{id:"adm49",t:"adm_estrategia",e:`Na cadeia de valor de Porter, atividades como logística interna, operações, logística externa, marketing/vendas e serviços são classificadas como`,
+o:["atividades de apoio.","atividades primárias.","atividades financeiras.","atividades acessórias e dispensáveis.","atividades exclusivamente administrativas."],c:1,
+cm:"Na cadeia de valor, as atividades PRIMÁRIAS (logística interna, operações, logística externa, marketing e vendas, serviços) criam valor diretamente; as de APOIO (infraestrutura, RH, tecnologia, aquisição) dão suporte a elas."},
+{id:"adm50",t:"adm_marketing",e:`No marketing de serviços, além dos 4 Ps tradicionais, acrescentam-se três elementos ao composto, que são`,
+o:["planejamento, produção e pós-venda.","pessoas, processos e evidência (ou perfil) física.","preço, propaganda e patrocínio.","produto, público e parceria.","posição, poder e persuasão."],c:1,
+cm:"O composto ampliado de serviços (7 Ps) acrescenta Pessoas, Processos e Evidência física (physical evidence) aos 4 Ps, refletindo a intangibilidade, a inseparabilidade e a variabilidade dos serviços."},
+{id:"adm51",t:"adm_marketing",e:`O posicionamento de mercado refere-se`,
+o:["à localização física das lojas da empresa.","à forma como a marca deseja ser percebida na mente do consumidor em relação aos concorrentes.","ao preço mais baixo praticado no setor.","ao número de funcionários da área comercial.","à quantidade de canais de distribuição utilizados."],c:1,
+cm:"Posicionamento é o lugar distintivo que a marca ocupa na mente do consumidor frente aos concorrentes, resultado de escolhas de segmentação e de proposta de valor comunicada de forma consistente."},
+{id:"adm52",t:"adm_marketing",e:`Sobre o comportamento do consumidor, o reconhecimento da necessidade, a busca de informações, a avaliação de alternativas, a decisão de compra e o comportamento pós-compra constituem`,
+o:["os quatro Ps do marketing.","as etapas do processo de decisão de compra.","os níveis da pirâmide de Maslow.","as perspectivas do Balanced Scorecard.","as forças competitivas de Porter."],c:1,
+cm:"Essas cinco etapas descrevem o processo de decisão de compra do consumidor. O comportamento pós-compra (satisfação/dissonância) influencia recompra e recomendação, sendo estratégico para a fidelização."},
+{id:"adm53",t:"adm_contabilidade",e:`O índice de Liquidez Corrente de uma empresa é calculado pela relação entre`,
+o:["Ativo Circulante e Passivo Circulante.","Passivo Total e Patrimônio Líquido.","Lucro Líquido e Receita Total.","Ativo Permanente e Ativo Total.","Receita e Custo das Mercadorias Vendidas."],c:0,
+cm:"Liquidez Corrente = Ativo Circulante / Passivo Circulante. Indica quanto a empresa tem de recursos de curto prazo para cada real de obrigação de curto prazo; acima de 1 sugere folga."},
+{id:"adm54",t:"adm_contabilidade",e:`A Demonstração do Resultado do Exercício (DRE) tem por finalidade apurar`,
+o:["a posição patrimonial em determinada data.","o resultado (lucro ou prejuízo) do período, confrontando receitas e despesas.","apenas as entradas e saídas de caixa.","o valor de mercado das ações da empresa.","o número de funcionários por setor."],c:1,
+cm:"A DRE confronta receitas e despesas do período (pelo regime de competência) para apurar o lucro ou prejuízo. Já a posição patrimonial em uma data é dada pelo Balanço Patrimonial; o caixa, pela DFC."},
+{id:"adm55",t:"adm_contabilidade",e:`No Balanço Patrimonial, classificam-se no Ativo Circulante`,
+o:["as obrigações a pagar no longo prazo.","os bens e direitos realizáveis até o término do exercício seguinte (curto prazo), como caixa, contas a receber e estoques.","o capital social integralizado pelos sócios.","as máquinas e edificações de uso permanente.","as receitas de vendas do período."],c:1,
+cm:"O Ativo Circulante reúne bens e direitos com expectativa de realização no curto prazo (até o fim do exercício seguinte): disponibilidades, contas a receber, estoques etc. Máquinas e edifícios ficam no Ativo Não Circulante (Imobilizado)."},
+{id:"adm56",t:"adm_decisao",e:`As decisões programadas, no processo decisório organizacional, caracterizam-se por serem`,
+o:["únicas, complexas e sem precedentes.","rotineiras e repetitivas, resolvidas por procedimentos e regras preestabelecidos.","tomadas exclusivamente pela alta direção.","sempre estratégicas e de longo prazo.","impossíveis de padronizar."],c:1,
+cm:"Decisões programadas são rotineiras e estruturadas, tratadas por regras, políticas e procedimentos. As NÃO programadas são novas, complexas e mal estruturadas, exigindo julgamento e análise específica."},
+{id:"adm57",t:"adm_decisao",e:`Um gestor que busca apenas informações que confirmem sua opinião prévia, ignorando dados contrários, está sob influência do viés de`,
+o:["ancoragem.","confirmação.","disponibilidade.","aversão ao risco.","excesso de otimismo."],c:1,
+cm:"O viés de confirmação leva o decisor a procurar, valorizar e lembrar apenas o que confirma sua crença inicial, descartando evidências contrárias — uma fonte comum de erro em decisões."},
+{id:"adm58",t:"adm_decisao",e:`Ao julgar que um evento é mais provável apenas porque exemplos dele vêm facilmente à memória, o decisor emprega a heurística da`,
+o:["representatividade.","disponibilidade.","ancoragem.","reciprocidade.","escassez."],c:1,
+cm:"A heurística da disponibilidade faz o decisor estimar probabilidades pela facilidade com que exemplos são lembrados (ex.: superestimar riscos recém-noticiados), o que pode distorcer o julgamento."},
+{id:"adm59",t:"adm_rh",e:`A avaliação de desempenho conhecida como '360 graus' caracteriza-se por`,
+o:["ser feita apenas pelo chefe imediato.","coletar percepções de múltiplas fontes: superiores, pares, subordinados, clientes e o próprio avaliado (autoavaliação).","avaliar somente resultados financeiros.","dispensar qualquer feedback ao avaliado.","ocorrer uma única vez na carreira."],c:1,
+cm:"A avaliação 360 graus reúne percepções de várias fontes (chefia, pares, subordinados, clientes e autoavaliação), oferecendo uma visão mais completa e reduzindo o viés de fonte única."},
+{id:"adm60",t:"adm_rh",e:`O indicador de turnover (rotatividade de pessoal) mede`,
+o:["o grau de satisfação dos clientes externos.","a proporção de entradas e saídas de empregados em relação ao quadro, em um período.","o número de horas de treinamento por funcionário.","a produtividade média da equipe.","o percentual de metas atingidas."],c:1,
+cm:"O turnover expressa a rotatividade — a relação entre desligamentos/admissões e o efetivo médio em um período. Índices altos costumam sinalizar problemas de clima, gestão, remuneração ou seleção."},
+{id:"adm61",t:"adm_rh",e:`Uma vantagem do recrutamento interno, em comparação ao externo, é`,
+o:["trazer necessariamente ideias e experiências totalmente novas.","aproveitar e motivar talentos já existentes, com processo mais rápido e de menor custo.","eliminar a necessidade de avaliar competências.","garantir maior diversidade de perfis.","impedir promoções na organização."],c:1,
+cm:"O recrutamento interno é mais rápido e econômico, valoriza e motiva os empregados e aproveita quem já conhece a cultura. Em contrapartida, o externo é que tende a trazer 'sangue novo' e mais diversidade."},
+{id:"adm62",t:"adm_logica",e:`A negação da proposição "Se o navio atracar, então a carga será descarregada" é`,
+o:["Se o navio não atracar, então a carga não será descarregada.","O navio atraca e a carga não é descarregada.","Se a carga for descarregada, então o navio atracou.","O navio não atraca ou a carga é descarregada.","Nem o navio atraca nem a carga é descarregada."],c:1,
+cm:"A negação de 'se P então Q' é 'P e não Q'. Logo: 'o navio atraca E a carga NÃO é descarregada'. As opções com 'se... então' são a inversa/recíproca, não a negação."},
+{id:"adm63",t:"adm_logica",e:`Pela Lei de De Morgan, a negação de "O contrato é válido e o prazo foi cumprido" equivale a`,
+o:["O contrato é válido e o prazo não foi cumprido.","O contrato não é válido ou o prazo não foi cumprido.","O contrato não é válido e o prazo não foi cumprido.","Se o contrato é válido, então o prazo foi cumprido.","O contrato é válido ou o prazo foi cumprido."],c:1,
+cm:"De Morgan: ¬(P ∧ Q) ≡ ¬P ∨ ¬Q. A negação de uma conjunção é a disjunção das negações: 'o contrato NÃO é válido OU o prazo NÃO foi cumprido'."},
+{id:"adm64",t:"adm_logica",e:`Uma proposição disjuntiva inclusiva "P ou Q" é FALSA somente quando`,
+o:["P é verdadeira e Q é falsa.","ambas, P e Q, são falsas.","ambas, P e Q, são verdadeiras.","P é falsa e Q é verdadeira.","pelo menos uma delas é verdadeira."],c:1,
+cm:"A disjunção inclusiva (P ∨ Q) só é falsa quando as duas proposições são falsas; em qualquer outro caso é verdadeira. (Diferente da conjunção, que só é verdadeira quando ambas são verdadeiras.)"},
+{id:"adm65",t:"adm_estatistica",e:`Ao lançar um dado honesto de seis faces, a probabilidade de sair um número par é`,
+o:["1/6.","1/3.","1/2.","2/3.","5/6."],c:2,
+cm:"Há três resultados pares (2, 4, 6) em seis possíveis: P = 3/6 = 1/2. Probabilidade é casos favoráveis sobre casos possíveis, em espaço equiprovável."},
+{id:"adm66",t:"adm_estatistica",e:`Considere o conjunto ordenado de valores: 4, 7, 9, 12. A mediana desse conjunto é`,
+o:["7.","8.","9.","9,5.","10,5."],c:1,
+cm:"Com número par de elementos, a mediana é a média dos dois valores centrais: (7 + 9)/2 = 8. A mediana não exige que o valor pertença ao conjunto."},
+{id:"adm67",t:"adm_estatistica",e:`Em uma avaliação, a prova objetiva vale peso 3 e a prova discursiva peso 2. Um candidato obteve 8,0 na objetiva e 6,0 na discursiva. Sua média ponderada é`,
+o:["6,8.","7,0.","7,2.","7,5.","8,0."],c:2,
+cm:"Média ponderada = (8×3 + 6×2)/(3+2) = (24 + 12)/5 = 36/5 = 7,2. Cada nota é multiplicada pelo seu peso e a soma é dividida pela soma dos pesos."},
+{id:"adm68",t:"adm_esg",e:`No pilar de Governança (o "G" do ESG), inclui-se, tipicamente,`,
+o:["a gestão de emissões de carbono.","a estrutura do conselho de administração, a transparência e a prestação de contas (accountability).","a política de diversidade e inclusão.","o consumo de água e energia.","o relacionamento com comunidades locais."],c:1,
+cm:"Governança trata de como a organização é dirigida e controlada: conselho, transparência, prestação de contas, ética e conformidade. Emissões e água são do pilar Ambiental; diversidade e comunidades, do Social."},
+{id:"adm69",t:"adm_esg",e:`A norma ISO 26000 caracteriza-se por`,
+o:["ser uma norma certificável de sistema de gestão.","oferecer diretrizes (orientações) sobre responsabilidade social, sem fins de certificação.","tratar exclusivamente de gestão da qualidade.","substituir a legislação ambiental brasileira.","aplicar-se apenas a órgãos públicos."],c:1,
+cm:"A ISO 26000 fornece DIRETRIZES sobre responsabilidade social (temas centrais como governança, direitos humanos, meio ambiente etc.), mas NÃO é certificável — diferentemente da ISO 9001 (qualidade) ou 14001 (ambiental)."},
+{id:"adm70",t:"adm_esg",e:`No contexto da sustentabilidade e da responsabilidade socioambiental, o termo 'stakeholders' designa`,
+o:["apenas os acionistas da empresa.","as partes interessadas que afetam ou são afetadas pela organização (clientes, empregados, comunidade, fornecedores, governo etc.).","somente os concorrentes diretos.","os fornecedores de matéria-prima, exclusivamente.","os órgãos de imprensa."],c:1,
+cm:"Stakeholders são todas as partes interessadas — internas e externas — que afetam ou são afetadas pela organização. Difere de 'shareholders' (apenas os acionistas). A gestão sustentável busca equilibrar esses interesses."},
+
+/* ===== EXPANSÃO — PSICOLOGIA (mais difíceis) ===== */
+{id:"psi21",t:"psi_etica",e:`Um psicólogo atua em equipe multiprofissional de saúde do trabalhador. Quanto ao sigilo, de acordo com o Código de Ética, ele deve`,
+o:["compartilhar todo o prontuário com todos os membros da equipe.","compartilhar apenas as informações estritamente necessárias, visando ao melhor atendimento, resguardando o que for possível.","recusar-se a prestar qualquer informação à equipe.","divulgar o caso em reuniões abertas para fins didáticos.","repassar as informações ao empregador sempre que solicitado."],c:1,
+cm:"Em equipe multiprofissional, o psicólogo compartilha somente o estritamente necessário ao atendimento, preservando ao máximo o sigilo. Não deve expor todo o conteúdo nem repassar informações ao empregador de forma indiscriminada."},
+{id:"psi22",t:"psi_etica",e:`Sobre os registros documentais decorrentes da atuação do psicólogo, as resoluções do CFP estabelecem que`,
+o:["não é necessário manter qualquer registro.","o psicólogo deve manter, sob sua guarda e sigilo, os registros/prontuários pelo prazo mínimo definido em resolução.","os registros pertencem ao empregador e podem ser divulgados livremente.","os prontuários devem ser publicados para transparência.","os registros só existem em atendimento clínico."],c:1,
+cm:"O psicólogo deve produzir e guardar registros dos serviços prestados, mantendo-os sob sigilo pelo prazo mínimo estabelecido em resolução do CFP. Os documentos não pertencem a terceiros nem podem ser divulgados livremente."},
+{id:"psi23",t:"psi_etica",e:`É um princípio fundamental que orienta a atuação do psicólogo, segundo o Código de Ética,`,
+o:["priorizar interesses de quem paga pelo serviço.","atuar com responsabilidade social, contribuindo para a eliminação de quaisquer formas de discriminação e opressão.","evitar qualquer posicionamento sobre direitos humanos.","garantir resultados previamente combinados.","restringir sua atuação ao consultório particular."],c:1,
+cm:"O Código de Ética compromete o psicólogo com os direitos humanos e a responsabilidade social, atuando contra a discriminação, a opressão e a injustiça, e jamais colaborando com práticas que as favoreçam."},
+{id:"psi24",t:"psi_etica",e:`Diante de condições de trabalho que firam a ética profissional ou prejudiquem os usuários, o psicólogo deve`,
+o:["aceitá-las sem manifestação para preservar o emprego.","recusar-se a submeter-se a tais condições e informar as instâncias competentes.","transferir a responsabilidade integralmente à instituição, seguindo as ordens.","suspender o sigilo dos atendimentos como forma de protesto.","encerrar imediatamente todos os atendimentos sem encaminhamento."],c:1,
+cm:"O psicólogo não deve pactuar com condições que firam a ética ou prejudiquem os usuários; deve recusá-las e comunicar às instâncias competentes, sem, contudo, abandonar os usuários (garantindo encaminhamento adequado)."},
+{id:"psi25",t:"psi_resolucoes",e:`Segundo a Resolução CFP nº 06/2019, o documento psicológico elaborado para responder a uma demanda ou questão específica formulada por outro profissional ou autoridade é`,
+o:["a declaração.","o parecer psicológico.","o atestado psicológico.","o prontuário.","o registro documental."],c:1,
+cm:"O parecer psicológico é o documento fundamentado que responde a uma questão-problema específica (demanda de outro profissional, autoridade, juízo). O laudo resulta de avaliação; a declaração informa (ex.: comparecimento); o atestado certifica uma condição."},
+{id:"psi26",t:"psi_resolucoes",e:`Ainda conforme a Resolução CFP nº 06/2019, o atestado psicológico destina-se a`,
+o:["descrever detalhadamente todo o processo de avaliação.","certificar, de forma sucinta, uma determinada situação ou estado psicológico, com finalidade específica (ex.: justificar afastamento).","substituir o laudo em processos judiciais complexos.","informar apenas o comparecimento a uma sessão.","registrar o histórico completo do atendimento."],c:1,
+cm:"O atestado psicológico certifica de forma objetiva e sucinta uma condição/estado psicológico para uma finalidade determinada (aptidão, afastamento etc.). A descrição aprofundada é própria do laudo; o mero comparecimento é objeto da declaração."},
+{id:"psi27",t:"psi_resolucoes",e:`Na avaliação psicológica realizada em concursos públicos, é exigência prevista nas normas do CFP que`,
+o:["os critérios sejam mantidos em sigilo dos candidatos.","a avaliação se baseie no perfil profissiográfico do cargo e que seja assegurado ao candidato o direito de conhecer o resultado (entrevista devolutiva) e de recorrer.","o resultado dependa apenas da impressão subjetiva do avaliador.","sejam usados instrumentos sem exigência de parecer favorável.","o candidato não tenha acesso a qualquer informação sobre o processo."],c:1,
+cm:"A avaliação psicológica em concurso deve partir do perfil profissiográfico do cargo, usar instrumentos com parecer favorável e assegurar transparência: o candidato tem direito à entrevista devolutiva (conhecer o resultado) e ao recurso."},
+{id:"psi28",t:"psi_resolucoes",e:`Quanto ao exercício da Psicologia mediado por tecnologias da informação e comunicação (TICs), a regulamentação do CFP estabelece que`,
+o:["é totalmente proibido o atendimento a distância.","o atendimento on-line é permitido, desde que observados os requisitos técnicos e éticos e o cadastro/regras definidos pelo Conselho.","o psicólogo pode atuar sem qualquer registro profissional.","dispensa-se o sigilo em atendimentos digitais.","é permitido apenas para fins de pesquisa acadêmica."],c:1,
+cm:"O CFP regulamenta (e permite) o atendimento psicológico mediado por TICs, desde que respeitados os requisitos éticos e técnicos — sigilo, segurança dos dados, competência profissional e as regras do Conselho —, mantendo as mesmas garantias do atendimento presencial."},
+{id:"psi29",t:"psi_organizacional",e:`Segundo Edgar Schein, a cultura organizacional pode ser compreendida em três níveis, que são`,
+o:["missão, visão e valores.","artefatos, valores compartilhados e pressupostos básicos.","estratégico, tático e operacional.","forças, fraquezas e oportunidades.","clima, motivação e liderança."],c:1,
+cm:"Schein descreve três níveis: artefatos (o visível — símbolos, layout, rituais), valores compartilhados (o justificado, o que se declara) e pressupostos básicos (o inconsciente, as crenças mais profundas que realmente guiam o comportamento)."},
+{id:"psi30",t:"psi_organizacional",e:`Na hierarquia das necessidades de Maslow, as necessidades de estima e de autorrealização situam-se`,
+o:["na base da pirâmide, como as mais urgentes.","no topo da pirâmide, sendo consideradas de ordem superior.","fora da pirâmide, por não influenciarem o trabalho.","no mesmo nível das necessidades fisiológicas.","abaixo das necessidades de segurança."],c:1,
+cm:"Maslow organiza as necessidades em fisiológicas, segurança, sociais, estima e autorrealização. Estima e autorrealização são as de ordem superior (topo), ganhando força à medida que as básicas são razoavelmente atendidas."},
+{id:"psi31",t:"psi_organizacional",e:`A pesquisa de clima organizacional tem como principal objetivo`,
+o:["medir os pressupostos básicos e inconscientes da cultura.","captar a percepção compartilhada dos trabalhadores sobre o ambiente de trabalho em determinado momento, orientando ações de melhoria.","substituir a avaliação de desempenho individual.","definir a estrutura hierárquica da empresa.","calcular a folha de pagamento."],c:1,
+cm:"A pesquisa de clima mede a percepção coletiva e conjuntural dos trabalhadores sobre aspectos como liderança, comunicação e reconhecimento, subsidiando planos de ação. A cultura (mais profunda e estável) não se capta por esse instrumento pontual."},
+{id:"psi32",t:"psi_organizacional",e:`A gestão de mudanças organizacionais eficaz reconhece que a resistência das pessoas`,
+o:["deve ser eliminada por imposição, sem diálogo.","é uma reação esperada, que precisa ser compreendida e trabalhada com comunicação, participação e apoio.","indica sempre má-fé dos trabalhadores.","desaparece automaticamente com o tempo.","é irrelevante para o sucesso da mudança."],c:1,
+cm:"A resistência é reação humana natural à mudança e deve ser compreendida e trabalhada (comunicação clara, participação, capacitação, apoio emocional), e não simplesmente combatida — o fator humano é decisivo para o sucesso."},
+{id:"psi33",t:"psi_diagnostico",e:`Na seleção por competências, a entrevista comportamental (por exemplo, no formato STAR) baseia-se na premissa de que`,
+o:["a aparência do candidato prediz o desempenho.","comportamentos passados em situações reais são bons preditores de comportamentos futuros.","apenas testes psicológicos podem prever desempenho.","a intuição do entrevistador é suficiente e dispensa roteiro.","competências não podem ser avaliadas em entrevista."],c:1,
+cm:"A entrevista comportamental parte do princípio de que o comportamento passado, em situações concretas, prediz o comportamento futuro. O formato STAR (Situação, Tarefa, Ação, Resultado) estrutura a coleta desses exemplos, reduzindo subjetividade."},
+{id:"psi34",t:"psi_diagnostico",e:`O Levantamento de Necessidades de Treinamento (LNT) pode ser conduzido em três níveis de análise, que são`,
+o:["estratégico, tático e sindical.","análise organizacional, análise das tarefas/operações e análise individual (das pessoas).","clínico, hospitalar e comunitário.","artefatos, valores e pressupostos.","curto, médio e longo prazo."],c:1,
+cm:"O LNT tradicionalmente ocorre em três níveis: organizacional (onde treinar, alinhado à estratégia), de tarefas/operações (o que é preciso saber fazer) e individual/pessoas (quem precisa e em quê), garantindo que o treinamento responda a lacunas reais."},
+{id:"psi35",t:"psi_diagnostico",e:`A entrevista de desligamento, conduzida no processo de saída de empregados, tem como principal utilidade`,
+o:["constranger o empregado que está saindo.","obter informações que ajudem a identificar causas de turnover e a melhorar a gestão de pessoas.","impedir a saída do trabalhador.","calcular verbas rescisórias.","substituir a avaliação de desempenho."],c:1,
+cm:"A entrevista de desligamento é fonte de feedback organizacional: ajuda a entender motivos de saída, problemas de clima/gestão e a orientar melhorias e a redução do turnover, devendo ser conduzida de forma ética e respeitosa."},
+{id:"psi36",t:"psi_diagnostico",e:`São exemplos de métodos de avaliação de desempenho`,
+o:["curva ABC, MRP e just in time.","escalas gráficas, incidentes críticos e avaliação 360 graus.","SWOT, cinco forças e BSC.","recrutamento, seleção e integração.","Maslow, Herzberg e McClelland."],c:1,
+cm:"Escalas gráficas, incidentes críticos, escolha forçada, avaliação por objetivos e 360 graus são métodos de avaliação de desempenho. As demais alternativas misturam ferramentas de produção, de estratégia, de agregar pessoas ou teorias motivacionais."},
+{id:"psi37",t:"psi_social",e:`A liderança transformacional distingue-se da transacional porque a transformacional`,
+o:["baseia-se apenas em recompensas e punições por metas.","inspira e engaja os liderados em torno de uma visão, estimulando desenvolvimento e mudança.","evita qualquer relação com os liderados.","foca exclusivamente o controle de tarefas rotineiras.","dispensa a comunicação com a equipe."],c:1,
+cm:"A liderança transacional opera por trocas (recompensa/punição conforme desempenho). A transformacional inspira, motiva por uma visão, estimula intelectualmente e desenvolve os liderados, promovendo mudança e comprometimento."},
+{id:"psi38",t:"psi_social",e:`Segundo o modelo de Tuckman, os estágios de desenvolvimento de um grupo/equipe seguem, tipicamente, a ordem`,
+o:["performing, storming, forming e norming.","forming (formação), storming (tormenta/conflito), norming (normatização) e performing (desempenho).","norming, forming, performing e storming.","storming, performing, forming e norming.","forming, performing, storming e norming."],c:1,
+cm:"Tuckman descreve: forming (formação, orientação), storming (conflitos e tensões), norming (coesão e normas) e performing (alto desempenho) — podendo haver ainda o adjourning (encerramento). Entender a fase ajuda a intervir adequadamente."},
+{id:"psi39",t:"psi_social",e:`No processo de comunicação, os 'ruídos' correspondem a`,
+o:["apenas sons altos no ambiente físico.","quaisquer interferências que distorçam ou dificultem a mensagem entre emissor e receptor.","à ausência total de mensagem.","ao canal utilizado para transmitir a mensagem.","ao feedback dado pelo receptor."],c:1,
+cm:"Ruído é qualquer interferência (física, semântica, psicológica) que distorça a mensagem no percurso emissor–canal–receptor, prejudicando a compreensão. Reduzi-lo e usar feedback melhoram a comunicação."},
+{id:"psi40",t:"psi_social",e:`Em situações de crise, emergência e catástrofe, os Primeiros Cuidados Psicológicos (PCP/PAP) orientam o profissional a`,
+o:["forçar a vítima a relatar detalhadamente o trauma imediatamente.","oferecer acolhimento, segurança, escuta respeitosa e informações, sem pressionar o relato, articulando a rede de apoio.","aplicar psicoterapia de longo prazo no local.","selecionar quem merece atendimento.","substituir o socorro médico de urgência."],c:1,
+cm:"Os Primeiros Cuidados Psicológicos priorizam segurança, acolhimento, escuta sem forçar o relato, atendimento de necessidades básicas e encaminhamento à rede de apoio. Não são psicoterapia nem substituem a urgência médica."},
+{id:"psi41",t:"psi_saude",e:`Com a atualização da NR-1, o Gerenciamento de Riscos Ocupacionais (GRO), materializado no PGR, passou a exigir expressamente a identificação e o tratamento também dos`,
+o:["riscos apenas físicos e químicos.","riscos psicossociais relacionados ao trabalho.","custos trabalhistas da empresa.","índices de produtividade individuais.","riscos exclusivamente ergonômicos."],c:1,
+cm:"A NR-1 estrutura o GRO e o PGR e passou a contemplar expressamente os riscos psicossociais (como sobrecarga, assédio e estresse relacionados ao trabalho), exigindo identificação, avaliação e medidas de prevenção."},
+{id:"psi42",t:"psi_saude",e:`Configura assédio moral no trabalho a conduta que se caracteriza, essencialmente, por`,
+o:["uma cobrança pontual e legítima de resultados.","exposição a situações humilhantes e constrangedoras, de forma repetitiva e prolongada, atingindo a dignidade do trabalhador.","um único desentendimento isolado entre colegas.","a realização de avaliação de desempenho formal.","o fornecimento de feedback construtivo."],c:1,
+cm:"O assédio moral pressupõe reiteração e prolongamento de condutas abusivas que humilham e degradam o trabalhador, afetando sua dignidade e saúde psíquica. Cobranças legítimas pontuais e feedback construtivo não o configuram."},
+{id:"psi43",t:"psi_saude",e:`O Nexo Técnico Epidemiológico Previdenciário (NTEP) é um instrumento que`,
+o:["mede a produtividade dos setores da empresa.","estabelece presunção de relação entre determinados agravos e a atividade econômica (nexo entre doença e trabalho).","calcula o valor da aposentadoria.","substitui a avaliação psicológica.","define o organograma da empresa."],c:1,
+cm:"O NTEP relaciona estatisticamente certos agravos (CID) a atividades econômicas (CNAE), criando presunção de nexo entre a doença e o trabalho — relevante para o reconhecimento de doenças ocupacionais e seus efeitos previdenciários."},
+{id:"psi44",t:"psi_saude",e:`A Síndrome de Burnout, segundo a caracterização amplamente adotada (Maslach), compõe-se de três dimensões, que são`,
+o:["ansiedade, depressão e fobia.","exaustão emocional, despersonalização (cinismo/distanciamento) e redução da realização profissional.","estresse, tédio e euforia.","insônia, cefaleia e fadiga muscular.","negação, raiva e aceitação."],c:1,
+cm:"O Burnout é descrito por três dimensões: exaustão emocional (esgotamento), despersonalização/cinismo (distanciamento afetivo do trabalho e das pessoas) e redução da realização profissional (sensação de ineficácia). Decorre de estresse ocupacional crônico mal administrado."},
+
+/* ===== EXPANSÃO — PORTUGUÊS (mais difíceis) ===== */
+{id:"pt15",t:"pt_compreensao",e:`Texto:\n"Não se trata de recusar a tecnologia, mas de interrogá-la. Adotar uma ferramenta sem examinar seus efeitos é abrir mão, de antemão, da própria capacidade de decidir."\n\nInfere-se do texto que o autor defende`,
+o:["a rejeição de toda e qualquer tecnologia.","uma adoção crítica e reflexiva da tecnologia, que preserve a autonomia de decisão.","a adoção imediata de qualquer ferramenta disponível.","a impossibilidade de decidir diante da tecnologia.","a superioridade da técnica sobre o julgamento humano."],c:1,
+cm:"O autor não recusa a tecnologia ('não se trata de recusar'), mas propõe interrogá-la — adoção crítica que preserva a capacidade de decidir. As alternativas extremas (rejeitar tudo/adotar tudo) contrariam o texto."},
+{id:"pt16",t:"pt_ortografia",e:`Assinale a opção em que a grafia e o emprego das palavras estão corretos.`,
+o:["O relatório estava mau redigido, o que veio de encontro às expectativas da equipe.","O relatório estava mal redigido, o que veio ao encontro das críticas previstas.","O relatório estava mau redigido, o que veio ao encontro das expectativas.","O relatório estava mal redigido, o que veio de encontro das críticas.","O relatório estava mais redigido, o que veio ao encontro das expectativas."],c:1,
+cm:"'Mal' (advérbio, oposto de 'bem') qualifica 'redigido'. 'Ir ao encontro de' = concordar/favorecer; 'ir de encontro a' = colidir/opor-se. Como as críticas eram previstas, o texto coerente é 'veio ao encontro das críticas previstas'."},
+{id:"pt17",t:"pt_coesao",e:`"A carga foi inspecionada e liberada; ______, o navio pôde seguir viagem no mesmo dia." A conjunção que estabelece adequadamente a relação de conclusão é`,
+o:["contudo","portanto","embora","porque","à medida que"],c:1,
+cm:"O segundo fato é consequência/conclusão do primeiro; 'portanto' é conclusiva. 'Contudo' é adversativa, 'embora' concessiva, 'porque' causal e 'à medida que' proporcional."},
+{id:"pt18",t:"pt_semantica",e:`Na frase "O gerente pesou os prós e os contras antes de decidir", o verbo "pesar" foi empregado em sentido`,
+o:["denotativo, referindo-se a medir a massa de um objeto.","conotativo, com o sentido de avaliar/ponderar.","pejorativo.","ambíguo e sem definição possível.","técnico, próprio da física."],c:1,
+cm:"'Pesar' aqui é figurado (conotativo): significa 'avaliar, ponderar'. Não se trata de medir massa (sentido literal/denotativo)."},
+{id:"pt19",t:"pt_verbos",e:`Assinale a opção em que a forma verbal do imperativo está de acordo com a norma-padrão (tratamento por "você").`,
+o:["Faça a conferência e envie-me o relatório.","Faz a conferência e envia-me o relatório.","Fazei a conferência e enviai-me o relatório.","Faças a conferência e envies-me o relatório.","Fazias a conferência e enviavas-me o relatório."],c:0,
+cm:"Para 'você', o imperativo afirmativo deriva do presente do subjuntivo: 'faça', 'envie'. As formas 'faz/envia' são de 'tu'; 'fazei/enviai' de 'vós'; as demais não são imperativas."},
+{id:"pt20",t:"pt_classes",e:`Em "A empresa cujas metas foram cumpridas recebeu o prêmio", a palavra "cujas" é um pronome relativo que indica`,
+o:["tempo.","posse (relação entre 'empresa' e 'metas').","modo.","causa.","lugar."],c:1,
+cm:"'Cujo(a)(s)' é pronome relativo que estabelece POSSE entre o antecedente ('empresa') e o consequente ('metas'): as metas da empresa. Ele sempre concorda com o termo possuído (metas → cujas)."},
+{id:"pt21",t:"pt_coord_subord",e:`No período "É necessário que todos cumpram o prazo", a oração destacada classifica-se como subordinada substantiva`,
+o:["subjetiva.","objetiva direta.","completiva nominal.","predicativa.","apositiva."],c:0,
+cm:"A oração 'que todos cumpram o prazo' funciona como sujeito da expressão 'é necessário' (o que é necessário? que todos cumpram). Logo, é subordinada substantiva subjetiva. (Verbo/expressão impessoal + 'que' costuma introduzir subjetiva.)"},
+{id:"pt22",t:"pt_pontuacao",e:`Assinale a opção em que os dois-pontos foram empregados corretamente.`,
+o:["Os documentos exigidos são: identidade, CPF e comprovante de residência.","Os documentos: exigidos são identidade e CPF.","Os: documentos exigidos são identidade e CPF.","Os documentos exigidos: são identidade e CPF.","Os documentos exigidos são identidade: CPF e comprovante."],c:0,
+cm:"Os dois-pontos anunciam uma enumeração/explicação após um termo completo: 'Os documentos exigidos são: ...'. Não se separam sujeito, verbo e complemento com dois-pontos no meio, como nas demais opções."},
+{id:"pt23",t:"pt_concordancia",e:`Assinale a opção correta quanto à concordância verbal.`,
+o:["Um dos funcionários que chegou mais cedo relatou o problema.","Fazem cinco anos que a unidade opera.","A maioria dos candidatos compareceu à prova.","Haviam muitas dúvidas sobre o edital.","Tratam-se de questões complexas."],c:2,
+cm:"Com expressão partitiva ('a maioria de'), o verbo pode concordar com o núcleo 'maioria' (singular): 'a maioria compareceu' — correto. 'Faz cinco anos' (impessoal), 'havia muitas dúvidas' (haver impessoal) e 'trata-se de' corrigem as demais; em 'um dos que' o usual é o plural ('chegaram')."},
+{id:"pt24",t:"pt_regencia",e:`Assinale a opção em que a regência (verbal ou nominal) está de acordo com a norma-padrão.`,
+o:["Ela tem preferência por trabalhar em campo do que no escritório.","Ela prefere trabalhar em campo a trabalhar no escritório.","Ela prefere mais trabalhar em campo do que no escritório.","Ela prefere trabalhar em campo do que no escritório.","Ela tem preferência a trabalhar em campo do que no escritório."],c:1,
+cm:"'Preferir' exige a estrutura 'preferir A a B' (sem 'mais', sem 'do que'): 'prefere trabalhar em campo A trabalhar no escritório'. As construções com 'do que' e 'mais' são desvios da norma-padrão."},
+{id:"pt25",t:"pt_crase",e:`Assinale a opção em que o uso (ou a ausência) do acento indicativo de crase está correto.`,
+o:["O navio ficou à distância segura do cais.","Ele começou a trabalhar às 8h e ficou a disposição da chefia.","Entreguei o documento a diretora e fiquei à espera.","Vou à pé até o terminal portuário.","Refiro-me à ele, o novo supervisor."],c:0,
+cm:"'À distância' com especificação ('segura') admite/ exige crase. Não há crase antes de verbo ('a trabalhar'), de masculino ('a pé') nem de pronome pessoal ('a ele'); e 'à diretora' pediria crase ('entreguei à diretora'), o que torna a opção C incorreta como um todo."},
+{id:"pt26",t:"pt_pronomes",e:`Assinale a opção que exemplifica corretamente o emprego da mesóclise, conforme a norma-padrão.`,
+o:["Entregar-lhe-ei o relatório amanhã.","Lhe entregarei o relatório amanhã.","Entregarei-lhe o relatório amanhã.","Não entregar-lhe-ei o relatório.","Me entregará o relatório amanhã."],c:0,
+cm:"A mesóclise ocorre com o futuro do presente (ou do pretérito) quando não há palavra atrativa: o pronome vai ao meio do verbo — 'entregar-lhe-ei'. Havendo atrativo (ex.: 'não'), usa-se próclise ('não lhe entregarei')."},
+
+/* ===== EXPANSÃO — INGLÊS (mais difíceis) ===== */
+{id:"en9",t:"en_compreensao",e:`Read the text:\n"Before entering the terminal, every visitor must complete a short safety induction. Failure to attend it means access to the operational area will be denied, regardless of the reason for the visit."\n\nAccording to the text, a visitor who does not attend the safety induction will`,
+o:["be allowed into the operational area anyway.","be denied access to the operational area.","receive a longer induction later.","be fined a fixed amount.","supervise the terminal operations."],c:1,
+cm:"O texto afirma que a falta na indução implica negação de acesso à área operacional ('access will be denied'), independentemente do motivo da visita ('regardless of the reason')."},
+{id:"en10",t:"en_gramatica",e:`Read: "All incidents **must be reported** to the supervisor within 24 hours."\nThe verb form "must be reported" is in the`,
+o:["active voice, present continuous.","passive voice, expressing obligation.","future perfect tense.","imperative mood, active voice.","past simple, active voice."],c:1,
+cm:"'Must be reported' é voz passiva (be + particípio) combinada com o modal 'must', que expressa obrigação. O foco recai sobre a ação (relatar os incidentes), não sobre quem a executa."},
+{id:"en11",t:"en_compreensao",e:`In the sentence "Workers should identify any potential **hazard** before starting the task", the word "hazard" is closest in meaning to`,
+o:["reward","danger/risk","schedule","benefit","tool"],c:1,
+cm:"'Hazard' significa perigo/risco. O contexto ('identify any potential hazard before starting the task') confirma o sentido de risco a ser prevenido, não recompensa nem benefício."},
+
+/* ===== EXPANSÃO 2 — ESPECÍFICAS (inéditas, padrão Cesgranrio) ===== */
+{id:"adm71",t:"adm_financeira",e:`A alavancagem financeira ocorre quando a empresa`,
+o:["utiliza somente capital próprio para financiar seus investimentos.","utiliza capital de terceiros buscando ampliar o retorno sobre o capital próprio.","reduz suas dívidas a zero para diminuir o risco.","distribui todo o lucro como dividendos.","aumenta o número de sócios da empresa."],c:1,
+cm:"Alavancagem financeira é o uso de capital de terceiros (dívida) para potencializar o retorno dos acionistas. Amplia o retorno esperado, mas também o risco financeiro — efeito que se inverte quando o custo da dívida supera o retorno dos ativos."},
+{id:"adm72",t:"adm_financeira",e:`São exemplos de fontes de financiamento de longo prazo próprias e de terceiros, respectivamente,`,
+o:["empréstimo bancário e emissão de ações.","lucros retidos (reinvestidos) e debêntures.","desconto de duplicatas e capital de giro.","cheque especial e antecipação de recebíveis.","folha de pagamento e impostos a recolher."],c:1,
+cm:"Capital próprio de longo prazo inclui a retenção/reinvestimento de lucros e a emissão de ações; capital de terceiros de longo prazo inclui debêntures e financiamentos. As demais opções citam fontes de curtíssimo prazo ou obrigações operacionais."},
+{id:"adm73",t:"adm_producao",e:`A Gestão da Cadeia de Suprimentos (Supply Chain Management) caracteriza-se por`,
+o:["otimizar isoladamente apenas o setor de compras.","integrar e coordenar os fluxos de materiais, informações e recursos financeiros do fornecedor ao cliente final.","eliminar a necessidade de fornecedores.","concentrar-se somente na entrega ao cliente, sem envolver fornecedores.","tratar exclusivamente do transporte rodoviário."],c:1,
+cm:"O SCM integra e coordena, de ponta a ponta, os fluxos de materiais, informações e finanças entre todos os elos (fornecedores, fabricante, distribuidores, clientes), buscando eficiência e valor para o cliente final — visão sistêmica, não setorial."},
+{id:"adm74",t:"adm_producao",e:`O Planejamento e Controle da Produção (PCP) tem como função principal`,
+o:["definir a política de dividendos da empresa.","planejar e controlar o que, quanto, quando e como produzir, coordenando recursos para atender à demanda.","realizar a seleção de pessoal da fábrica.","auditar as demonstrações contábeis.","definir a estratégia de marketing digital."],c:1,
+cm:"O PCP responde a o quê, quanto, quando e como produzir, articulando materiais, capacidade e prazos para atender à demanda com o melhor uso dos recursos, apoiado por ferramentas como plano mestre e MRP."},
+{id:"adm75",t:"adm_contratacao",e:`Na Lei nº 13.303/2016, a dispensa de licitação em razão do valor aplica-se quando`,
+o:["há inviabilidade de competição por fornecedor exclusivo.","o valor da contratação é inferior aos limites estabelecidos, autorizando a contratação direta.","o gestor prefere um fornecedor específico.","a empresa deseja evitar a publicidade do certame.","o objeto é de notória especialização."],c:1,
+cm:"A dispensa em razão do valor autoriza contratação direta abaixo dos limites legais, por economicidade. Não confundir com inexigibilidade (inviabilidade de competição — fornecedor exclusivo, serviço técnico singular de notória especialização)."},
+{id:"adm76",t:"adm_contratacao",e:`Sobre o regime de licitações aplicável às empresas estatais, é correto afirmar que`,
+o:["seguem obrigatoriamente a Lei nº 8.666/1993 em todos os atos.","possuem regime próprio na Lei nº 13.303/2016, distinto do regime geral da administração direta.","não estão sujeitas a qualquer regra de contratação.","aplicam sempre e exclusivamente a Lei nº 14.133/2021.","contratam livremente, sem necessidade de motivação."],c:1,
+cm:"As estatais têm regime PRÓPRIO de licitações e contratos na Lei 13.303/2016, distinto das leis gerais que regem a administração direta. Ainda assim, submetem-se a princípios como impessoalidade, moralidade, economicidade e transparência."},
+{id:"adm77",t:"adm_projetos",e:`No Guia PMBOK 7ª edição, a entrega de valor é tratada como`,
+o:["um detalhe secundário do gerenciamento.","o foco central, orientando princípios e domínios de desempenho do projeto.","uma responsabilidade exclusiva do setor financeiro.","algo que só importa após o encerramento do projeto.","um sinônimo de cumprir prazos, apenas."],c:1,
+cm:"O PMBOK 7 desloca o foco de processos para a entrega de VALOR, sustentada por princípios e domínios de desempenho. O sucesso passa a ser medido pelos resultados e benefícios gerados, não apenas pelo cumprimento de escopo/prazo/custo."},
+{id:"adm78",t:"adm_projetos",e:`No Scrum, a diferença entre Product Backlog e Sprint Backlog é que o Product Backlog`,
+o:["é a lista de tarefas de uma única Sprint, e o Sprint Backlog, do produto inteiro.","é a lista ordenada de tudo que pode ser necessário no produto, enquanto o Sprint Backlog contém os itens selecionados para a Sprint atual.","é definido pelo Scrum Master, e o Sprint Backlog, pelo cliente.","não existe no Scrum.","é imutável durante todo o projeto."],c:1,
+cm:"O Product Backlog é a lista viva e ordenada de tudo que pode agregar valor ao produto (responsabilidade do Product Owner). O Sprint Backlog é o subconjunto selecionado para a Sprint, mais o plano para entregá-lo (dos Desenvolvedores)."},
+{id:"adm79",t:"adm_negociacao",e:`Em uma negociação, conhecer a própria MAPAN (BATNA) permite ao negociador`,
+o:["aceitar qualquer proposta para fechar rápido.","saber até que ponto vale a pena negociar, definindo seu ponto de recusa (walk-away).","ignorar completamente os interesses da outra parte.","garantir que a outra parte perca.","dispensar qualquer preparação prévia."],c:1,
+cm:"A MAPAN (melhor alternativa caso não haja acordo) define o poder de barganha e o ponto de recusa: só vale aceitar um acordo melhor que a MAPAN. Conhecê-la evita fechar maus acordos e orienta as concessões."},
+{id:"adm80",t:"adm_negociacao",e:`A tática de negociação conhecida como concessões graduais e recíprocas visa`,
+o:["fazer todas as concessões de uma só vez, no início.","construir acordo por aproximações, trocando concessões de parte a parte ao longo do processo.","impedir qualquer concessão.","encerrar a negociação sem acordo.","transferir a decisão a um terceiro."],c:1,
+cm:"Concessões graduais e recíprocas constroem o acordo por etapas: cada parte cede algo em troca de contrapartidas, sinalizando boa-fé e preservando valor. Conceder tudo de início enfraquece a posição; não conceder nada trava a negociação."},
+{id:"adm81",t:"adm_si",e:`Os Sistemas de Informação Gerencial (SIG/MIS) destinam-se, principalmente, a`,
+o:["registrar as transações operacionais em tempo real.","fornecer relatórios e informações consolidadas para apoiar o controle e a gestão no nível tático.","controlar máquinas no chão de fábrica.","substituir a estratégia da empresa.","realizar apenas cópias de segurança."],c:1,
+cm:"O SIG consolida dados (frequentemente vindos dos SPT) em relatórios gerenciais que apoiam o planejamento e o controle no nível tático. Já os SPT tratam as transações operacionais e os SAD apoiam decisões menos estruturadas."},
+{id:"adm82",t:"adm_si",e:`Um sistema de CRM (Customer Relationship Management) tem como foco`,
+o:["a gestão integrada da produção industrial.","a gestão do relacionamento com os clientes, integrando informações de vendas, marketing e atendimento.","o controle exclusivo do estoque de matéria-prima.","a folha de pagamento dos funcionários.","a contabilidade fiscal da empresa."],c:1,
+cm:"O CRM centraliza e integra informações do relacionamento com clientes (vendas, marketing, atendimento, histórico), apoiando fidelização e personalização. Difere do ERP (processos internos) e do SCM (cadeia de suprimentos)."},
+{id:"adm83",t:"adm_estrategia",e:`No planejamento estratégico, a missão, a visão e os valores organizacionais representam, respectivamente,`,
+o:["onde a empresa quer chegar; a razão de existir; as metas anuais.","a razão de existir da organização; o estado futuro desejado; os princípios que guiam o comportamento.","o lucro do exercício; o número de clientes; os concorrentes.","a estratégia de preço; a de produto; a de praça.","as forças; as fraquezas; as oportunidades."],c:1,
+cm:"Missão = razão de existir/propósito atual; Visão = estado futuro desejado (aonde se quer chegar); Valores = princípios e crenças que orientam o comportamento e as decisões. Juntos, dão direção ao planejamento estratégico."},
+{id:"adm84",t:"adm_estrategia",e:`Na Matriz BCG, um produto com alta participação de mercado em um setor de baixo crescimento é classificado como`,
+o:["estrela.","vaca leiteira (geradora de caixa).","interrogação (ponto de interrogação).","abacaxi (cão/abacaxi).","incógnita."],c:1,
+cm:"Na Matriz BCG, alta participação + baixo crescimento = 'vaca leiteira', que gera caixa com pouco investimento. Estrela é alta participação + alto crescimento; interrogação é baixa participação + alto crescimento; abacaxi/cão é baixa participação + baixo crescimento."},
+{id:"adm85",t:"adm_marketing",e:`No composto de marketing, decisões sobre canais de distribuição, logística e pontos de venda referem-se ao "P" de`,
+o:["Produto.","Preço.","Praça (distribuição).","Promoção.","Pessoas."],c:2,
+cm:"A 'Praça' trata de como o produto/serviço chega ao cliente: canais de distribuição, cobertura, pontos de venda e logística. Produto é a oferta; Preço, o valor cobrado; Promoção, a comunicação."},
+{id:"adm86",t:"adm_marketing",e:`O marketing de relacionamento tem como objetivo central`,
+o:["realizar uma única venda ao maior número de pessoas.","construir e manter relacionamentos de longo prazo, aumentando a fidelização e o valor do cliente ao longo do tempo.","reduzir a qualidade para baixar preços.","eliminar o pós-venda.","focar exclusivamente na captação de novos clientes."],c:1,
+cm:"O marketing de relacionamento prioriza reter e desenvolver clientes (fidelização, valor ao longo do tempo, lifetime value), reconhecendo que manter um cliente costuma ser mais rentável do que conquistar um novo. O pós-venda é peça-chave."},
+{id:"adm87",t:"adm_contabilidade",e:`A Demonstração dos Fluxos de Caixa (DFC) classifica as movimentações em três grupos, que são`,
+o:["ativo, passivo e patrimônio líquido.","operacional, de investimento e de financiamento.","receitas, custos e despesas.","circulante, não circulante e permanente.","bruto, líquido e operacional."],c:1,
+cm:"A DFC organiza as entradas e saídas de caixa em três atividades: operacionais (do negócio), de investimento (compra/venda de ativos de longo prazo) e de financiamento (captação e pagamento de capital próprio e de terceiros)."},
+{id:"adm88",t:"adm_contabilidade",e:`A depreciação, na contabilidade, representa`,
+o:["a valorização de um bem ao longo do tempo.","a alocação sistemática do custo de um ativo imobilizado ao longo de sua vida útil.","a distribuição de lucros aos sócios.","o pagamento de dívidas de longo prazo.","o aumento do capital social."],c:1,
+cm:"Depreciação é o reconhecimento, por competência, do desgaste/uso de um ativo imobilizado, alocando seu custo ao longo da vida útil. Reduz o valor contábil do bem e compõe as despesas do período."},
+{id:"adm89",t:"adm_decisao",e:`No modelo racional de tomada de decisão, uma das primeiras etapas é`,
+o:["implementar a solução antes de analisar.","identificar e definir corretamente o problema (ou a oportunidade).","escolher aleatoriamente uma alternativa.","avaliar apenas a primeira ideia que surgir.","ignorar os critérios de decisão."],c:1,
+cm:"O modelo racional começa por identificar/definir o problema e os critérios, para então gerar alternativas, avaliá-las, escolher, implementar e avaliar os resultados. Definir mal o problema compromete todas as etapas seguintes."},
+{id:"adm90",t:"adm_decisao",e:`O brainstorming, como técnica de apoio à decisão em grupo, baseia-se em`,
+o:["criticar cada ideia imediatamente ao ser proposta.","gerar o máximo de ideias sem julgamento inicial, estimulando a criatividade, para só depois avaliá-las.","permitir que apenas o líder proponha soluções.","escolher a solução por votação secreta antes de discutir.","limitar as ideias às já testadas anteriormente."],c:1,
+cm:"O brainstorming separa a geração da avaliação: primeiro produz-se o maior número de ideias sem crítica (para não inibir a criatividade); a triagem e a análise vêm depois. Criticar de imediato inibe a fase criativa."},
+{id:"adm91",t:"adm_rh",e:`O absenteísmo, como indicador de gestão de pessoas, mede`,
+o:["a rotatividade de empregados.","a frequência e a duração das ausências dos empregados ao trabalho.","o número de promoções internas.","a satisfação dos clientes.","o total de horas extras pagas."],c:1,
+cm:"O absenteísmo mede as ausências (faltas, atrasos, saídas) em relação ao tempo de trabalho previsto. Índices altos podem sinalizar problemas de saúde, clima, motivação ou condições de trabalho — distinto do turnover (rotatividade)."},
+{id:"adm92",t:"adm_rh",e:`A gestão do clima organizacional, na área de RH, apoia-se principalmente em`,
+o:["auditar as demonstrações financeiras.","pesquisas que captam a percepção dos empregados sobre o ambiente de trabalho, subsidiando planos de melhoria.","definir a estrutura de capital da empresa.","controlar o estoque de materiais.","calcular a depreciação dos ativos."],c:1,
+cm:"A gestão de clima usa pesquisas periódicas para captar a percepção coletiva dos empregados (liderança, comunicação, reconhecimento, condições) e transformar os resultados em planos de ação, impactando engajamento e retenção."},
+{id:"adm93",t:"adm_logica",e:`Uma proposição composta que é sempre verdadeira, independentemente dos valores lógicos de suas proposições simples, é denominada`,
+o:["contradição.","tautologia.","contingência.","conjunção.","bicondicional."],c:1,
+cm:"Tautologia é a proposição sempre verdadeira em todas as linhas da tabela-verdade. A contradição é sempre falsa; a contingência ora verdadeira, ora falsa."},
+{id:"adm94",t:"adm_logica",e:`Se 4 operadores inspecionam 60 dutos em 3 horas, mantendo o mesmo ritmo, quantos dutos 6 operadores inspecionam em 2 horas?`,
+o:["40 dutos.","45 dutos.","60 dutos.","72 dutos.","90 dutos."],c:2,
+cm:"Regra de três composta: a produção é proporcional a operadores e a horas. 60 × (6/4) × (2/3) = 60 × 1,5 × 0,666... = 60. Aumentar operadores em 50% e reduzir o tempo a 2/3 compensa-se, resultando em 60 dutos."},
+{id:"adm95",t:"adm_estatistica",e:`Em um conjunto de dados, a moda é`,
+o:["o valor que ocupa a posição central.","o valor (ou valores) que aparece com maior frequência.","a média aritmética dos valores.","a diferença entre o maior e o menor valor.","a raiz quadrada da variância."],c:1,
+cm:"A moda é o valor mais frequente. Um conjunto pode ser amodal (sem moda), bimodal ou multimodal. A posição central é a mediana; a diferença entre extremos é a amplitude; a raiz da variância é o desvio padrão."},
+{id:"adm96",t:"adm_estatistica",e:`Sendo P(A) = 0,5, P(B) = 0,4 e P(A∩B) = 0,2, a probabilidade da união P(A∪B) é`,
+o:["0,6.","0,7.","0,8.","0,9.","1,1."],c:1,
+cm:"P(A∪B) = P(A) + P(B) − P(A∩B) = 0,5 + 0,4 − 0,2 = 0,7. Subtrai-se a interseção para não contá-la duas vezes. Somar sem subtrair (0,9) é o erro típico."},
+{id:"adm97",t:"adm_esg",e:`O conceito de Triple Bottom Line (tripé da sustentabilidade) considera três dimensões, que são`,
+o:["passado, presente e futuro.","econômica (lucro), social (pessoas) e ambiental (planeta).","produção, vendas e lucro.","governança, auditoria e compliance.","curto, médio e longo prazo."],c:1,
+cm:"O Triple Bottom Line (Elkington) propõe equilibrar três dimensões — econômica (profit), social (people) e ambiental (planet) — como base da sustentabilidade organizacional, indo além do resultado puramente financeiro."},
+{id:"adm98",t:"adm_esg",e:`As diretrizes da Global Reporting Initiative (GRI) são utilizadas por organizações para`,
+o:["calcular o imposto de renda devido.","elaborar relatórios de sustentabilidade padronizados e comparáveis sobre seus impactos econômicos, ambientais e sociais.","auditar as demonstrações financeiras.","definir preços de venda.","registrar patentes."],c:1,
+cm:"A GRI oferece um padrão amplamente adotado para relatórios de sustentabilidade, tornando a divulgação dos impactos econômicos, ambientais e sociais mais transparente e comparável entre organizações e ao longo do tempo."},
+
+{id:"psi45",t:"psi_etica",e:`Quanto à publicidade dos serviços psicológicos, o Código de Ética estabelece que o psicólogo pode divulgá-los desde que`,
+o:["prometa resultados e garanta a cura.","o faça com veracidade e responsabilidade, informando nome e registro (CRP), sem sensacionalismo nem promessas de resultados.","use depoimentos de pacientes identificados.","compare-se depreciativamente a colegas.","omita seu número de registro profissional."],c:1,
+cm:"A publicidade deve ser verdadeira e responsável, identificar o profissional e seu CRP, e não pode prometer resultados, sensacionalizar, usar o sofrimento das pessoas nem depreciar colegas. O sigilo dos usuários deve ser preservado."},
+{id:"psi46",t:"psi_etica",e:`Constitui conduta contrária aos princípios do Código de Ética do Psicólogo`,
+o:["basear o trabalho no respeito à dignidade e à liberdade das pessoas.","utilizar práticas que resultem em discriminação, negligência ou dano ao usuário.","zelar pelo sigilo profissional.","atuar com competência e responsabilidade técnica.","promover os direitos humanos."],c:1,
+cm:"O Código veda expressamente práticas que causem discriminação, negligência, opressão ou dano. As demais alternativas descrevem justamente os princípios que o psicólogo deve observar (dignidade, sigilo, competência, direitos humanos)."},
+{id:"psi47",t:"psi_resolucoes",e:`Segundo a Resolução CFP nº 06/2019, o laudo psicológico deve conter, em regra, uma estrutura com`,
+o:["apenas a conclusão, sem fundamentação.","identificação, descrição da demanda, procedimento, análise e conclusão.","somente o resultado dos testes, sem interpretação.","exclusivamente a assinatura do psicólogo.","apenas a data e o local de emissão."],c:1,
+cm:"O laudo psicológico organiza-se, em geral, em identificação, descrição da demanda, procedimentos utilizados, análise (interpretação fundamentada) e conclusão. É documento aprofundado e fundamentado, não uma simples afirmação de resultado."},
+{id:"psi48",t:"psi_resolucoes",e:`Ainda conforme a Resolução CFP nº 06/2019, a declaração psicológica destina-se a`,
+o:["apresentar análise aprofundada de um processo de avaliação.","informar, de forma pontual, a ocorrência de fatos como comparecimento, acompanhamento ou frequência a atendimento.","certificar aptidão para o exercício de um cargo.","responder a uma questão-problema formulada por autoridade.","substituir o prontuário do usuário."],c:1,
+cm:"A declaração é documento breve que informa fatos objetivos (comparecimento, acompanhamento, participação), sem revelar conteúdo sigiloso. Análise aprofundada é do laudo; certificação de condição é do atestado; resposta a questão específica é do parecer."},
+{id:"psi49",t:"psi_organizacional",e:`Na Teoria dos Dois Fatores de Herzberg, são exemplos de fatores motivacionais (intrínsecos)`,
+o:["salário, condições físicas e segurança no emprego.","reconhecimento, realização, o próprio conteúdo do trabalho e responsabilidade.","política da empresa e relações com a chefia.","benefícios e estabilidade.","supervisão e ambiente físico."],c:1,
+cm:"Para Herzberg, os fatores motivacionais (intrínsecos ao trabalho) — realização, reconhecimento, o trabalho em si, responsabilidade e crescimento — geram satisfação e motivação. Salário, condições e supervisão são higiênicos (extrínsecos): evitam insatisfação, mas não motivam."},
+{id:"psi50",t:"psi_organizacional",e:`A Teoria das Necessidades de McClelland aborda três necessidades que impulsionam o comportamento no trabalho, que são`,
+o:["fisiológicas, de segurança e sociais.","de realização, de poder e de afiliação.","higiênicas, motivacionais e existenciais.","de existência, de relacionamento e de crescimento.","de equidade, de expectativa e de reforço."],c:1,
+cm:"McClelland destaca as necessidades de realização (superar desafios/metas), de poder (influenciar e controlar) e de afiliação (relacionamentos e pertencimento). O peso de cada uma varia entre as pessoas e orienta funções e formas de gestão."},
+{id:"psi51",t:"psi_diagnostico",e:`O processo de integração (socialização/onboarding) de novos empregados tem como principal objetivo`,
+o:["avaliar o desempenho para justificar demissões.","facilitar a adaptação do novo empregado à cultura, às normas e ao trabalho, acelerando seu engajamento e produtividade.","substituir o processo de recrutamento.","reduzir os salários de admissão.","dispensar o treinamento técnico."],c:1,
+cm:"A socialização organizacional (onboarding) acolhe e orienta o recém-admitido quanto à cultura, valores, normas, papel e equipe, reduzindo a ansiedade inicial e acelerando adaptação, engajamento e desempenho — o que também ajuda a reter talentos."},
+{id:"psi52",t:"psi_diagnostico",e:`O plano de sucessão, na gestão de pessoas, tem como finalidade`,
+o:["demitir os ocupantes de cargos-chave.","identificar e preparar profissionais para assumir posições estratégicas no futuro, garantindo continuidade.","congelar as carreiras dentro da organização.","eliminar a avaliação de desempenho.","impedir promoções internas."],c:1,
+cm:"O plano de sucessão mapeia posições críticas e desenvolve potenciais sucessores (por competências e prontidão), assegurando continuidade e reduzindo riscos de vacância em cargos estratégicos. Conecta-se a avaliação, desenvolvimento e gestão de talentos."},
+{id:"psi53",t:"psi_social",e:`A comunicação assertiva no ambiente de trabalho caracteriza-se por`,
+o:["expressar-se de forma agressiva para impor a própria opinião.","expressar pensamentos, sentimentos e necessidades de modo claro, direto e respeitoso, considerando também o outro.","evitar dizer o que pensa para não gerar conflito.","usar apenas comunicação não verbal.","delegar sempre a fala a terceiros."],c:1,
+cm:"A assertividade fica entre a passividade (calar-se) e a agressividade (impor-se): é comunicar-se com clareza, franqueza e respeito, defendendo os próprios pontos sem desrespeitar o outro — o que favorece relações e reduz conflitos disfuncionais."},
+{id:"psi54",t:"psi_social",e:`No estudo dos grupos, o conflito é considerado funcional quando`,
+o:["sempre prejudica o desempenho da equipe.","é construtivo, estimulando debate, criatividade e melhores decisões, dentro de níveis administráveis.","deve ser totalmente eliminado a qualquer custo.","ocorre apenas entre a chefia e os subordinados.","impede qualquer mudança na organização."],c:1,
+cm:"Nem todo conflito é negativo: o conflito funcional (construtivo), em nível moderado, estimula o debate de ideias, a criatividade e a qualidade das decisões. Já o disfuncional, excessivo, prejudica relações e desempenho. Cabe à gestão administrá-lo."},
+{id:"psi55",t:"psi_saude",e:`A Norma Regulamentadora NR-17 trata, essencialmente, da`,
+o:["proteção contra incêndios.","ergonomia — adaptação das condições de trabalho às características psicofisiológicas dos trabalhadores.","segurança em instalações elétricas.","gestão de resíduos industriais.","sinalização de segurança."],c:1,
+cm:"A NR-17 estabelece parâmetros de ergonomia para adaptar as condições de trabalho (mobiliário, posto, ritmo, organização, ambiente) às características psicofisiológicas dos trabalhadores, prevenindo agravos como LER/DORT e sobrecarga."},
+{id:"psi56",t:"psi_saude",e:`Segundo Hans Selye, a Síndrome Geral de Adaptação (resposta ao estresse) desenvolve-se em três fases, que são`,
+o:["negação, raiva e aceitação.","alarme, resistência e exaustão.","exaustão, cinismo e ineficácia.","forming, storming e norming.","fisiológica, de segurança e social."],c:1,
+cm:"A Síndrome Geral de Adaptação de Selye descreve três fases da resposta ao estresse: alarme (reação inicial), resistência (tentativa de adaptação) e exaustão (esgotamento dos recursos, com adoecimento). É base para compreender o estresse ocupacional."},
+
+/* ===== EXPANSÃO 3 — ESPECÍFICAS (inéditas, padrão Cesgranrio) ===== */
+{id:"adm99",t:"adm_financeira",e:`O Custo Médio Ponderado de Capital (WACC) representa`,
+o:["o custo apenas do capital de terceiros (dívidas).","o custo médio das fontes de financiamento (próprias e de terceiros), ponderado por suas participações.","o lucro líquido dividido pelo patrimônio.","o valor de mercado das ações.","a taxa de inflação do período."],c:1,
+cm:"O WACC combina o custo do capital próprio e o de terceiros, ponderados pela participação de cada fonte na estrutura de capital. Costuma ser usado como taxa mínima de atratividade e como taxa de desconto na avaliação de projetos."},
+{id:"adm100",t:"adm_financeira",e:`A Taxa Mínima de Atratividade (TMA) de uma empresa corresponde`,
+o:["ao maior retorno possível de um projeto.","ao retorno mínimo que um investimento precisa oferecer para ser considerado atrativo.","ao custo fixo mensal da empresa.","ao valor do investimento inicial.","à taxa de depreciação dos ativos."],c:1,
+cm:"A TMA é o retorno mínimo aceitável, geralmente ligada ao custo de capital e ao risco. Um projeto é atrativo quando a TIR supera a TMA; a TMA também serve de taxa de desconto no cálculo do VPL."},
+{id:"adm101",t:"adm_contabilidade",e:`O método das partidas dobradas, base da escrituração contábil, estabelece que`,
+o:["cada lançamento afeta apenas uma conta.","para cada débito há um crédito de igual valor, mantendo o equilíbrio patrimonial.","os créditos devem ser sempre maiores que os débitos.","apenas as contas de resultado são movimentadas.","os lançamentos independem de documentos."],c:1,
+cm:"Pelas partidas dobradas, todo débito corresponde a um crédito de igual valor (não há débito sem crédito), o que mantém a igualdade Ativo = Passivo + PL e permite a conferência da escrituração."},
+{id:"adm102",t:"adm_contabilidade",e:`As provisões, na contabilidade, caracterizam-se por serem`,
+o:["ativos de alta liquidez.","passivos de prazo ou valor incertos, reconhecidos por competência (ex.: provisão para férias).","receitas antecipadas de clientes.","parte do capital social.","despesas já pagas em caixa."],c:1,
+cm:"Provisões são passivos com incerteza quanto a prazo e/ou valor, reconhecidos quando há obrigação presente provável e mensurável (regime de competência), como provisões para férias, 13º e contingências."},
+{id:"adm103",t:"adm_estatistica",e:`Em estatística, a diferença entre população e amostra é que a amostra`,
+o:["é sempre maior que a população.","é um subconjunto da população, usado para inferir características do todo.","é igual à população em qualquer estudo.","não tem relação com a população.","dispensa qualquer critério de seleção."],c:1,
+cm:"População é o conjunto de todos os elementos de interesse; a amostra é um subconjunto (idealmente representativo) usado para inferir, com margem de erro, características da população — base da estatística inferencial."},
+{id:"adm104",t:"adm_estatistica",e:`Em uma urna há 10 bolas, das quais 4 são defeituosas. Retirando-se uma bola ao acaso e sabendo-se que ela é vermelha (há 5 vermelhas, das quais 2 defeituosas), a probabilidade de ser defeituosa é`,
+o:["2/10.","2/5.","4/10.","1/2.","3/5."],c:1,
+cm:"Probabilidade condicional: P(defeituosa | vermelha) = (defeituosas e vermelhas)/(vermelhas) = 2/5. Condicionar reduz o espaço amostral às 5 vermelhas."},
+{id:"adm105",t:"adm_logica",e:`Considere verdadeiras as premissas: "Se a bomba falhar, o sistema para" e "A bomba falhou". A conclusão logicamente válida é`,
+o:["O sistema não para.","O sistema para.","A bomba não falhou.","O sistema para somente se a bomba não falhar.","Nada se pode concluir."],c:1,
+cm:"É o modus ponens: de 'P → Q' e 'P', conclui-se 'Q'. Como a bomba falhou (P) e 'se falhar, o sistema para' (P→Q), conclui-se que o sistema para (Q)."},
+{id:"adm106",t:"adm_logica",e:`A negação da proposição "Algum funcionário faltou à reunião" é`,
+o:["Algum funcionário compareceu à reunião.","Nenhum funcionário faltou à reunião.","Todos os funcionários faltaram à reunião.","Nem todos os funcionários compareceram.","Poucos funcionários faltaram."],c:1,
+cm:"A negação de 'existe/algum A que é B' é 'nenhum A é B' (para todo A, não B). Logo, a negação de 'algum funcionário faltou' é 'nenhum funcionário faltou'."},
+{id:"adm107",t:"adm_estrategia",e:`A análise PESTEL é utilizada no planejamento estratégico para avaliar`,
+o:["os processos internos da organização.","fatores do macroambiente externo: políticos, econômicos, sociais, tecnológicos, ambientais e legais.","apenas a concorrência direta.","o desempenho financeiro passado.","a estrutura hierárquica da empresa."],c:1,
+cm:"A PESTEL mapeia forças do macroambiente externo (Político, Econômico, Social, Tecnológico, Ambiental/Ecológico e Legal) que afetam a organização, complementando a análise das oportunidades e ameaças da SWOT."},
+{id:"adm108",t:"adm_decisao",e:`O fenômeno do 'pensamento de grupo' (groupthink), no processo decisório coletivo, ocorre quando`,
+o:["o grupo estimula amplamente o debate e a divergência.","a busca por consenso e coesão suprime o pensamento crítico e a consideração de alternativas.","cada membro decide isoladamente.","o líder delega toda a decisão a um consultor externo.","o grupo utiliza dados estatísticos em excesso."],c:1,
+cm:"No groupthink, a pressão por harmonia e consenso inibe a crítica e a análise de alternativas, levando a decisões de baixa qualidade. Estimular a divergência construtiva e o 'advogado do diabo' ajuda a evitá-lo."},
+{id:"adm109",t:"adm_marketing",e:`Fazem parte do mix de comunicação (promoção) de marketing`,
+o:["produto, preço, praça e promoção.","propaganda, promoção de vendas, relações públicas, venda pessoal e marketing direto.","segmentação, posicionamento e diferenciação.","logística, estoque e distribuição.","pesquisa, desenvolvimento e produção."],c:1,
+cm:"O mix de comunicação reúne as ferramentas para comunicar valor ao mercado: propaganda, promoção de vendas, relações públicas/publicidade, venda pessoal e marketing direto (e, atualmente, o digital). Não confundir com os 4 Ps."},
+{id:"adm110",t:"adm_rh",e:`A descrição e a análise de cargos, na gestão de pessoas, têm por finalidade`,
+o:["definir a política de preços da empresa.","especificar as tarefas, responsabilidades e requisitos de cada cargo, servindo de base para recrutamento, seleção, treinamento e avaliação.","calcular a depreciação dos ativos.","elaborar o balanço patrimonial.","definir a estratégia de comunicação."],c:1,
+cm:"A descrição de cargos detalha o que se faz (tarefas, responsabilidades); a análise define os requisitos (competências, conhecimentos). Ambas subsidiam recrutamento, seleção, T&D, avaliação de desempenho e remuneração."},
+{id:"psi57",t:"psi_organizacional",e:`Segundo a Teoria da Expectância (ou Expectativa) de Victor Vroom, a motivação resulta da combinação de três elementos, que são`,
+o:["higiene, motivação e ambiente.","expectância, instrumentalidade e valência.","realização, poder e afiliação.","alarme, resistência e exaustão.","reação, aprendizagem e resultado."],c:1,
+cm:"Para Vroom, a força motivacional depende da expectância (esforço → desempenho), da instrumentalidade (desempenho → recompensa) e da valência (valor atribuído à recompensa). Se qualquer fator for próximo de zero, a motivação cai."},
+{id:"psi58",t:"psi_organizacional",e:`A Teoria da Equidade de Adams sustenta que a motivação do trabalhador é influenciada por`,
+o:["apenas o valor absoluto do salário recebido.","a comparação entre a relação de suas contribuições e recompensas e a de outras pessoas (percepção de justiça).","exclusivamente as necessidades fisiológicas.","o número de horas trabalhadas.","a idade do trabalhador."],c:1,
+cm:"Na Teoria da Equidade, as pessoas comparam sua razão contribuições/recompensas com a de referências. A percepção de iniquidade (para menos ou para mais) gera tensão e reações (reduzir esforço, pedir aumento, sair). O que motiva é a justiça percebida, não só o valor absoluto."},
+{id:"psi59",t:"psi_saude",e:`A CIPA (Comissão Interna de Prevenção de Acidentes), regida pela NR-5, tem como objetivo`,
+o:["fiscalizar a folha de pagamento.","prevenir acidentes e doenças decorrentes do trabalho, tornando compatível o trabalho com a preservação da saúde (incluindo ações contra o assédio).","substituir o SESMT em todas as funções.","gerir os planos de saúde da empresa.","definir a estratégia de negócios."],c:1,
+cm:"A CIPA (NR-5) atua na prevenção de acidentes e doenças ocupacionais, com representantes de empregados e empregador; com atualizações recentes, passou a incluir também medidas de prevenção ao assédio e à violência no trabalho."},
+{id:"psi60",t:"psi_saude",e:`O PCMSO (Programa de Controle Médico de Saúde Ocupacional), previsto na NR-7, destina-se a`,
+o:["controlar o estoque de medicamentos da empresa.","promover e preservar a saúde dos trabalhadores por meio de ações e exames médicos ocupacionais, articulado ao gerenciamento de riscos.","calcular benefícios previdenciários.","avaliar o desempenho dos empregados.","definir a jornada de trabalho."],c:1,
+cm:"O PCMSO (NR-7) estabelece diretrizes e exames médicos ocupacionais (admissional, periódico, demissional etc.) para rastrear e prevenir agravos, articulando-se ao gerenciamento de riscos (GRO/PGR) da NR-1."},
+{id:"psi61",t:"psi_saude",e:`A Qualidade de Vida no Trabalho (QVT) refere-se, essencialmente, a`,
+o:["apenas ao valor do salário pago.","um conjunto de condições e percepções (saúde, segurança, relações, sentido do trabalho, equilíbrio) que impactam o bem-estar e o desempenho.","somente à ergonomia do mobiliário.","exclusivamente aos benefícios oferecidos.","à quantidade de horas extras realizadas."],c:1,
+cm:"A QVT é multidimensional: envolve condições físicas e psicossociais, saúde, segurança, relações, reconhecimento, autonomia e equilíbrio trabalho-vida. Programas de QVT visam bem-estar e, como consequência, engajamento e produtividade."},
+{id:"psi62",t:"psi_resolucoes",e:`De acordo com as normas do CFP sobre avaliação psicológica, a avaliação psicológica deve ser compreendida como`,
+o:["a simples aplicação de um único teste.","um processo amplo e fundamentado, que integra diferentes fontes e métodos (entrevistas, testes com parecer favorável, observação) para responder a uma demanda.","uma decisão baseada apenas na intuição do profissional.","um procedimento dispensável em contextos públicos.","um exame exclusivamente médico."],c:1,
+cm:"A avaliação psicológica é um processo técnico e fundamentado que integra múltiplos métodos e fontes (entrevista, testes com parecer favorável no SATEPSI, observação, história), não se reduzindo à aplicação de um único instrumento."},
+{id:"psi63",t:"psi_social",e:`Nos estudos clássicos de Kurt Lewin sobre estilos de liderança, o estilo em que o líder deixa o grupo à vontade, com mínima interferência nas decisões, é o`,
+o:["autocrático.","democrático.","liberal (laissez-faire).","transformacional.","situacional."],c:2,
+cm:"Lewin descreveu três estilos: autocrático (o líder decide e impõe), democrático (participativo) e liberal/laissez-faire (o grupo tem liberdade, com pouca intervenção do líder). Cada estilo produz efeitos distintos no clima e no desempenho."},
+{id:"psi64",t:"psi_social",e:`A coesão de um grupo de trabalho refere-se ao grau em que os membros`,
+o:["competem entre si de forma destrutiva.","se sentem atraídos pelo grupo e motivados a permanecer nele, com forte senso de unidade.","desconhecem os objetivos comuns.","atuam de forma totalmente isolada.","rejeitam as normas do grupo."],c:1,
+cm:"Coesão é a força que mantém os membros unidos e comprometidos com o grupo. Alta coesão tende a favorecer satisfação e desempenho, mas, em excesso, pode alimentar conformismo e pensamento de grupo."},
+{id:"psi65",t:"psi_diagnostico",e:`No modelo de Kirkpatrick, a avaliação de um treinamento pode ocorrer em quatro níveis, que são`,
+o:["reação, aprendizagem, comportamento e resultados.","planejamento, execução, controle e encerramento.","forming, storming, norming e performing.","alarme, resistência, exaustão e recuperação.","expectância, instrumentalidade, valência e esforço."],c:0,
+cm:"Kirkpatrick propõe quatro níveis: reação (satisfação dos participantes), aprendizagem (conhecimentos/habilidades adquiridos), comportamento (transferência para o trabalho) e resultados (impacto organizacional). A profundidade aumenta a cada nível."},
+{id:"psi66",t:"psi_diagnostico",e:`Quanto às fontes de recrutamento, é correto afirmar que o recrutamento`,
+o:["só pode ser interno.","pode ser interno, externo ou misto, cada um com vantagens e limitações.","dispensa a definição do perfil da vaga.","é sinônimo de seleção.","ocorre após a integração do empregado."],c:1,
+cm:"O recrutamento pode ser interno (aproveita quem já está na empresa; rápido e motivador), externo (traz novos perfis e diversidade) ou misto (combina ambos). A escolha depende da vaga, do prazo e da estratégia de pessoas."},
+{id:"psi67",t:"psi_etica",e:`Segundo o Código de Ética, quanto à competência profissional, o psicólogo deve`,
+o:["realizar quaisquer procedimentos, mesmo sem formação específica.","atuar apenas nos limites de sua competência, buscando aprimoramento e não realizando atividades para as quais não esteja capacitado.","delegar toda a responsabilidade técnica à instituição.","garantir resultados a quem contrata.","dispensar a atualização profissional."],c:1,
+cm:"O psicólogo deve atuar com responsabilidade técnica, dentro dos limites de sua competência e formação, buscando aprimoramento contínuo, e não realizar procedimentos para os quais não esteja capacitado — resguardando a qualidade e a segurança do serviço."},
+{id:"psi68",t:"psi_organizacional",e:`O Desenvolvimento Organizacional (DO) pode ser compreendido como`,
+o:["uma mudança pontual e improvisada de setores isolados.","uma abordagem planejada e sistêmica de mudança, voltada à melhoria de processos, cultura e desempenho das pessoas e da organização.","a simples troca de tecnologia, sem envolver pessoas.","um método exclusivamente financeiro.","a redução de pessoal como fim em si."],c:1,
+cm:"O DO é uma estratégia planejada e de longo prazo de mudança organizacional, com base nas ciências do comportamento, que atua sobre cultura, processos, equipes e pessoas para aumentar a efetividade e a capacidade de adaptação da organização."}
 ];
+
+/* ---------------- MATERIAL DE ESTUDO (resumos originais por tópico) ---------------- */
+const MATERIAL={
+pt_compreensao:`<p>Ler é reconstruir o sentido do texto, não apenas localizar palavras.</p><ul><li>Identifique a <b>tese</b> (ideia central), os <b>argumentos</b> que a sustentam e a <b>conclusão</b>.</li><li>Separe o que está <b>explícito</b> do que é <b>inferência</b> (o que se deduz sem estar escrito).</li><li>Cuidado com as <b>palavras restritivas</b> (apenas, sempre, nunca, somente): costumam tornar a alternativa falsa.</li><li>Desconfie do distrator <b>"quase certo"</b>, que extrapola, generaliza ou inverte um único dado do texto.</li><li>Volte ao texto para confirmar; não responda pela própria opinião.</li></ul>`,
+pt_ortografia:`<p>A banca cobra grafias e distinções frequentes.</p><ul><li><b>Porquês</b>: por que (pergunta/relativo), porque (explicação), por quê (fim de frase), porquê (substantivo).</li><li><b>Mas</b> (oposição) x <b>mais</b> (quantidade); <b>mal</b> (advérbio, oposto de bem) x <b>mau</b> (adjetivo, oposto de bom).</li><li><b>A fim de</b> (finalidade) x <b>afim</b> (semelhante); <b>senão</b> (caso contrário) x <b>se não</b> (condição).</li><li>Acordo Ortográfico: hífen, acentuação de paroxítonas e queda do acento em ditongos abertos de paroxítonas (ideia, heroico).</li></ul>`,
+pt_coesao:`<p>Coesão é a amarração do texto por referência e por conexão.</p><ul><li><b>Referenciação</b>: pronomes e sinônimos que retomam (anáfora) ou antecipam (catáfora) termos. Saiba a que "isso/este/o qual" se refere.</li><li><b>Conectivos e seus valores</b>: adição (e, além disso), oposição (mas, contudo, entretanto), conclusão (portanto, logo), causa (porque, pois), condição (se, caso), concessão (embora, ainda que).</li><li>Trocar um conectivo muda a lógica — a banca testa exatamente isso.</li></ul>`,
+pt_semantica:`<p>O sentido depende do contexto.</p><ul><li><b>Sinonímia</b> (sentidos próximos) e <b>antonímia</b> (opostos).</li><li><b>Denotação</b> (literal) x <b>conotação</b> (figurado): "coração de pedra" é conotativo.</li><li><b>Polissemia</b>: uma palavra com vários sentidos ("banco"); <b>ambiguidade</b>: duplo sentido indesejado.</li><li>Leia o período inteiro antes de escolher o sinônimo — ele precisa caber naquele contexto.</li></ul>`,
+pt_verbos:`<p>Modos e tempos verbais e sua correlação.</p><ul><li><b>Indicativo</b> (certeza), <b>subjuntivo</b> (hipótese/dúvida), <b>imperativo</b> (ordem).</li><li><b>Correlação</b> na condicional: "Se eu <b>fizesse</b> (imperfeito do subj.), <b>faria</b> (futuro do pretérito)".</li><li>O imperativo afirmativo de "você" vem do presente do subjuntivo: <b>faça, envie</b>.</li><li>Vozes: ativa, passiva (ser + particípio) e reflexiva.</li></ul>`,
+pt_classes:`<p>Identifique a classe pela função na frase.</p><ul><li><b>Pronomes relativos</b> (que, quem, cujo, o qual) retomam um antecedente e têm função sintática.</li><li><b>Conjunções</b> ligam orações (coordenativas ou subordinativas).</li><li>"Que" pode ser pronome relativo, conjunção integrante, partícula expletiva...: analise o papel.</li><li><b>Cujo</b> indica posse e concorda com o termo possuído (a empresa <b>cujas</b> metas).</li></ul>`,
+pt_coord_subord:`<p>Períodos compostos por coordenação e por subordinação.</p><ul><li><b>Coordenadas</b>: orações independentes (aditivas, adversativas, conclusivas, alternativas, explicativas).</li><li><b>Subordinadas</b>: completam outra — <b>substantivas</b> (funções de substantivo), <b>adjetivas</b> (com pronome relativo) e <b>adverbiais</b>.</li><li>Classifique a adverbial pelo conectivo: causal (porque), concessiva (embora), condicional (se), consecutiva (tão... que), final (para que).</li></ul>`,
+pt_pontuacao:`<p>A vírgula organiza a frase — e tem proibições.</p><ul><li><b>Isola</b>: adjunto adverbial deslocado, aposto, vocativo, oração adjetiva explicativa e termos enumerados.</li><li><b>Nunca</b> separe sujeito do verbo, nem verbo do complemento.</li><li><b>Dois-pontos</b>: anunciam enumeração, explicação ou fala.</li><li><b>Ponto e vírgula</b>: separa itens longos ou orações coordenadas com estrutura interna.</li></ul>`,
+pt_concordancia:`<p>Verbal (com o sujeito) e nominal (com o substantivo).</p><ul><li><b>Haver</b> (= existir) e <b>fazer</b> (tempo) são impessoais: ficam no singular ("<b>havia</b> dúvidas", "<b>faz</b> dois anos").</li><li>Expressões partitivas ("a maioria de") admitem verbo no singular.</li><li>Nominal: "anexo", "obrigado" e "mesmo" variam ("segue <b>anexa</b>", "muito <b>obrigada</b>"); "meio" = "um pouco" é advérbio invariável ("meio nervosa").</li></ul>`,
+pt_regencia:`<p>Verbos e nomes exigem preposições específicas.</p><ul><li><b>Assistir a</b> (ver): assistir <b>ao</b> filme; <b>aspirar a</b> (almejar): aspirar <b>a</b> um cargo.</li><li><b>Obedecer a</b>, <b>preferir A a B</b> (sem "mais/do que"), <b>implicar</b> algo (sem "em", = acarretar).</li><li>A regência define o uso da crase (chegar <b>à</b> reunião).</li></ul>`,
+pt_crase:`<p>Crase = preposição "a" + artigo "a(s)".</p><ul><li><b>Ocorre</b>: antes de palavra feminina que exige artigo (entreguei <b>à</b> diretora), em "à moda de", nas horas (<b>às</b> 8h), em "àquela".</li><li><b>Não ocorre</b>: antes de masculino, verbo, pronomes em geral, e antes de palavra no plural com "a" (a distâncias).</li><li>Cidades: depende ("Vou a São Paulo" x "Vou à Bahia").</li></ul>`,
+pt_pronomes:`<p>Colocação do pronome átono (o, lhe, se, me...).</p><ul><li><b>Próclise</b> (antes) com palavra atrativa: negação, advérbio, pronome relativo, conjunção subordinativa (nunca <b>se</b> soube).</li><li><b>Ênclise</b> (depois) no início de oração e no imperativo afirmativo (entregue-<b>lhe</b>).</li><li><b>Mesóclise</b> (no meio) com futuro do presente/pretérito sem atrativo (dir-<b>lhe</b>-ei).</li></ul>`,
+en_compreensao:`<p>Reading comprehension: estratégia antes de vocabulário.</p><ul><li><b>Skimming</b> para a ideia geral; <b>scanning</b> para achar um dado específico.</li><li>Identifique <b>tópico</b>, <b>propósito do autor</b> e a função de cada parágrafo.</li><li>Cuidado com a alternativa que troca um único dado do texto (números, "not", "only").</li><li>Deduza o sentido de palavras desconhecidas pelo contexto.</li></ul>`,
+en_gramatica:`<p>Gramática a serviço da compreensão.</p><ul><li><b>Conectivos</b>: however/nevertheless (contraste), therefore/thus (conclusão), although/though (concessão), because (causa), whereas (enquanto que).</li><li><b>Voz passiva</b>: be + particípio (must be reported).</li><li><b>Referência</b>: a que "it/they/which/this" se refere.</li><li><b>Formação de palavras</b>: prefixos (un-, in-) e sufixos (-less, -ment) mudam o sentido.</li></ul>`,
+adm_financeira:`<p>Decisões de investimento e de financiamento.</p><ul><li><b>Valor do dinheiro no tempo</b>: R$ hoje vale mais que amanhã; base dos juros compostos.</li><li><b>VPL</b> &gt; 0 = aceitar; <b>TIR</b> &gt; TMA = aceitar; <b>payback</b> (o descontado considera o tempo, o simples não).</li><li><b>Alavancagem financeira</b>: usar capital de terceiros para ampliar o retorno (e o risco).</li><li><b>Capital de giro / CCL</b> = Ativo Circulante − Passivo Circulante; <b>ciclo financeiro</b> = do pagamento a fornecedores ao recebimento de clientes.</li></ul>`,
+adm_producao:`<p>Planejar e controlar a produção e os estoques.</p><ul><li><b>Curva ABC</b>: poucos itens (A) concentram o maior valor.</li><li><b>Lote econômico (LEC/EOQ)</b>: minimiza a soma dos custos de pedido e de manutenção.</li><li><b>Ponto de pedido</b>: nível que dispara nova compra (considera lead time e estoque de segurança).</li><li><b>MRP</b>: calcula necessidades a partir do plano mestre + estrutura do produto (BOM) + estoques. <b>JIT/Kanban</b>: produção puxada, sem excesso de estoque.</li></ul>`,
+adm_contratacao:`<p>Como as estatais contratam.</p><ul><li><b>Lei 13.303/2016</b>: regime PRÓPRIO de licitações e contratos das estatais (não a 8.666/14.133).</li><li><b>Dispensa</b>: licitação possível, mas dispensada por lei (ex.: baixo valor). <b>Inexigibilidade</b>: competição inviável (fornecedor exclusivo, serviço singular).</li><li><b>LC 123/2006</b>: tratamento diferenciado a ME/EPP (empate ficto).</li><li><b>Lei 12.846/2013</b>: responsabilização OBJETIVA da pessoa jurídica por atos lesivos à administração.</li></ul>`,
+adm_projetos:`<p>Gerenciamento preditivo e ágil.</p><ul><li><b>PMBOK 7</b>: foco em <b>entrega de valor</b>, 12 princípios e 8 domínios de desempenho (não mais só grupos de processos).</li><li><b>Scrum</b>: papéis (Product Owner, Scrum Master, Devs); eventos com timebox (Sprint ≤ 1 mês, Daily ~15 min, Review, Retrospectiva); artefatos (Product Backlog, Sprint Backlog, Incremento). Não há "gerente de projeto".</li><li><b>Kanban</b>: fluxo puxado e limite de trabalho em progresso (WIP).</li><li>Projeto é temporário; produto tem ciclo de vida contínuo.</li></ul>`,
+adm_negociacao:`<p>Conflitos e negociação.</p><ul><li><b>Estilos (Thomas-Kilmann)</b>: competição, colaboração (ganha-ganha), compromisso, acomodação, evitação.</li><li><b>MAPAN/BATNA</b>: melhor alternativa se não houver acordo — define o ponto de recusa e o poder de barganha.</li><li><b>ZOPA</b>: faixa de possível acordo (sobreposição dos limites).</li><li><b>Distributiva</b> (soma zero) x <b>integrativa</b> (amplia valor, ganho mútuo).</li></ul>`,
+adm_si:`<p>Sistemas de informação e seu papel.</p><ul><li>Hierarquia: <b>dado</b> (bruto) → <b>informação</b> (contextualizada) → <b>conhecimento</b>.</li><li><b>SPT</b> (transações operacionais), <b>SIG</b> (relatórios gerenciais, nível tático), <b>SAD</b> (apoio a decisões semi/não estruturadas com modelos).</li><li><b>ERP</b> integra processos em base única; <b>CRM</b> gere o relacionamento com clientes; <b>BI/data warehouse</b> apoia a análise.</li></ul>`,
+adm_estrategia:`<p>Diagnóstico e formulação da estratégia.</p><ul><li><b>SWOT</b>: forças/fraquezas (internas) e oportunidades/ameaças (externas).</li><li><b>5 forças de Porter</b>: entrantes, fornecedores, clientes, substitutos, rivalidade.</li><li><b>Estratégias genéricas</b>: custo, diferenciação e foco. <b>Cadeia de valor</b>: atividades primárias e de apoio.</li><li><b>Missão</b> (razão de existir), <b>visão</b> (futuro desejado), <b>valores</b>; <b>BSC</b> (4 perspectivas); <b>Matriz BCG</b>.</li></ul>`,
+adm_marketing:`<p>Composto e orientação ao mercado.</p><ul><li><b>4 Ps</b>: Produto, Preço, Praça (distribuição), Promoção; em serviços, +Pessoas, Processos e Evidência física (7 Ps).</li><li><b>Segmentação</b> (geográfica, demográfica, psicográfica, comportamental) → <b>posicionamento</b> na mente do consumidor.</li><li><b>Comportamento do consumidor</b>: reconhecimento da necessidade, busca, avaliação, compra e pós-compra.</li><li><b>Marketing de relacionamento/CRM</b>: reter e desenvolver clientes (valor no tempo).</li></ul>`,
+adm_contabilidade:`<p>Registros e demonstrações.</p><ul><li><b>Equação</b>: Ativo = Passivo + Patrimônio Líquido.</li><li><b>Regime de competência</b>: reconhece receitas/despesas quando ocorrem (não pelo caixa).</li><li>Demonstrações: <b>Balanço Patrimonial</b> (posição), <b>DRE</b> (resultado), <b>DFC</b> (caixa: operacional, investimento, financiamento).</li><li><b>Liquidez corrente</b> = AC/PC; <b>depreciação</b> aloca o custo do imobilizado pela vida útil.</li></ul>`,
+adm_decisao:`<p>Como se decide nas organizações.</p><ul><li><b>Racionalidade limitada</b> (Simon): decisões "satisfatórias", não ótimas, por limites de informação e tempo.</li><li><b>Programadas</b> (rotineiras, por regras) x <b>não programadas</b> (novas, complexas).</li><li><b>Vieses</b>: ancoragem, confirmação, disponibilidade, excesso de confiança.</li><li>Técnicas de apoio: brainstorming, análise de cenários, matriz de decisão.</li></ul>`,
+adm_rh:`<p>Gestão de pessoas por competências.</p><ul><li><b>CHA</b>: Conhecimentos, Habilidades e Atitudes.</li><li><b>Recrutamento</b> (atrair) e <b>seleção</b> (escolher); interno (rápido, motiva) x externo (traz novidade).</li><li><b>T&D</b>: levantar necessidades (LNT) → planejar → executar → avaliar.</li><li><b>Avaliação de desempenho</b> (escalas, incidentes críticos, 360°); indicadores: <b>turnover</b> (rotatividade) e <b>absenteísmo</b> (faltas); gestão de <b>clima</b> e <b>cultura</b>.</li></ul>`,
+adm_logica:`<p>Raciocínio lógico e quantitativo.</p><ul><li><b>Conectivos</b>: e (∧), ou (∨), se...então (→), se e somente se (↔).</li><li><b>Negações</b>: ¬(P∧Q)=¬P∨¬Q (De Morgan); negação de "se P então Q" = "P e não Q"; negação de "todo" = "algum não".</li><li><b>Equivalência</b>: contrapositiva de "P→Q" é "¬Q→¬P".</li><li>Quantitativo: proporções/regra de três, porcentagem, combinatória e progressões.</li></ul>`,
+adm_estatistica:`<p>Descrever e inferir a partir de dados.</p><ul><li><b>Tendência central</b>: média, mediana (valor central) e moda (mais frequente).</li><li><b>Dispersão</b>: amplitude, variância e desvio padrão (raiz da variância).</li><li><b>Probabilidade</b>: casos favoráveis/possíveis; união P(A∪B)=P(A)+P(B)−P(A∩B).</li><li>Diferencie <b>população</b> de <b>amostra</b> e saiba ler tabelas e gráficos.</li></ul>`,
+adm_esg:`<p>Sustentabilidade e responsabilidade.</p><ul><li><b>ESG</b>: Ambiental, Social e Governança. <b>Triple Bottom Line</b>: econômico, social e ambiental (profit, people, planet).</li><li><b>Governança</b>: conselho, transparência, prestação de contas (accountability), equidade.</li><li><b>Stakeholders</b>: partes interessadas (≠ shareholders/acionistas).</li><li><b>GRI</b> (relatórios) e <b>ISO 26000</b> (diretrizes, não certificável); cuidado com <b>greenwashing</b>.</li></ul>`,
+psi_etica:`<p>Código de Ética do Psicólogo.</p><ul><li>Base na <b>dignidade</b>, na <b>liberdade</b> e nos <b>direitos humanos</b>; atuar contra discriminação e opressão.</li><li><b>Sigilo</b> é dever; pode ser relativizado, no mínimo necessário, para <b>proteger a vida</b>.</li><li>Em equipe, compartilhar só o <b>estritamente necessário</b>.</li><li><b>Publicidade</b> com veracidade, com nome e CRP, sem prometer resultados nem sensacionalismo.</li></ul>`,
+psi_resolucoes:`<p>Resoluções do CFP mais cobradas.</p><ul><li><b>06/2019 (documentos)</b>: declaração (informa fato), atestado (certifica condição), <b>laudo</b> (resultado de avaliação, fundamentado) e <b>parecer</b> (responde a questão específica).</li><li><b>Avaliação psicológica / SATEPSI</b>: usar instrumentos com <b>parecer favorável</b>.</li><li><b>Avaliação em concurso</b>: baseada no <b>perfil profissiográfico</b>, com transparência, entrevista devolutiva e recurso.</li><li><b>TDICs</b>: atendimento on-line regulamentado, com sigilo e segurança de dados.</li></ul>`,
+psi_organizacional:`<p>Comportamento e gestão nas organizações.</p><ul><li><b>Cultura</b> (Schein: artefatos, valores, pressupostos) x <b>clima</b> (percepção momentânea, medida por pesquisa).</li><li><b>Motivação</b>: Maslow (hierarquia), Herzberg (higiênicos x motivacionais), McClelland (realização, poder, afiliação), Vroom (expectância) e Adams (equidade).</li><li><b>Gestão por competências</b>, gestão de mudanças e desenvolvimento organizacional.</li></ul>`,
+psi_diagnostico:`<p>Subsistemas de gestão de pessoas.</p><ul><li><b>Recrutamento e seleção</b> por competências (entrevista comportamental/STAR).</li><li><b>Integração/onboarding</b>: socialização do novo empregado; <b>plano de sucessão</b>: preparar sucessores.</li><li><b>T&D</b> (LNT em três níveis; avaliação de Kirkpatrick: reação, aprendizagem, comportamento, resultados).</li><li><b>Avaliação de desempenho</b>, <b>desligamento</b> (entrevista de saída) e <b>diversidade/ações afirmativas</b>.</li></ul>`,
+psi_social:`<p>Grupos, liderança e comunicação.</p><ul><li><b>Liderança</b>: estilos de Lewin (autocrática, democrática, liberal); transacional x transformacional; situacional (adapta ao liderado).</li><li><b>Grupos</b>: fases de Tuckman (forming, storming, norming, performing); coesão; conflito funcional x disfuncional.</li><li><b>Comunicação</b>: emissor–canal–receptor, ruídos, feedback e assertividade.</li><li>Intervenção em crise/catástrofe: <b>primeiros cuidados psicológicos</b> (acolhimento, segurança, rede de apoio).</li></ul>`,
+psi_saude:`<p>Saúde mental e do trabalhador.</p><ul><li><b>NRs</b>: NR-1 (GRO/PGR, com <b>riscos psicossociais</b>), NR-5 (CIPA), NR-7 (PCMSO), NR-17 (ergonomia).</li><li><b>Nexo causal</b> (NTEP) entre doença e trabalho; doenças relacionadas ao trabalho.</li><li><b>Burnout</b> (CID-11): exaustão, distanciamento/cinismo e queda de eficácia. <b>Estresse</b> (Selye: alarme, resistência, exaustão).</li><li><b>Assédio moral</b>: condutas abusivas, repetitivas e prolongadas; QVT e prevenção.</li></ul>`
+};
+
+const MASTER_TARGET=8;
+function ALLQ(){return (typeof S!=="undefined"&&S&&Array.isArray(S.custom))?Q.concat(S.custom):Q;}
+function fonteOf(q){return q.f||"Inédita · padrão Cesgranrio";}
+function qcountOf(tk){return ALLQ().filter(q=>q.t===tk).length;}
 
 /* ---------------- ESTADO / PERSISTÊNCIA (dois perfis) ---------------- */
 const KEY="transpetro_estudos_v2";
 const NAMES={dani:"Danielle",mari:"Mariana"};
 const CARGO={dani:"ADM",mari:"PSI"};
 function freshProfile(){return {progress:{},errors:[],activity:{},log:[],meta:20};}
-function freshState(){return {active:null,profiles:{dani:freshProfile(),mari:freshProfile()}};}
+function freshState(){return {active:null,custom:[],profiles:{dani:freshProfile(),mari:freshProfile()}};}
 let S=load();
 function load(){
   let raw=null;try{const r=localStorage.getItem(KEY);if(r)raw=JSON.parse(r);}catch(e){}
-  if(raw&&raw.profiles){raw.profiles.dani=Object.assign(freshProfile(),raw.profiles.dani);raw.profiles.mari=Object.assign(freshProfile(),raw.profiles.mari);if(raw.active!=="dani"&&raw.active!=="mari")raw.active=null;return raw;}
+  if(raw&&raw.profiles){raw.profiles.dani=Object.assign(freshProfile(),raw.profiles.dani);raw.profiles.mari=Object.assign(freshProfile(),raw.profiles.mari);if(raw.active!=="dani"&&raw.active!=="mari")raw.active=null;if(!Array.isArray(raw.custom))raw.custom=[];return raw;}
   const st=freshState();
   try{const old=JSON.parse(localStorage.getItem("transpetro_estudos_v1"));
     if(old&&old.progress){for(const k in old.progress){const ar=TOPICS[k]?TOPICS[k].area:null;const tgt=(ar==="PSI")?st.profiles.mari:st.profiles.dani;tgt.progress[k]=old.progress[k];}
@@ -512,7 +1013,7 @@ function daysToProva(){const now=new Date();const p=new Date(PROVA+"T00:00:00");
 
 /* progresso por tópico (perfil ativo) */
 function bump(topic,ok){const pr=P();if(!pr)return;const p=pr.progress[topic]||(pr.progress[topic]={a:0,c:0});p.a++;if(ok)p.c++;}
-function mastery(topic){const pr=P();const p=(pr&&pr.progress[topic])||{a:0,c:0};const acc=p.a?p.c/p.a:0;let st="novo";if(p.a>0){if(acc<0.6)st="fraco";else if(acc<0.8||p.a<2)st="medio";else st="forte";}return{a:p.a,c:p.c,acc,st};}
+function mastery(topic){const pr=P();const p=(pr&&pr.progress[topic])||{a:0,c:0};const acc=p.a?p.c/p.a:0;let st="novo";if(p.a>0){if(p.c>=MASTER_TARGET)st="forte";else if(p.c>=4)st="medio";else st="fraco";}return{a:p.a,c:p.c,acc,st};}
 const ST_LABEL={forte:"Dominado",medio:"Consolidando",fraco:"Precisa ampliar",novo:"Não praticado"};
 const ST_COLOR={forte:"var(--good)",medio:"var(--warn)",fraco:"var(--crit)",novo:"var(--novo)"};
 
@@ -529,13 +1030,13 @@ function streak(){const pr=P();if(!pr)return 0;const act=pr.activity;let n=0;let
 function daysStudied(){const pr=P();if(!pr)return 0;return Object.keys(pr.activity).filter(d=>pr.activity[d]>0).length;}
 
 /* ---------------- NAVEGAÇÃO ---------------- */
-const views=["painel","simulado","evolucao","rotina","data"];
+const views=["painel","simulado","estudar","evolucao","rotina","data"];
 function show(v){
-  if((v==="simulado"||v==="evolucao"||v==="rotina")&&!S.active){alert("Primeiro escolha quem vai estudar: Danielle (Administração) ou Mariana (Psicologia).");v="painel";}
+  if((v==="simulado"||v==="estudar"||v==="evolucao"||v==="rotina")&&!S.active){alert("Primeiro escolha quem vai estudar: Danielle (Administração) ou Mariana (Psicologia).");v="painel";}
   views.forEach(x=>{const el=document.getElementById("v-"+x);if(el)el.hidden=(x!==v);});
   document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",String(t.dataset.view===v)));
   window.scrollTo({top:0,behavior:"instant"in window?"instant":"auto"});
-  if(v==="painel")renderPainel();if(v==="simulado")renderSetup();if(v==="evolucao")renderEvolucao();if(v==="rotina")renderRotina();if(v==="data")renderData();}
+  if(v==="painel")renderPainel();if(v==="simulado")renderSetup();if(v==="estudar")renderEstudar();if(v==="evolucao")renderEvolucao();if(v==="rotina")renderRotina();if(v==="data")renderData();}
 document.getElementById("nav").addEventListener("click",e=>{const b=e.target.closest(".tab");if(b)show(b.dataset.view);});
 document.getElementById("btnData").addEventListener("click",()=>show("data"));
 
@@ -602,12 +1103,14 @@ function renderPainel(){
 let setupSel={escopo:"ADMfull",n:10};
 function countFor(escopo){return buildPool(escopo).length;}
 function buildPool(escopo){
-  if(escopo==="erros"){const pr=P();return Q.filter(q=>pr&&pr.errors.includes(q.id));}
+  const A=ALLQ();
+  if(escopo&&escopo.slice(0,6)==="topic:"){const tk=escopo.slice(6);return A.filter(q=>q.t===tk);}
+  if(escopo==="erros"){const pr=P();return A.filter(q=>pr&&pr.errors.includes(q.id));}
   let areas;
   if(escopo==="ADMfull")areas=["PT","EN","ADM"];
   else if(escopo==="PSIfull")areas=["PT","EN","PSI"];
   else areas=[escopo];
-  return Q.filter(q=>areas.includes(TOPICS[q.t].area));
+  return A.filter(q=>TOPICS[q.t]&&areas.includes(TOPICS[q.t].area));
 }
 function renderSetup(){
   const el=document.getElementById("v-simulado");
@@ -649,6 +1152,7 @@ function renderSetup(){
   el.querySelector("#startBtn").addEventListener("click",()=>startSim(setupSel.escopo,setupSel.n));
 }
 function quickStart(escopo){if(!S.active)return;setupSel.escopo=escopo;show("simulado");startSim(escopo,10);}
+function startTopicDrill(tk){if(!S.active)return;show("simulado");startSim("topic:"+tk,"tudo");}
 
 /* ---------------- SIMULADO: execução ---------------- */
 let RUN=null;
@@ -679,6 +1183,7 @@ function renderRun(){
       <div class="qmeta">
         <span class="badge">${AREAS[area].tag}</span>
         <span class="small muted">${esc(TOPICS[q.t].label)}</span>
+        <span class="badge" style="background:var(--surface-2);color:var(--muted);font-weight:500">${esc(fonteOf(q))}</span>
       </div>
       <div class="qtext">${esc(q.e)}</div>
       <div class="opts" id="opts">
@@ -770,10 +1275,43 @@ function reviewCard(d){
     </div>
     <div class="qrbody" hidden>
       <div class="ans"><span class="k">Sua resposta:</span> ${chosen} &nbsp;·&nbsp; <span class="k">Gabarito:</span> ${corr}) ${esc(q.o[q.c])}</div>
+      <div class="small muted">Fonte: ${esc(fonteOf(q))}</div>
       <div class="small">${esc(q.cm)}</div>
       ${!d.ok?`<div class="studybox"><div class="eyebrow">Conteúdo para estudar</div><div class="small" style="margin-top:6px"><strong>${esc(TOPICS[q.t].label)}.</strong> ${esc(TOPICS[q.t].estudo)}</div></div>`:""}
     </div>
   </div>`;
+}
+
+/* ---------------- ESTUDAR (conteúdo) ---------------- */
+function renderEstudar(){
+  const el=document.getElementById("v-estudar");const id=S.active;
+  const areasOrder=[CARGO[id],"PT","EN"];
+  let html=`<div class="stack"><div class="card pad">
+    <div class="eyebrow">Área de estudos de ${esc(NAMES[id])}</div>
+    <h2 style="font-size:20px;margin-top:6px">Conteúdo para estudar</h2>
+    <p class="small muted" style="margin-top:6px">Resumos objetivos de cada tema do edital, com os pontos que mais caem e as pegadinhas da banca. Toque em um tema para abrir e, ao terminar, treine com questões daquele conteúdo.</p>
+  </div>`;
+  areasOrder.forEach(ar=>{
+    const ks=Object.keys(TOPICS).filter(k=>TOPICS[k].area===ar);
+    html+=`<div class="card pad"><div class="areahead"><h3>${AREAS[ar].label}</h3></div>`;
+    ks.forEach(k=>{const m=mastery(k);const mat=MATERIAL[k]||("<p>"+esc(TOPICS[k].estudo)+"</p>");
+      html+=`<div class="topicrow" data-topic="${k}">
+        <div class="trhead">
+          <span class="name">${esc(TOPICS[k].label)}</span>
+          <span class="pill ${m.st}">${ST_LABEL[m.st]}</span>
+        </div>
+        <div class="trstudy" hidden>
+          <div class="matbox">${mat}</div>
+          <button class="btn sm" data-drill="${k}" style="margin-top:12px">Treinar este tópico (${qcountOf(k)} questões) →</button>
+        </div>
+      </div>`;
+    });
+    html+=`</div>`;
+  });
+  html+=`</div>`;
+  el.innerHTML=html;
+  el.querySelectorAll(".topicrow").forEach(r=>r.querySelector(".trhead").addEventListener("click",()=>{const s=r.querySelector(".trstudy");s.hidden=!s.hidden;}));
+  el.querySelectorAll("[data-drill]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();startTopicDrill(b.dataset.drill);}));
 }
 
 /* ---------------- EVOLUÇÃO ---------------- */
@@ -796,15 +1334,15 @@ function renderEvolucao(){
     const ks=Object.keys(TOPICS).filter(k=>TOPICS[k].area===ar);
     const s=areaStats(ar);
     html+=`<div class="card pad"><div class="areahead"><h3>${AREAS[ar].label}</h3><span class="small muted" style="font-family:var(--mono)">${s.a?Math.round(s.acc*100)+"% · "+s.a+" q":"sem dados"}</span></div>`;
-    ks.forEach(k=>{const m=mastery(k);const w=m.a?Math.max(4,Math.round(m.acc*100)):4;
+    ks.forEach(k=>{const m=mastery(k);const w=Math.max(4,Math.round(Math.min(1,m.c/MASTER_TARGET)*100));const avail=qcountOf(k);
       html+=`<div class="topicrow" data-topic="${k}">
         <div class="trhead">
           <span class="name">${esc(TOPICS[k].label)}</span>
           <span class="pill ${m.st}">${ST_LABEL[m.st]}</span>
         </div>
         <div class="trbar"><i style="width:${w}%;background:${ST_COLOR[m.st]}"></i></div>
-        <div class="small muted" style="margin-top:6px">${m.a?(m.c+"/"+m.a+" acertos"):"toque para ver o que estudar"}</div>
-        <div class="trstudy" hidden>${esc(TOPICS[k].estudo)}</div>
+        <div class="small muted" style="margin-top:6px"><b style="font-family:var(--mono)">${m.c}/${MASTER_TARGET}</b> acertos para dominar${m.a?" · "+Math.round(m.acc*100)+"% de acerto":""} · ${avail} questões no banco</div>
+        <div class="trstudy" hidden><button class="btn sm" data-drill="${k}">Treinar só este tópico →</button><div style="margin-top:10px">${esc(TOPICS[k].estudo)}</div></div>
       </div>`;
     });
     html+=`</div>`;
@@ -812,6 +1350,7 @@ function renderEvolucao(){
   html+=`</div>`;
   el.innerHTML=html;
   el.querySelectorAll(".topicrow").forEach(r=>r.querySelector(".trhead").addEventListener("click",()=>{const s=r.querySelector(".trstudy");s.hidden=!s.hidden;}));
+  el.querySelectorAll("[data-drill]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();startTopicDrill(b.dataset.drill);}));
 }
 
 /* ---------------- ROTINA ---------------- */
@@ -884,12 +1423,41 @@ function renderRotina(){
 /* ---------------- DADOS / BACKUP ---------------- */
 function renderData(){
   const el=document.getElementById("v-data");
+  const topicOpts=Object.keys(TOPICS).map(k=>`<option value="${k}">${AREAS[TOPICS[k].area].tag} — ${esc(TOPICS[k].label)}</option>`).join("");
+  const nCustom=(S.custom||[]).length;
   el.innerHTML=`<div class="stack datapanel">
+    <div class="card pad">
+      <div class="eyebrow">Adicionar questão (banca e ano)</div>
+      <h2 style="font-size:19px;margin-top:6px">Incorpore questões ao banco</h2>
+      <p class="small muted" style="margin-top:6px">Cole aqui questões a que você já tem acesso legítimo (suas fontes/plataformas), informando <b>banca</b> e <b>ano</b> — elas entram no banco das duas pessoas com esse selo aparecendo na questão. Você já adicionou <b>${nCustom}</b> questão(ões).</p>
+      <div class="field"><label>Matéria e tópico</label>
+        <select id="qTopic">${topicOpts}</select>
+      </div>
+      <div class="field"><label>Enunciado</label>
+        <textarea id="qEnun" placeholder="Texto da questão..."></textarea>
+      </div>
+      <div class="field"><label>Alternativas — uma por linha (exatamente 5, de A a E)</label>
+        <textarea id="qOpts" placeholder="Primeira alternativa&#10;Segunda alternativa&#10;Terceira alternativa&#10;Quarta alternativa&#10;Quinta alternativa"></textarea>
+      </div>
+      <div class="field"><label>Correta, banca e ano</label>
+        <div class="row" style="align-items:center;gap:10px">
+          <select id="qCorr"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+          <input id="qBanca" placeholder="Banca (ex.: Cesgranrio)">
+          <input id="qAno" placeholder="Ano" style="width:90px">
+        </div>
+      </div>
+      <div class="field"><label>Comentário / o que estudar (opcional)</label>
+        <textarea id="qCom" placeholder="Explicação do gabarito e o que revisar..."></textarea>
+      </div>
+      <button class="btn sm" id="qAdd" style="align-self:flex-start">Adicionar ao banco</button>
+      <div class="small" id="qMsg" style="margin-top:8px"></div>
+      ${nCustom?`<button class="btn ghost sm" id="qClear" style="align-self:flex-start;margin-top:12px;color:var(--crit);border-color:var(--crit)">Remover as questões que adicionei</button>`:""}
+    </div>
     <div class="card pad">
       <div class="eyebrow">Backup e dados</div>
       <h2 style="font-size:19px;margin-top:6px">Progresso das duas pessoas</h2>
-      <p class="small muted" style="margin-top:6px">O progresso de Danielle e de Mariana é salvo automaticamente neste navegador (inclusive na versão publicada no GitHub). Para levar a outro computador ou celular, copie o código abaixo e cole no campo de restauração no outro aparelho.</p>
-      <div class="field"><label>Backup completo (Danielle + Mariana)</label>
+      <p class="small muted" style="margin-top:6px">O progresso e as questões adicionadas ficam salvos neste navegador (inclusive na versão do GitHub). Para levar a outro aparelho, copie o código abaixo e cole no campo de restauração no outro dispositivo.</p>
+      <div class="field"><label>Backup completo (progresso + questões suas)</label>
         <textarea id="expBox" readonly>${esc(JSON.stringify(S))}</textarea>
         <button class="btn ghost sm" id="copyBtn" style="align-self:flex-start">Copiar código</button>
       </div>
@@ -902,8 +1470,26 @@ function renderData(){
       </div>
     </div>
   </div>`;
+  el.querySelector("#qAdd").addEventListener("click",()=>{
+    const t=el.querySelector("#qTopic").value;
+    const e=el.querySelector("#qEnun").value.trim();
+    const opts=el.querySelector("#qOpts").value.split("\n").map(x=>x.trim()).filter(x=>x);
+    const corr="ABCDE".indexOf(el.querySelector("#qCorr").value);
+    const banca=el.querySelector("#qBanca").value.trim();
+    const ano=el.querySelector("#qAno").value.trim();
+    const com=el.querySelector("#qCom").value.trim();
+    const msg=el.querySelector("#qMsg");
+    if(!e||opts.length!==5||corr<0){msg.textContent="Preencha o enunciado e exatamente 5 alternativas (uma por linha), e marque a alternativa correta.";msg.style.color="var(--crit)";return;}
+    const f=(banca||"Fonte informada")+(ano?" · "+ano:"");
+    const q={id:"cst_"+Date.now()+"_"+Math.floor(Math.random()*1e4),t:t,e:e,o:opts,c:corr,cm:com||"Revise o conteúdo do tema indicado.",f:f};
+    if(!Array.isArray(S.custom))S.custom=[];S.custom.push(q);save();
+    msg.textContent="Questão adicionada ao banco com o selo: "+f;msg.style.color="var(--good)";
+    el.querySelector("#qEnun").value="";el.querySelector("#qOpts").value="";el.querySelector("#qCom").value="";
+    setTimeout(renderData,1100);
+  });
+  const clr=el.querySelector("#qClear");if(clr)clr.addEventListener("click",()=>{if(confirm("Remover todas as questões que você adicionou? As questões originais do app permanecem.")){S.custom=[];save();renderData();}});
   el.querySelector("#copyBtn").addEventListener("click",()=>{const t=el.querySelector("#expBox");t.select();try{document.execCommand("copy");el.querySelector("#copyBtn").textContent="Copiado ✓";}catch(e){}});
-  el.querySelector("#impBtn").addEventListener("click",()=>{try{const o=JSON.parse(el.querySelector("#impBox").value);if(o&&o.profiles){o.profiles.dani=Object.assign(freshProfile(),o.profiles.dani);o.profiles.mari=Object.assign(freshProfile(),o.profiles.mari);if(o.active!=="dani"&&o.active!=="mari")o.active=null;S=o;save();alert("Progresso restaurado!");show("painel");}else{alert("Código inválido.");}}catch(e){alert("Código inválido.");}});
+  el.querySelector("#impBtn").addEventListener("click",()=>{try{const o=JSON.parse(el.querySelector("#impBox").value);if(o&&o.profiles){o.profiles.dani=Object.assign(freshProfile(),o.profiles.dani);o.profiles.mari=Object.assign(freshProfile(),o.profiles.mari);if(o.active!=="dani"&&o.active!=="mari")o.active=null;if(!Array.isArray(o.custom))o.custom=[];S=o;save();alert("Progresso restaurado!");show("painel");}else{alert("Código inválido.");}}catch(e){alert("Código inválido.");}});
   el.querySelector("#resetBtn").addEventListener("click",()=>{if(confirm("Isso apaga o progresso das DUAS pessoas. Continuar?")){S=freshState();save();show("painel");}});
 }
 

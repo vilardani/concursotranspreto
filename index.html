@@ -1,0 +1,917 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Rumo à Transpetro</title><style>:root{color-scheme:light}html{-webkit-text-size-adjust:100%}body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:14px;background:#eef2f2;color:#152227}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Rumo à Transpetro</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --ground:#eef2f2; --surface:#ffffff; --surface-2:#f6f8f8;
+    --ink:#152227; --ink-soft:#3c4b51; --muted:#657279; --line:#dce3e3;
+    --accent:#0c6d78; --accent-deep:#084a52; --accent-soft:#e2eeef;
+    --good:#1f8a5b; --good-soft:#e0f0e7;
+    --warn:#b26a08; --warn-soft:#f6ebda;
+    --crit:#bf3b2e; --crit-soft:#f6e2df;
+    --novo:#8b97a0; --novo-soft:#eceff0;
+    --shadow:0 1px 2px rgba(16,40,44,.06),0 6px 20px rgba(16,40,44,.06);
+    --radius:14px;
+    --serif:'Spectral',Georgia,serif;
+    --sans:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#0d1a1e; --surface:#152529; --surface-2:#1a2d31;
+      --ink:#e6eeee; --ink-soft:#bcc9ca; --muted:#869799; --line:#26383c;
+      --accent:#3bb2bd; --accent-deep:#7fd3da; --accent-soft:#173036;
+      --good:#46c185; --good-soft:#12302a; --warn:#e2a445; --warn-soft:#31280f;
+      --crit:#e6675a; --crit-soft:#33201d; --novo:#7d8a90; --novo-soft:#1d2c30;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0d1a1e; --surface:#152529; --surface-2:#1a2d31;
+    --ink:#e6eeee; --ink-soft:#bcc9ca; --muted:#869799; --line:#26383c;
+    --accent:#3bb2bd; --accent-deep:#7fd3da; --accent-soft:#173036;
+    --good:#46c185; --good-soft:#12302a; --warn:#e2a445; --warn-soft:#31280f;
+    --crit:#e6675a; --crit-soft:#33201d; --novo:#7d8a90; --novo-soft:#1d2c30;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  img{max-width:100%}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.2;text-wrap:balance;margin:0}
+  p{margin:0}
+  button{font-family:inherit}
+  .wrap{max-width:900px;margin:0 auto;padding-inline:16px}
+
+  /* header */
+  header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .hbar{display:flex;align-items:center;gap:12px;padding-block:12px}
+  .brand{display:flex;flex-direction:column;gap:1px;min-width:0}
+  .brand b{font-family:var(--serif);font-size:19px;letter-spacing:.2px}
+  .brand span{font-size:11px;color:var(--muted);letter-spacing:.3px}
+  .count{margin-left:auto;text-align:right;line-height:1.1;flex-shrink:0}
+  .count b{font-family:var(--mono);font-size:22px;color:var(--accent);font-variant-numeric:tabular-nums}
+  .count span{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+  .gear{background:none;border:1px solid var(--line);color:var(--muted);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:15px;flex-shrink:0}
+  .gear:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* nav */
+  nav{display:flex;gap:4px;padding-bottom:8px;overflow-x:auto;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;background:none;border:none;color:var(--muted);font-size:13.5px;font-weight:500;padding:7px 13px;border-radius:9px;cursor:pointer;white-space:nowrap}
+  .tab[aria-selected="true"]{background:var(--accent);color:#fff}
+  .tab:not([aria-selected="true"]):hover{background:var(--surface-2);color:var(--ink)}
+
+  main{padding-block:20px 60px}
+  section[hidden]{display:none!important}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .pad{padding:18px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .muted{color:var(--muted)}
+  .small{font-size:12.5px}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:14.5px;font-weight:600;cursor:pointer;transition:filter .15s}
+  .btn:hover{filter:brightness(1.08)}
+  .btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent);filter:none}
+  .btn.sm{padding:8px 13px;font-size:13px;border-radius:9px}
+  .btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
+
+  /* painel */
+  .hero{display:grid;gap:16px}
+  .lead{font-size:15px;color:var(--ink-soft);max-width:60ch}
+  .cargos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .cargo{cursor:pointer;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;transition:border-color .15s,transform .15s}
+  .cargo:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .cargo.sel{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 55%,transparent),var(--shadow)}
+  .cargo h3{font-size:17px}
+  .cargo .kpi{display:flex;align-items:baseline;gap:6px}
+  .cargo .kpi b{font-family:var(--mono);font-size:30px;font-variant-numeric:tabular-nums}
+  .ring{--p:0;--c:var(--accent);height:8px;border-radius:99px;background:var(--novo-soft);overflow:hidden}
+  .ring>i{display:block;height:100%;width:calc(var(--p)*1%);background:var(--c);border-radius:99px;transition:width .5s}
+  .statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .stat{background:var(--surface-2);border-radius:11px;padding:12px;text-align:center}
+  .stat b{display:block;font-family:var(--mono);font-size:22px;font-variant-numeric:tabular-nums}
+  .stat span{font-size:11px;color:var(--muted)}
+  .quick{display:flex;flex-wrap:wrap;gap:8px}
+
+  /* setup */
+  .field{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+  .field>label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:var(--surface);border:1px solid var(--line);color:var(--ink-soft);border-radius:99px;padding:8px 14px;font-size:13.5px;cursor:pointer;transition:all .12s}
+  .chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+
+  /* run */
+  .runbar{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .prog{flex:1;height:6px;background:var(--novo-soft);border-radius:99px;overflow:hidden}
+  .prog>i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+  .qmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+  .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;font-weight:600;padding:3px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+  .badge.pt{background:var(--accent-soft);color:var(--accent)}
+  .qtext{font-size:16px;line-height:1.6;color:var(--ink);margin:6px 0 4px;white-space:pre-wrap}
+  .opts{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+  .opt{display:flex;gap:11px;align-items:flex-start;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;cursor:pointer;font-size:14.5px;line-height:1.45;color:var(--ink-soft);transition:border-color .12s,background .12s}
+  .opt:hover{border-color:var(--accent)}
+  .opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+  .opt .letter{font-family:var(--mono);font-weight:600;color:var(--accent);flex-shrink:0}
+  .opt.correct{border-color:var(--good);background:var(--good-soft)}
+  .opt.wrong{border-color:var(--crit);background:var(--crit-soft)}
+  .opt.correct .letter{color:var(--good)}.opt.wrong .letter{color:var(--crit)}
+  .navbtns{display:flex;gap:10px;margin-top:18px;align-items:center}
+
+  /* result */
+  .scorehead{text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}
+  .bigscore{font-family:var(--mono);font-size:52px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+  .areabars{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+  .areabar{display:grid;grid-template-columns:120px 1fr 52px;gap:10px;align-items:center;font-size:13px}
+  .areabar .lab{color:var(--ink-soft)}
+  .areabar .num{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+  .qreview{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .qreview+.qreview{margin-top:10px}
+  .qrhead{display:flex;gap:10px;align-items:flex-start;padding:13px 15px;cursor:pointer;background:var(--surface)}
+  .qrhead .ic{flex-shrink:0;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-size:13px;font-weight:700;color:#fff}
+  .ic.ok{background:var(--good)}.ic.no{background:var(--crit)}
+  .qrhead .t{font-size:13.5px;color:var(--ink-soft);line-height:1.45}
+  .qrbody{padding:0 15px 15px;font-size:13.5px;color:var(--ink-soft);display:flex;flex-direction:column;gap:10px}
+  .studybox{background:var(--warn-soft);border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);border-radius:10px;padding:12px 14px}
+  .studybox .eyebrow{color:var(--warn)}
+  .ans{font-size:12.5px}
+  .ans .k{font-weight:600;color:var(--ink)}
+  .filterrow{display:flex;gap:8px;align-items:center;margin:16px 0 10px}
+
+  /* evolução */
+  .topicrow{border-bottom:1px solid var(--line);padding:13px 0}
+  .topicrow:last-child{border-bottom:none}
+  .trhead{display:flex;align-items:center;gap:10px;cursor:pointer}
+  .trhead .name{font-size:14px;flex:1;min-width:0}
+  .pill{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:99px;white-space:nowrap}
+  .pill.forte{background:var(--good-soft);color:var(--good)}
+  .pill.medio{background:var(--warn-soft);color:var(--warn)}
+  .pill.fraco{background:var(--crit-soft);color:var(--crit)}
+  .pill.novo{background:var(--novo-soft);color:var(--novo)}
+  .trbar{height:6px;border-radius:99px;background:var(--novo-soft);margin-top:9px;overflow:hidden}
+  .trbar>i{display:block;height:100%;border-radius:99px;transition:width .5s}
+  .trstudy{margin-top:10px;font-size:13px;color:var(--ink-soft);background:var(--surface-2);border-radius:9px;padding:11px 13px;line-height:1.55}
+  .areahead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:22px 0 4px}
+  .areahead h3{font-size:16px}
+
+  /* rotina */
+  .week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:6px}
+  .day{aspect-ratio:1;border-radius:8px;background:var(--novo-soft);display:grid;place-items:center;font-size:11px;color:var(--muted);position:relative}
+  .day.on{background:var(--accent);color:#fff}
+  .day small{position:absolute;top:3px;left:0;right:0;text-align:center;font-size:8px;opacity:.7;text-transform:uppercase}
+  .plan{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+  .plan th,.plan td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+  .plan th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600}
+  .plan td:first-child{font-weight:600;white-space:nowrap;width:1%}
+  .goalset{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .goalset input{width:70px;font-family:var(--mono);font-size:16px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink)}
+
+  /* data panel */
+  .datapanel textarea{width:100%;height:120px;font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:9px;padding:10px;background:var(--surface-2);color:var(--ink);resize:vertical}
+
+  .stack{display:flex;flex-direction:column;gap:16px}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);font-size:11.5px;line-height:1.6}
+
+  @media (max-width:560px){
+    .cargos,.statrow{grid-template-columns:1fr 1fr}
+    .statrow{grid-template-columns:1fr 1fr}
+    .areabar{grid-template-columns:88px 1fr 46px}
+    .brand b{font-size:17px}
+    .count b{font-size:19px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="hbar">
+      <div class="brand">
+        <b>Rumo à Transpetro</b>
+        <span id="brandSub">SIMULADOS CESGRANRIO · ADM &amp; PSICOLOGIA</span>
+      </div>
+      <div class="count"><b id="cdDays">–</b><span>dias p/ a prova</span></div>
+      <button class="gear" id="btnData" title="Backup e dados" aria-label="Dados">⚙</button>
+    </div>
+    <nav id="nav" role="tablist">
+      <button class="tab" role="tab" data-view="painel" aria-selected="true">Painel</button>
+      <button class="tab" role="tab" data-view="simulado" aria-selected="false">Simulado</button>
+      <button class="tab" role="tab" data-view="evolucao" aria-selected="false">Evolução</button>
+      <button class="tab" role="tab" data-view="rotina" aria-selected="false">Rotina</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="v-painel"></section>
+  <section id="v-simulado" hidden></section>
+  <section id="v-evolucao" hidden></section>
+  <section id="v-rotina" hidden></section>
+  <section id="v-data" hidden></section>
+  <footer>
+    Prova objetiva prevista para <b>06/12/2026</b> (Edital Transpetro/PSP/Terra/Nível Superior 2026.4 — Cesgranrio). Estrutura: 50 questões de Conhecimentos Específicos + 10 de Português + 10 de Inglês; eliminação com aproveitamento inferior a 50% em qualquer bloco e grau zero em qualquer matéria dos Conhecimentos Gerais.
+    <br>As questões deste app são autorais, redigidas no estilo da banca para treino; confira sempre o conteúdo programático oficial. Seu progresso fica salvo neste navegador — use ⚙ para fazer backup.
+  </footer>
+</main>
+
+<script>
+/* ---------------- DADOS: taxonomia de tópicos + conteúdo de reforço ---------------- */
+const PROVA="2026-12-06";
+const AREAS={
+  PT:{label:"Português",tag:"Português"},
+  EN:{label:"Inglês",tag:"Inglês"},
+  ADM:{label:"Administração — Ênfase 1",tag:"Administração"},
+  PSI:{label:"Psicologia",tag:"Psicologia"}
+};
+const TOPICS={
+  pt_compreensao:{area:"PT",label:"Compreensão e interpretação de textos",estudo:"Leitura ativa: identifique tese, argumentos e conclusão. Separe o que está explícito do que é inferência e desconfie da alternativa 'quase certa' que extrapola ou generaliza além do texto."},
+  pt_ortografia:{area:"PT",label:"Ortografia oficial",estudo:"Revise 'porquê/por que/porque/por quê', 'mas/mais', 'a fim/afim', 'senão/se não', uso de g/j, s/z, x/ch e o Acordo Ortográfico (hífen e acentuação de paroxítonas e ditongos abertos)."},
+  pt_coesao:{area:"PT",label:"Mecanismos de coesão textual",estudo:"Referenciação (anáfora/catáfora com pronomes e sinônimos) e conectivos de adição, oposição, conclusão, causa e condição. Saiba a que termo cada 'isso/este/o qual' remete e o valor lógico da conjunção."},
+  pt_semantica:{area:"PT",label:"Significação das palavras",estudo:"Sentido no contexto: sinonímia, antonímia, denotação x conotação, polissemia e ambiguidade. A palavra muda de sentido conforme a frase — leia o período inteiro antes de trocar por um sinônimo."},
+  pt_verbos:{area:"PT",label:"Emprego de tempos e modos verbais",estudo:"Modos indicativo, subjuntivo e imperativo; correlação verbal ('se eu fizesse... faria'); pretéritos e futuros. O subjuntivo domina as orações condicionais e concessivas."},
+  pt_classes:{area:"PT",label:"Emprego das classes de palavras",estudo:"Identifique as classes, sobretudo pronomes (relativos e demonstrativos), conjunções e advérbios. 'Que' e 'se' mudam de classe conforme a função — analise o papel na oração."},
+  pt_coord_subord:{area:"PT",label:"Coordenação e subordinação",estudo:"Diferencie orações coordenadas (independentes) de subordinadas (uma completa a outra) e classifique as subordinadas pelo valor da conjunção: causal, concessiva, condicional, consecutiva, final."},
+  pt_pontuacao:{area:"PT",label:"Emprego dos sinais de pontuação",estudo:"A vírgula isola adjunto adverbial deslocado, aposto, vocativo e oração adjetiva explicativa; nunca separa sujeito de verbo nem verbo de complemento. Estude também ponto e vírgula e dois-pontos."},
+  pt_concordancia:{area:"PT",label:"Concordância verbal e nominal",estudo:"Verbal: sujeito composto, coletivo, 'haver' impessoal e partícula 'se'. Nominal: 'anexo', 'meio', 'obrigado', adjetivo com vários substantivos. Ache bem o núcleo do sujeito."},
+  pt_regencia:{area:"PT",label:"Regência verbal e nominal",estudo:"Preposição exigida pelo verbo/nome: 'assistir a' (ver), 'aspirar a' (almejar), 'obedecer a', 'preferir... a', 'implicar' (sem prep. = acarretar). Ligue a regência ao uso da crase."},
+  pt_crase:{area:"PT",label:"Sinal indicativo de crase",estudo:"Crase = a (prep.) + a (artigo). Ocorre antes de palavra feminina que pede 'a'; não ocorre antes de masculino, verbo ou pronomes em geral. Especiais: 'à moda de', horas, 'àquela'."},
+  pt_pronomes:{area:"PT",label:"Colocação dos pronomes átonos",estudo:"Próclise com palavra atrativa (negação, advérbio, pronome relativo, conjunção subordinativa); ênclise no início da oração e no imperativo; mesóclise no futuro sem atrativo."},
+  en_compreensao:{area:"EN",label:"Reading comprehension",estudo:"Skimming para a ideia geral, scanning para detalhes. Identifique tópico, propósito do autor e função de cada parágrafo. Cuidado com o distrator que troca um único dado do texto."},
+  en_gramatica:{area:"EN",label:"Grammar for comprehension",estudo:"Conectivos (however, therefore, although, whereas), tempos e voz passiva, pronomes de referência e formação de palavras (prefixos/sufixos) — a serviço da compreensão, não da gramática isolada."},
+  adm_financeira:{area:"ADM",label:"Administração Financeira e Orçamentária",estudo:"Valor do dinheiro no tempo, juros compostos, VPL (>0 = aceitar), TIR, payback (simples e descontado), alavancagem e administração do capital de giro (ciclo operacional e financeiro)."},
+  adm_producao:{area:"ADM",label:"Administração da Produção e Compras",estudo:"Gestão de estoques (curva ABC, ponto de pedido, lote econômico, estoque de segurança), MRP, Just in Time/Kanban, Supply Chain Management e planejamento e controle da produção."},
+  adm_contratacao:{area:"ADM",label:"Contratação (Lei 13.303 e afins)",estudo:"Lei 13.303/2016 (estatais): regime próprio de licitações e contratos, dispensa e inexigibilidade. Somam-se a LC 123/2006 (ME/EPP) e as normas anticorrupção (Lei 12.846/2013)."},
+  adm_projetos:{area:"ADM",label:"Gerenciamento de Projetos",estudo:"PMBOK 7ª ed.: de grupos de processos para 12 princípios e 8 domínios de desempenho, entrega de valor e 'tailoring'. Ágil: Scrum (papéis, eventos, artefatos) e Kanban (fluxo puxado, limite de WIP)."},
+  adm_negociacao:{area:"ADM",label:"Conflitos e Negociação",estudo:"Estilos de conflito de Thomas-Kilmann (competição, colaboração, compromisso, acomodação, evitação), negociação integrativa (ganha-ganha), MAPAN/BATNA e ZOPA."},
+  adm_si:{area:"ADM",label:"Administração de Sistemas de Informação",estudo:"Tipos de sistemas: SPT (transações), SIG (gerenciais), SAD (apoio à decisão) e ERP (integração). Dado x informação x conhecimento e o papel estratégico da TI."},
+  adm_estrategia:{area:"ADM",label:"Estratégia Empresarial",estudo:"Diagnóstico estratégico: SWOT, 5 forças de Porter e cadeia de valor. Estratégias genéricas (custo, diferenciação, foco), níveis de estratégia e Balanced Scorecard."},
+  adm_marketing:{area:"ADM",label:"Administração Mercadológica",estudo:"Composto de marketing (4 Ps) e, em serviços, os 7 Ps. Segmentação, posicionamento, comportamento do consumidor, CRM e marketing digital/plataformização."},
+  adm_contabilidade:{area:"ADM",label:"Contabilidade",estudo:"Equação patrimonial (Ativo = Passivo + PL), regime de competência x caixa, Balanço, DRE e DFC. Noções de custos, contabilidade gerencial, governança, compliance e riscos."},
+  adm_decisao:{area:"ADM",label:"Processo Decisório",estudo:"Modelo racional x racionalidade limitada (Simon, 'satisficing'), decisões programadas x não programadas e vieses (ancoragem, confirmação, disponibilidade, excesso de confiança)."},
+  adm_rh:{area:"ADM",label:"Administração de Recursos Humanos",estudo:"Gestão por competências (CHA), recrutamento e seleção, T&D (levantar, planejar, executar, avaliar), avaliação de desempenho e gestão de clima e cultura organizacional."},
+  adm_logica:{area:"ADM",label:"Lógica",estudo:"Proposições, conectivos e tabelas-verdade, equivalências e negações (De Morgan), argumentos válidos e falácias, e raciocínio quantitativo (combinatória, progressões, proporções)."},
+  adm_estatistica:{area:"ADM",label:"Estatística",estudo:"Medidas de tendência central (média, mediana, moda), de dispersão (amplitude, variância, desvio padrão) e de posição; probabilidade básica e leitura de tabelas e gráficos."},
+  adm_esg:{area:"ADM",label:"Sustentabilidade e Responsabilidade Socioambiental",estudo:"Pilares ESG (ambiental, social, governança), sustentabilidade nas organizações, relatórios e indicadores (GRI, ISO 26000), stakeholders e o alerta contra 'greenwashing'."},
+  psi_etica:{area:"PSI",label:"Código de Ética do Psicólogo",estudo:"Código de Ética (Res. CFP 010/2005): princípios fundamentais, sigilo profissional e suas exceções (proteção da vida), responsabilidade e limites da atuação."},
+  psi_resolucoes:{area:"PSI",label:"Resoluções do CFP",estudo:"Res. 06/2019 (documentos: declaração, atestado, relatório/laudo, parecer), 31/2022 e SATEPSI (avaliação psicológica), 08/2025 (avaliação em concurso público) e 09/2024 (atuação por TDICs)."},
+  psi_organizacional:{area:"PSI",label:"Psicologia Organizacional",estudo:"Cultura x clima organizacional, gestão estratégica de pessoas e por competências, gestão de mudanças, desenvolvimento organizacional e teorias da motivação (Maslow, Herzberg, McClelland)."},
+  psi_diagnostico:{area:"PSI",label:"Diagnóstico e intervenção nas organizações",estudo:"Recrutamento e seleção por competências, treinamento e desenvolvimento, avaliação de desempenho, processos de desligamento, preparação para aposentadoria e diversidade/ações afirmativas."},
+  psi_social:{area:"PSI",label:"Psicologia Social e Trabalho",estudo:"Processos grupais, liderança (estilos e teorias), comunicação e equipes de trabalho, e modelos de intervenção psicossocial em crise, emergência e catástrofe."},
+  psi_saude:{area:"PSI",label:"Saúde do trabalhador e saúde mental no trabalho",estudo:"NRs (NR-1/GRO-PGR e riscos psicossociais, NR-5 CIPA, NR-7 PCMSO, NR-17 ergonomia), nexo causal, doenças relacionadas ao trabalho, Burnout (CID-11), teoria do estresse e assédio moral."}
+};
+
+/* ---------------- BANCO DE QUESTÕES (autorais, estilo Cesgranrio) ---------------- */
+const Q=[
+/* ----- PORTUGUÊS ----- */
+{id:"pt1",t:"pt_compreensao",e:`Texto:\n"A eficiência operacional não se resume a fazer mais em menos tempo. Ela pressupõe eliminar o que não agrega valor — retrabalho, esperas, deslocamentos inúteis — de modo que o esforço se concentre naquilo que o cliente de fato reconhece como importante."\n\nDepreende-se do texto que a eficiência operacional está associada, principalmente, a`,
+o:["executar o maior número possível de tarefas em cada jornada.","suprimir atividades que não geram valor percebido pelo cliente.","reduzir custos por meio da diminuição do quadro de pessoal.","priorizar a velocidade em detrimento da qualidade do produto.","padronizar processos independentemente das necessidades do cliente."],c:1,
+cm:"O texto define eficiência como concentrar esforço no que agrega valor ao cliente, eliminando o que não agrega. A letra A é justamente o senso comum que o autor nega ('não se resume a fazer mais em menos tempo'); as demais extrapolam o texto."},
+{id:"pt2",t:"pt_compreensao",e:`Texto:\n"Ainda que a tecnologia prometa autonomia, é a disciplina de quem a utiliza que decide seu resultado. A ferramenta amplia — não substitui — o discernimento humano."\n\nA ideia central do texto é a de que a tecnologia`,
+o:["torna dispensável o julgamento humano nas decisões.","garante autonomia plena a quem a adota.","potencializa, mas não elimina, a necessidade de discernimento.","fracassa sempre que utilizada sem supervisão constante.","é incompatível com a disciplina de seus usuários."],c:2,
+cm:"'Amplia — não substitui — o discernimento humano' sintetiza a tese. A letra A contradiz o texto; as demais generalizam ou distorcem."},
+{id:"pt3",t:"pt_coesao",e:`No período "A empresa reformulou seus processos; **isso**, contudo, não bastou para reverter o prejuízo", o termo destacado retoma`,
+o:["apenas o substantivo 'processos'.","o fato de a empresa ter reformulado seus processos.","o substantivo 'prejuízo', antecipando-o.","o sujeito 'A empresa', exclusivamente.","a conjunção 'contudo' e seu valor adversativo."],c:1,
+cm:"O pronome demonstrativo 'isso' é um caso de coesão referencial que retoma toda a oração anterior (o fato de reformular os processos), não um único substantivo. 'Contudo' apenas marca oposição."},
+{id:"pt4",t:"pt_semantica",e:`Na frase "O gestor adotou uma postura **cristalina** ao expor as metas à equipe", a palavra destacada foi empregada em sentido`,
+o:["denotativo, significando 'feito de cristal'.","conotativo, significando 'transparente, clara'.","pejorativo, significando 'fria e distante'.","técnico, próprio da mineralogia.","ambíguo, sem possibilidade de definição."],c:1,
+cm:"'Cristalina' aqui é metáfora (sentido conotativo) para 'clara, transparente'. Não se trata do sentido literal/denotativo ligado ao cristal."},
+{id:"pt5",t:"pt_verbos",e:`Assinale a opção em que a correlação entre os tempos e modos verbais está adequada à norma-padrão.`,
+o:["Se a diretoria aprovasse o projeto, ele seria implantado ainda este ano.","Se a diretoria aprovava o projeto, ele seria implantado ainda este ano.","Se a diretoria aprovar o projeto, ele seja implantado ainda este ano.","Caso a diretoria aprovaria o projeto, ele seria implantado.","Quando a diretoria aprovasse o projeto, ele será implantado."],c:0,
+cm:"A condicional hipotética pede pretérito imperfeito do subjuntivo na condição ('aprovasse') e futuro do pretérito na oração principal ('seria'). As demais rompem essa correlação."},
+{id:"pt6",t:"pt_classes",e:`Em "Este é o relatório **que** a auditoria solicitou", a palavra destacada classifica-se como`,
+o:["conjunção integrante.","pronome relativo.","advérbio de intensidade.","preposição acidental.","interjeição."],c:1,
+cm:"'Que' retoma o antecedente 'relatório' e introduz oração adjetiva, exercendo função sintática (objeto de 'solicitou'): é pronome relativo. Como conjunção integrante, não retomaria termo anterior nem teria função na oração."},
+{id:"pt7",t:"pt_coord_subord",e:`No período "Embora dispusesse de poucos recursos, a equipe entregou o projeto no prazo", a oração destacada é subordinada adverbial`,
+o:["causal.","concessiva.","condicional.","consecutiva.","final."],c:1,
+cm:"'Embora' introduz ideia de concessão (uma quebra de expectativa: apesar de poucos recursos, entregou). Causal seria 'porque'; condicional, 'se'; final, 'para que'."},
+{id:"pt8",t:"pt_pontuacao",e:`Assinale a opção em que a vírgula foi empregada corretamente segundo a norma-padrão.`,
+o:["Os funcionários da unidade sul, receberão treinamento em dezembro.","Receberão treinamento em dezembro, os funcionários da unidade sul.","Em dezembro, os funcionários da unidade sul receberão treinamento.","Os funcionários, receberão treinamento, em dezembro.","Os funcionários da unidade sul receberão, treinamento em dezembro."],c:2,
+cm:"Em C, a vírgula isola o adjunto adverbial deslocado ('Em dezembro') no início do período — uso correto. Nas demais, a vírgula separa indevidamente sujeito de verbo ou verbo de complemento."},
+{id:"pt9",t:"pt_concordancia",e:`Assinale a opção que respeita a concordância verbal da norma-padrão.`,
+o:["Fazem dois anos que a unidade foi inaugurada.","Houveram muitos problemas na implantação do sistema.","Deve haver soluções para esse impasse.","Existe, no relatório, várias inconsistências.","Tratam-se de decisões estratégicas."],c:2,
+cm:"'Haver' no sentido de 'existir' é impessoal e fica na 3ª pessoa do singular; em locução, o auxiliar acompanha: 'deve haver'. 'Fazer' de tempo também é impessoal ('faz dois anos'), 'houve muitos problemas', 'existem inconsistências' e 'trata-se de' corrigem as demais."},
+{id:"pt10",t:"pt_concordancia",e:`Assinale a opção correta quanto à concordância nominal.`,
+o:["Seguem anexo as planilhas solicitadas.","As candidatas ficaram meio nervosas antes da prova.","É proibido a entrada de pessoas não autorizadas.","Elas mesmo redigiram o parecer.","Muito obrigado, disse a supervisora."],c:1,
+cm:"'Meio' com sentido de 'um pouco' é advérbio e fica invariável ('meio nervosas'). O correto nas demais: 'seguem anexas as planilhas', 'é proibida a entrada' (com artigo), 'elas mesmas' e 'muito obrigada' (mulher)."},
+{id:"pt11",t:"pt_regencia",e:`Assinale a opção em que a regência verbal segue a norma-padrão.`,
+o:["Assistimos o jogo pela televisão.","Prefiro trabalhar em equipe do que sozinho.","A medida implicará em novos custos para a empresa.","O gerente aspirava a um cargo de diretoria.","Cheguei na reunião antes do horário previsto."],c:3,
+cm:"'Aspirar' no sentido de 'almejar' é transitivo indireto e exige a preposição 'a': 'aspirava a um cargo'. As demais: 'assistimos ao jogo', 'prefiro... a', 'implicará novos custos' (sem 'em') e 'cheguei à reunião'."},
+{id:"pt12",t:"pt_crase",e:`Assinale a opção em que o sinal indicativo de crase foi empregado corretamente.`,
+o:["Entreguei o relatório à diretora responsável pela área.","Estou disposto à colaborar com o projeto.","Refiro-me à este documento que você citou.","O treinamento começará à partir das 9h.","Ela viajou à Brasília na semana passada."],c:0,
+cm:"Em A, 'entregar a alguém' + artigo feminino 'a diretora' = crase correta ('à diretora'). Não há crase antes de verbo ('a colaborar'), de pronome demonstrativo masculino/'este', na locução 'a partir' nem antes de 'Brasília' (cidade que não pede artigo)."},
+{id:"pt13",t:"pt_pronomes",e:`Assinale a opção que respeita a colocação pronominal da norma-padrão.`,
+o:["Não vi-o desde a última reunião.","Me parece que a proposta foi aceita.","Nunca se soube a causa exata do problema.","Dir-lhe-ei a verdade quando for possível... aliás, lhe direi hoje.","Quando encontrá-lo, entregue-o o documento."],c:2,
+cm:"A palavra 'nunca' (advérbio de negação) atrai o pronome: exige próclise — 'nunca se soube'. Em A, a negação também atrai ('não o vi'); em B, não se inicia oração com pronome átono; as demais misturam colocações inadequadas."},
+{id:"pt14",t:"pt_ortografia",e:`Assinale a opção em que todas as palavras estão grafadas corretamente.`,
+o:["excessão, previlégio, beneficiência","exceção, privilégio, beneficência","esceção, privilégio, benificência","exceção, previlégio, beneficência","excessão, privilégio, beneficiência"],c:1,
+cm:"As grafias corretas são 'exceção', 'privilégio' e 'beneficência'. As demais trazem erros comuns como 'excessão', 'previlégio' e 'beneficiência/benificência'."},
+
+/* ----- INGLÊS ----- */
+{id:"en1",t:"en_compreensao",e:`Read the text:\n"Pipeline operators rely on continuous monitoring systems that detect pressure drops within seconds. When an anomaly is identified, automated valves can isolate the affected section, limiting the volume of any potential spill before crews arrive on site."\n\nAccording to the text, the main purpose of the monitoring systems is to`,
+o:["replace the crews that work on site.","increase the pressure inside the pipelines.","identify anomalies and help contain potential spills.","measure the volume of oil transported per day.","schedule the maintenance of automated valves."],c:2,
+cm:"O texto diz que os sistemas detectam quedas de pressão e acionam válvulas para isolar a seção e limitar vazamentos — ou seja, identificar anomalias e conter derrames. 'Replace the crews' contraria 'before crews arrive'."},
+{id:"en2",t:"en_compreensao",e:`In the sentence "automated valves can isolate the **affected** section", the word "affected" is closest in meaning to`,
+o:["improved","impacted","protected","isolated","inspected"],c:1,
+cm:"'Affected' = atingido/impactado ('impacted'). 'Improved' e 'protected' têm sentido oposto ao contexto de anomalia."},
+{id:"en3",t:"en_gramatica",e:`Read: "The new procedure reduced downtime; **however**, it required additional training for the staff."\nThe connector "however" introduces an idea of`,
+o:["addition","conclusion","contrast","cause","purpose"],c:2,
+cm:"'However' é conectivo de contraste/oposição (reduziu o tempo parado, mas exigiu treinamento). 'Therefore' seria conclusão; 'because', causa."},
+{id:"en4",t:"en_compreensao",e:`Read the text:\n"Although renewable sources are expanding rapidly, oil and gas are expected to remain part of the global energy mix for decades, especially in sectors that are difficult to electrify, such as heavy transport."\n\nThe text suggests that oil and gas will`,
+o:["be completely replaced by renewables within a few years.","disappear only from the heavy transport sector.","continue to play a role in the energy mix for a long time.","become the only source of energy in the future.","stop expanding because of renewable sources."],c:2,
+cm:"'Are expected to remain part of the global energy mix for decades' indica permanência por longo tempo. 'Completely replaced within a few years' contradiz o texto."},
+{id:"en5",t:"en_gramatica",e:`In "sectors that are difficult **to electrify**, such as heavy transport", the expression "such as" is used to`,
+o:["introduce a contrast.","introduce an example.","express a condition.","indicate a consequence.","show a comparison of superiority."],c:1,
+cm:"'Such as' introduz exemplo ('heavy transport' é exemplo de setor difícil de eletrificar)."},
+{id:"en6",t:"en_compreensao",e:`Read: "Safety training must be completed **before** employees are allowed to operate the equipment."\nThe sentence states that operating the equipment is`,
+o:["optional for trained employees.","allowed only after safety training.","forbidden for all employees.","independent of any training.","required before the safety training."],c:1,
+cm:"'Before employees are allowed to operate' = a operação só é permitida após o treinamento de segurança. A letra E inverte a ordem."},
+{id:"en7",t:"en_compreensao",e:`In "automated valves can isolate the affected section, **limiting** the volume of any potential spill", the -ing form "limiting" expresses`,
+o:["a past habit.","a result/consequence of the action.","an obligation.","a hypothetical condition.","a question."],c:1,
+cm:"A forma em '-ing' aqui expressa consequência/resultado da ação de isolar a seção (limita o volume do derrame)."},
+{id:"en8",t:"en_gramatica",e:`Choose the option in which the word and its opposite (antonym) are correctly paired.`,
+o:["increase — reduce","allow — permit","expand — grow","detect — identify","remain — stay"],c:0,
+cm:"'Increase' (aumentar) x 'reduce' (reduzir) são antônimos. Os demais pares são sinônimos."},
+
+/* ----- ADMINISTRAÇÃO ----- */
+{id:"adm1",t:"adm_financeira",e:`Ao analisar um projeto de investimento pelo método do Valor Presente Líquido (VPL), a empresa deve, em regra,`,
+o:["rejeitar o projeto sempre que o VPL for positivo.","aceitar o projeto quando o VPL for maior que zero.","aceitar o projeto apenas quando o VPL for igual a zero.","ignorar o valor do dinheiro no tempo no cálculo.","escolher o projeto de menor VPL entre alternativas."],c:1,
+cm:"VPL positivo significa que o projeto gera valor acima do custo de capital, devendo ser aceito. VPL = 0 indica indiferença e VPL < 0, rejeição. O método justamente considera o valor do dinheiro no tempo."},
+{id:"adm2",t:"adm_financeira",e:`O ciclo financeiro (ou ciclo de caixa) de uma empresa corresponde ao período entre`,
+o:["a compra da matéria-prima e a venda do produto.","o pagamento aos fornecedores e o recebimento das vendas.","a emissão da nota fiscal e a entrega do produto.","o início e o fim do exercício contábil.","a aprovação e a execução do orçamento anual."],c:1,
+cm:"O ciclo financeiro vai do pagamento a fornecedores até o recebimento dos clientes — o intervalo em que a empresa precisa financiar suas operações. O ciclo operacional é que vai da compra à venda/recebimento."},
+{id:"adm3",t:"adm_producao",e:`Na gestão de estoques, o 'ponto de pedido' (ponto de ressuprimento) indica`,
+o:["a quantidade máxima que o estoque pode atingir.","o nível de estoque que dispara uma nova ordem de compra.","o custo total de manutenção do estoque no período.","o momento de encerrar a produção de um item.","a quantidade ideal de itens a serem descartados."],c:1,
+cm:"O ponto de pedido é o nível de estoque que, ao ser atingido, aciona um novo pedido, considerando o consumo durante o tempo de reposição (lead time) e o estoque de segurança."},
+{id:"adm4",t:"adm_producao",e:`A filosofia Just in Time (JIT) tem como princípio central`,
+o:["manter grandes estoques de segurança para evitar faltas.","produzir e adquirir itens apenas na quantidade e no momento necessários.","maximizar os lotes de produção para diluir custos fixos.","centralizar todas as compras em um único fornecedor anual.","priorizar a produção empurrada com base em previsões de longo prazo."],c:1,
+cm:"O JIT busca eliminar desperdícios produzindo/adquirindo o necessário, na quantidade certa e no momento certo (produção puxada), reduzindo estoques — o oposto de grandes estoques e produção empurrada."},
+{id:"adm5",t:"adm_contratacao",e:`As licitações e os contratos das empresas públicas e sociedades de economia mista, como a Transpetro, regem-se`,
+o:["exclusivamente pela Lei nº 8.666/1993.","por regime próprio previsto na Lei nº 13.303/2016 (Lei das Estatais).","pelas mesmas regras dos órgãos da administração direta, sem exceções.","por normas internas sem qualquer base legal federal.","apenas pela nova Lei de Licitações (Lei nº 14.133/2021)."],c:1,
+cm:"A Lei 13.303/2016 (Lei das Estatais) instituiu regime próprio de licitações e contratos para empresas públicas e sociedades de economia mista, distinto do regime das leis gerais de licitação da administração direta."},
+{id:"adm6",t:"adm_contratacao",e:`De acordo com a Lei nº 13.303/2016, a contratação direta, sem licitação, é admitida nas hipóteses de`,
+o:["conveniência exclusiva do gestor, a qualquer tempo.","dispensa e inexigibilidade previstas na lei.","preferência por empresas de grande porte.","escolha aleatória entre os fornecedores cadastrados.","sigilo absoluto sobre os valores contratados."],c:1,
+cm:"A contratação direta é excepcional e só cabe nas hipóteses legais de dispensa e de inexigibilidade de licitação, devidamente justificadas. Fora delas, a regra é licitar."},
+{id:"adm7",t:"adm_projetos",e:`Uma das principais mudanças do Guia PMBOK 7ª edição em relação às anteriores é`,
+o:["o abandono completo da gestão de riscos em projetos.","a adoção de uma abordagem baseada em princípios e domínios de desempenho, em vez de apenas grupos de processos.","a proibição do uso de métodos ágeis.","a substituição do gerente de projetos por um algoritmo.","a exigência de que todo projeto siga o modelo em cascata."],c:1,
+cm:"O PMBOK 7 migrou de uma lógica centrada em grupos de processos e áreas de conhecimento para 12 princípios de gerenciamento e 8 domínios de desempenho, com foco em entrega de valor e adaptação (tailoring), acomodando abordagens preditivas e ágeis."},
+{id:"adm8",t:"adm_projetos",e:`No framework Scrum, NÃO é um papel (responsabilidade) previsto:`,
+o:["Product Owner.","Scrum Master.","Desenvolvedores (Time de Desenvolvimento).","Gerente de Projeto.","(todas as anteriores são papéis do Scrum)"],c:3,
+cm:"O Scrum define três responsabilidades: Product Owner, Scrum Master e Desenvolvedores. Não há o papel de 'gerente de projeto' no framework — suas atribuições distribuem-se entre esses papéis."},
+{id:"adm9",t:"adm_negociacao",e:`Segundo o modelo de administração de conflitos de Thomas-Kilmann, o estilo que combina alta assertividade e alta cooperação, buscando soluções que atendam a ambas as partes, é a`,
+o:["competição.","acomodação.","evitação (fuga).","colaboração.","imposição."],c:3,
+cm:"A colaboração (ou integração) une alta assertividade e alta cooperação, buscando o ganha-ganha. A competição é assertiva e pouco cooperativa; a acomodação, o inverso; a evitação, baixa em ambas."},
+{id:"adm10",t:"adm_negociacao",e:`Em uma negociação, a 'MAPAN' (Melhor Alternativa à Negociação de um Acordo), conhecida em inglês como BATNA, refere-se`,
+o:["ao valor mínimo que se aceita receber em qualquer acordo.","à melhor opção que o negociador tem caso o acordo não se concretize.","à primeira proposta apresentada pela outra parte.","ao ponto em que as duas partes têm interesses idênticos.","à obrigação legal de fechar o acordo."],c:1,
+cm:"A MAPAN/BATNA é a melhor alternativa disponível caso a negociação fracasse; ela define o poder de barganha e o ponto a partir do qual vale mais desistir do que aceitar um mau acordo."},
+{id:"adm11",t:"adm_si",e:`Um sistema de informação que integra, em uma única base de dados, processos de diversas áreas da empresa (finanças, compras, produção, RH), evitando redundância e retrabalho, é caracterizado como`,
+o:["SAD (Sistema de Apoio à Decisão).","ERP (Enterprise Resource Planning).","SPT isolado de um único setor.","planilha eletrônica departamental.","sistema especialista de diagnóstico."],c:1,
+cm:"O ERP integra os processos e dados das várias áreas em uma base única, garantindo consistência e reduzindo redundância. O SAD apoia decisões específicas; o SPT trata transações operacionais."},
+{id:"adm12",t:"adm_si",e:`Na hierarquia dado–informação–conhecimento, a 'informação' distingue-se do 'dado' porque`,
+o:["o dado é sempre mais valioso que a informação.","a informação é o dado processado e contextualizado, com significado para a decisão.","informação e dado são sinônimos perfeitos.","a informação existe apenas em meio físico (papel).","o dado resulta da interpretação da informação."],c:1,
+cm:"Dado é o registro bruto; informação é o dado tratado, organizado e contextualizado, adquirindo significado útil. O conhecimento vai além, agregando experiência e capacidade de ação."},
+{id:"adm13",t:"adm_estrategia",e:`Na análise SWOT, as forças e as fraquezas referem-se, respectivamente, a fatores`,
+o:["externos e internos à organização.","internos à organização (ambos).","externos à organização (ambos).","de concorrentes e de fornecedores.","de curto e de longo prazo, sem relação com o ambiente."],c:1,
+cm:"Forças (strengths) e fraquezas (weaknesses) são fatores internos, controláveis pela organização; oportunidades e ameaças são fatores externos, do ambiente."},
+{id:"adm14",t:"adm_estrategia",e:`No modelo das cinco forças competitivas de Porter, NÃO se inclui como uma das forças`,
+o:["a ameaça de novos entrantes.","o poder de barganha dos fornecedores.","o poder de barganha dos clientes.","a cultura organizacional interna da empresa.","a ameaça de produtos ou serviços substitutos."],c:3,
+cm:"As cinco forças de Porter são: novos entrantes, poder dos fornecedores, poder dos clientes, produtos substitutos e rivalidade entre concorrentes. A cultura interna não é uma das forças (é fator interno)."},
+{id:"adm15",t:"adm_marketing",e:`O composto de marketing tradicional (4 Ps) é formado por`,
+o:["produto, preço, praça e promoção.","pessoas, processos, produtividade e posicionamento.","planejamento, produção, publicidade e pós-venda.","preço, propaganda, patrocínio e público.","produto, propaganda, promoção e parceria."],c:0,
+cm:"Os 4 Ps de McCarthy/Kotler são Produto, Preço, Praça (distribuição) e Promoção. Em marketing de serviços, acrescentam-se Pessoas, Processos e Evidências físicas (7 Ps)."},
+{id:"adm16",t:"adm_marketing",e:`A segmentação de mercado consiste em`,
+o:["oferecer o mesmo produto, do mesmo modo, a todos os consumidores.","dividir o mercado em grupos com características e necessidades semelhantes.","eliminar concorrentes por meio de preços predatórios.","reduzir a variedade de produtos a um único modelo.","concentrar toda a comunicação em um único veículo de mídia."],c:1,
+cm:"Segmentar é agrupar consumidores por semelhanças (demográficas, geográficas, comportamentais etc.) para direcionar ofertas e comunicação — base para o posicionamento e para o marketing-alvo."},
+{id:"adm17",t:"adm_contabilidade",e:`A equação patrimonial básica da contabilidade estabelece que`,
+o:["Ativo = Receita − Despesa.","Ativo = Passivo + Patrimônio Líquido.","Patrimônio Líquido = Ativo + Passivo.","Passivo = Ativo + Patrimônio Líquido.","Receita = Ativo − Passivo."],c:1,
+cm:"O Ativo (bens e direitos) é financiado por capital de terceiros (Passivo) e capital próprio (Patrimônio Líquido): Ativo = Passivo + PL. Rearranjando, PL = Ativo − Passivo."},
+{id:"adm18",t:"adm_contabilidade",e:`Pelo regime de competência, as receitas e as despesas devem ser reconhecidas`,
+o:["somente quando há efetiva entrada ou saída de caixa.","no período em que ocorrem (são geradas ou incorridas), independentemente do recebimento ou pagamento.","apenas no encerramento do exercício.","de acordo com a preferência do gestor financeiro.","exclusivamente quando emitida a nota fiscal de venda."],c:1,
+cm:"No regime de competência, o fato gerador determina o reconhecimento no período em que ocorre, independentemente do fluxo de caixa. Reconhecer só pela entrada/saída de caixa é regime de caixa."},
+{id:"adm19",t:"adm_decisao",e:`O conceito de 'racionalidade limitada', proposto por Herbert Simon, sustenta que os decisores`,
+o:["sempre encontram a solução ótima entre todas as alternativas possíveis.","tomam decisões satisfatórias diante de limites de informação, tempo e capacidade cognitiva.","não utilizam qualquer critério lógico ao decidir.","decidem exclusivamente com base na intuição, sem análise.","eliminam completamente os vieses cognitivos ao decidir."],c:1,
+cm:"Simon mostra que, diante de limites de informação, tempo e cognição, os decisores buscam uma solução 'satisfatória' (satisficing), não a ótima do modelo racional puro."},
+{id:"adm20",t:"adm_decisao",e:`A tendência de valorizar excessivamente a primeira informação recebida ao tomar uma decisão, usando-a como referência para os julgamentos seguintes, é o viés de`,
+o:["confirmação.","ancoragem.","disponibilidade.","aversão à perda.","representatividade."],c:1,
+cm:"O viés de ancoragem faz o decisor apegar-se a um valor/informação inicial. O de confirmação busca dados que confirmem a crença prévia; o de disponibilidade superestima o que é mais lembrado."},
+{id:"adm21",t:"adm_rh",e:`Na gestão por competências, a sigla CHA representa`,
+o:["Cargo, Hierarquia e Autoridade.","Conhecimentos, Habilidades e Atitudes.","Contratação, Homologação e Admissão.","Capacidade, Honestidade e Assiduidade.","Competência, Hierarquia e Avaliação."],c:1,
+cm:"Competência costuma ser descrita pela tríade CHA: Conhecimentos (saber), Habilidades (saber fazer) e Atitudes (querer fazer/como agir)."},
+{id:"adm22",t:"adm_rh",e:`No ciclo de Treinamento e Desenvolvimento (T&D), a primeira etapa é`,
+o:["a avaliação dos resultados do treinamento.","o levantamento (diagnóstico) das necessidades de treinamento.","a execução das atividades instrucionais.","a certificação dos participantes.","a definição do orçamento anual da empresa."],c:1,
+cm:"O ciclo de T&D começa pelo Levantamento de Necessidades de Treinamento (LNT), seguido de planejamento/desenho, execução e avaliação dos resultados."},
+{id:"adm23",t:"adm_logica",e:`A negação lógica da proposição "Todos os funcionários cumpriram a meta" é`,
+o:["Nenhum funcionário cumpriu a meta.","Todos os funcionários não cumpriram a meta.","Pelo menos um funcionário não cumpriu a meta.","Alguns funcionários cumpriram a meta.","Todos os funcionários cumpriram a meta parcialmente."],c:2,
+cm:"A negação de 'todo A é B' é 'existe pelo menos um A que não é B'. 'Nenhum cumpriu' é a contrária (mais forte), não a negação/contraditória."},
+{id:"adm24",t:"adm_logica",e:`Considere a condicional "Se o sistema falhar, então o alarme será acionado". A proposição logicamente equivalente é`,
+o:["Se o alarme for acionado, então o sistema falhou.","Se o sistema não falhar, então o alarme não será acionado.","Se o alarme não for acionado, então o sistema não falhou.","O sistema falhou e o alarme não foi acionado.","O sistema não falha e o alarme é acionado."],c:2,
+cm:"A equivalente de 'se P então Q' é a contrapositiva 'se não Q então não P'. A letra A é a recíproca e a B, a inversa — nenhuma equivalente."},
+{id:"adm25",t:"adm_estatistica",e:`Considere o conjunto de dados: 2, 3, 3, 6, 11. A média, a mediana e a moda desse conjunto são, respectivamente,`,
+o:["5, 3 e 3.","3, 3 e 5.","5, 6 e 3.","6, 3 e 3.","5, 3 e 6."],c:0,
+cm:"Média = (2+3+3+6+11)/5 = 25/5 = 5; mediana = valor central do rol (2,3,3,6,11) = 3; moda = valor mais frequente = 3."},
+{id:"adm26",t:"adm_estatistica",e:`O desvio padrão é uma medida estatística de`,
+o:["tendência central dos dados.","dispersão dos dados em torno da média.","posição relativa de um valor no conjunto.","correlação entre duas variáveis.","frequência acumulada de uma classe."],c:1,
+cm:"O desvio padrão mede a dispersão (variabilidade) dos dados em relação à média: quanto maior, mais espalhados os valores. Média, mediana e moda são de tendência central."},
+{id:"adm27",t:"adm_esg",e:`A sigla ESG, cada vez mais presente na gestão corporativa, corresponde a`,
+o:["Economia, Sustentabilidade e Governo.","Ambiental (Environmental), Social e Governança (Governance).","Estratégia, Segurança e Gestão.","Eficiência, Serviço e Qualidade.","Ecologia, Sociedade e Grupo."],c:1,
+cm:"ESG reúne os pilares Ambiental (Environmental), Social e de Governança (Governance) — critérios usados para avaliar a sustentabilidade e a responsabilidade das organizações."},
+{id:"adm28",t:"adm_esg",e:`O termo 'greenwashing' refere-se à prática de`,
+o:["adotar metas ambientais auditadas e transparentes.","comunicar uma imagem ambientalmente responsável que não corresponde às práticas reais da empresa.","reciclar integralmente os resíduos da produção.","substituir fontes fósseis por energias renováveis.","publicar relatórios de sustentabilidade certificados."],c:1,
+cm:"Greenwashing ('maquiagem verde') é criar uma aparência de responsabilidade ambiental sem lastro em práticas reais — o oposto de transparência e de metas efetivamente cumpridas."},
+
+/* ----- PSICOLOGIA ----- */
+{id:"psi1",t:"psi_etica",e:`De acordo com o Código de Ética Profissional do Psicólogo, o sigilo é um dever fundamental. Ainda assim, a quebra do sigilo é admitida quando`,
+o:["o empregador do psicólogo solicita as informações.","houver situação que exija a proteção da vida e a restrição ao mínimo necessário for observada.","o caso for considerado interessante para fins de divulgação.","qualquer colega de profissão requerer acesso ao prontuário.","o cliente demorar a efetuar o pagamento das sessões."],c:1,
+cm:"O sigilo pode ser relativizado, com base em decisão responsável, para proteger a vida (do cliente ou de terceiros), revelando-se apenas o estritamente necessário. Interesse de terceiros, curiosidade ou inadimplência não autorizam a quebra."},
+{id:"psi2",t:"psi_etica",e:`Entre os princípios fundamentais do Código de Ética do Psicólogo está o compromisso de`,
+o:["priorizar os interesses comerciais da instituição contratante.","basear seu trabalho no respeito à dignidade e à liberdade das pessoas, promovendo direitos humanos.","evitar qualquer atuação em contextos organizacionais.","garantir resultados favoráveis a quem contrata o serviço.","restringir sua atuação a diagnósticos, sem intervenção."],c:1,
+cm:"O Código funda a atuação no respeito à dignidade, à liberdade e aos direitos humanos, com responsabilidade social. Subordinar a técnica a interesses comerciais ou garantir resultados fere esses princípios."},
+{id:"psi3",t:"psi_resolucoes",e:`Segundo a Resolução CFP nº 06/2019, o documento psicológico que apresenta, de forma aprofundada, o resultado de um processo de avaliação psicológica, com análise e conclusão fundamentadas, é`,
+o:["a declaração.","o atestado psicológico.","o laudo psicológico.","o recibo de atendimento.","a anotação em prontuário."],c:2,
+cm:"O laudo psicológico é o documento resultante de um processo de avaliação, com descrição, análise e conclusão fundamentadas. A declaração apenas informa comparecimento; o atestado afirma uma condição de forma sucinta."},
+{id:"psi4",t:"psi_resolucoes",e:`O SATEPSI, tratado nas resoluções do CFP sobre avaliação psicológica, é o sistema responsável por`,
+o:["credenciar clínicas de psicologia junto ao SUS.","avaliar e informar quais testes psicológicos possuem condições favoráveis de uso.","fiscalizar o pagamento da anuidade dos psicólogos.","registrar todos os atendimentos clínicos do país.","emitir a carteira de identidade profissional do psicólogo."],c:1,
+cm:"O SATEPSI (Sistema de Avaliação de Testes Psicológicos) analisa e divulga quais instrumentos têm parecer favorável (satisfazem requisitos técnicos) para uso profissional, orientando a avaliação psicológica."},
+{id:"psi5",t:"psi_resolucoes",e:`A avaliação psicológica em concurso público e processos seletivos, objeto de resolução específica do CFP, deve caracterizar-se por`,
+o:["critérios sigilosos, não divulgados aos candidatos.","fundamentação técnica, transparência dos critérios e direito do candidato a conhecer os resultados.","uso de instrumentos sem exigência de parecer favorável.","decisão baseada apenas na impressão do avaliador.","dispensa de qualquer relação com o perfil do cargo."],c:1,
+cm:"A avaliação psicológica em contextos públicos exige base técnica, uso de instrumentos com parecer favorável, critérios previamente definidos a partir do perfil do cargo, transparência e direito de o candidato conhecer/entrevistar-se sobre o resultado."},
+{id:"psi6",t:"psi_organizacional",e:`A distinção entre cultura e clima organizacional pode ser resumida da seguinte forma:`,
+o:["cultura e clima são termos sinônimos.","a cultura é a percepção momentânea do ambiente; o clima, os valores profundos e duradouros.","a cultura envolve valores, crenças e pressupostos mais profundos e duradouros; o clima é a percepção compartilhada e mais momentânea do ambiente de trabalho.","o clima independe da cultura da organização.","a cultura só existe em empresas privadas; o clima, em públicas."],c:2,
+cm:"A cultura organizacional é o conjunto mais profundo e estável de valores, crenças e pressupostos; o clima é a percepção compartilhada, mais conjuntural, do ambiente — influenciada pela cultura, mas variável no tempo."},
+{id:"psi7",t:"psi_organizacional",e:`Na Teoria dos Dois Fatores de Herzberg, os fatores 'higiênicos' (como salário, condições físicas e relações interpessoais)`,
+o:["são a principal fonte de motivação e satisfação no trabalho.","quando adequados, evitam a insatisfação, mas não geram, por si sós, motivação.","não têm qualquer influência sobre o comportamento no trabalho.","substituem integralmente os fatores motivacionais.","referem-se apenas ao conteúdo do próprio cargo."],c:1,
+cm:"Para Herzberg, os fatores higiênicos (extrínsecos) evitam a insatisfação quando presentes, mas não motivam; a motivação vem dos fatores motivacionais (intrínsecos), ligados ao conteúdo do trabalho, reconhecimento e realização."},
+{id:"psi8",t:"psi_organizacional",e:`A gestão de mudanças nas organizações tem entre seus principais desafios`,
+o:["eliminar completamente qualquer resistência antes de comunicar a mudança.","lidar com a resistência das pessoas, comunicando, envolvendo e apoiando os envolvidos ao longo do processo.","impor as mudanças sem participação dos trabalhadores para agilizar.","tratar a mudança como evento único, sem acompanhamento posterior.","restringir-se a alterações tecnológicas, ignorando aspectos humanos."],c:1,
+cm:"A resistência é natural; a gestão de mudanças eficaz trabalha comunicação, participação, capacitação e apoio às pessoas ao longo do processo, considerando os aspectos humanos e culturais, não apenas os técnicos."},
+{id:"psi9",t:"psi_diagnostico",e:`No processo de agregar pessoas, recrutamento e seleção diferenciam-se porque o recrutamento`,
+o:["escolhe o candidato final, e a seleção apenas o comunica.","atrai candidatos potenciais, enquanto a seleção compara e escolhe os mais adequados ao perfil.","é sempre interno, e a seleção, sempre externa.","dispensa a definição do perfil da vaga.","ocorre após a admissão do trabalhador."],c:1,
+cm:"Recrutamento é o conjunto de técnicas para atrair candidatos (formar o 'pool'); seleção é o processo de comparar candidatos ao perfil e escolher os mais adequados. Ambos partem da definição do perfil da vaga."},
+{id:"psi10",t:"psi_diagnostico",e:`A preparação para a aposentadoria, como atuação do psicólogo nas organizações, tem como objetivo principal`,
+o:["antecipar demissões para reduzir custos com pessoal.","apoiar o trabalhador na transição para uma nova fase de vida, considerando aspectos psicossociais.","avaliar o desempenho para justificar o desligamento.","impedir que o trabalhador se aposente.","restringir-se ao cálculo do benefício previdenciário."],c:1,
+cm:"Programas de preparação para a aposentadoria (PPA) apoiam o trabalhador na transição, trabalhando identidade, projetos de vida, saúde e vínculos — dimensão psicossocial —, e não questões meramente previdenciárias ou de corte de custos."},
+{id:"psi11",t:"psi_diagnostico",e:`A avaliação de desempenho, quando bem conduzida, deve servir principalmente para`,
+o:["punir os trabalhadores com pior resultado.","subsidiar o desenvolvimento das pessoas e a melhoria contínua, com retorno (feedback) construtivo.","justificar exclusivamente decisões de demissão.","comparar publicamente os empregados entre si.","substituir o levantamento de necessidades de treinamento."],c:1,
+cm:"A avaliação de desempenho é ferramenta de desenvolvimento: identifica pontos fortes e lacunas, orienta feedback, T&D e planos de carreira. Reduzi-la a punição ou exposição pública descaracteriza sua função."},
+{id:"psi12",t:"psi_social",e:`Sobre liderança, a abordagem situacional (Hersey e Blanchard) propõe que o líder eficaz`,
+o:["mantém sempre o mesmo estilo, independentemente da equipe.","adapta seu estilo ao nível de maturidade/prontidão dos liderados para cada tarefa.","utiliza apenas o estilo autocrático em qualquer contexto.","evita delegar tarefas em todas as situações.","baseia-se exclusivamente em traços natos de personalidade."],c:1,
+cm:"A liderança situacional sustenta que não há um estilo único ideal: o líder ajusta seu comportamento (direção e apoio) conforme a maturidade/prontidão dos liderados para cada tarefa — daí variar entre determinar, persuadir, compartilhar e delegar."},
+{id:"psi13",t:"psi_social",e:`Nos processos grupais, o fenômeno em que a presença do grupo leva o indivíduo a reduzir seu esforço individual em tarefas coletivas é conhecido como`,
+o:["sinergia positiva.","facilitação social plena.","'folga social' (vadiagem social / social loafing).","coesão grupal.","liderança compartilhada."],c:2,
+cm:"A 'folga social' (social loafing) descreve a redução do esforço individual quando a contribuição de cada um se dilui no grupo. Estratégias como tornar contribuições identificáveis e metas claras reduzem o efeito."},
+{id:"psi14",t:"psi_social",e:`Modelos de intervenção psicossocial em situações de crise, emergência e catástrofe têm como foco`,
+o:["realizar psicoterapia de longo prazo no local do evento.","oferecer apoio imediato, acolhimento e estabilização emocional às pessoas afetadas, articulando a rede de suporte.","selecionar quem terá direito à assistência.","substituir o atendimento médico de urgência.","avaliar a produtividade dos trabalhadores durante a crise."],c:1,
+cm:"As intervenções em crise/emergência priorizam primeiros cuidados psicológicos: acolhimento, estabilização, informação e encaminhamento à rede de apoio — não substituem a urgência médica nem se confundem com psicoterapia prolongada."},
+{id:"psi15",t:"psi_saude",e:`A Norma Regulamentadora NR-1, em sua atualização, passou a exigir, no Gerenciamento de Riscos Ocupacionais (GRO/PGR), a consideração também dos`,
+o:["riscos exclusivamente químicos.","riscos psicossociais relacionados ao trabalho.","riscos apenas de acidentes mecânicos.","custos financeiros da folha de pagamento.","índices de produtividade da equipe."],c:1,
+cm:"A NR-1 estruturou o GRO e o PGR e passou a contemplar expressamente os riscos psicossociais relacionados ao trabalho, exigindo sua identificação e o planejamento de medidas de prevenção."},
+{id:"psi16",t:"psi_saude",e:`A Síndrome de Burnout, relevante para a saúde mental no trabalho, é caracterizada como`,
+o:["um traço de personalidade estável e imutável.","uma síndrome resultante de estresse crônico no trabalho não gerido, com exaustão, distanciamento e queda na eficácia.","uma doença exclusivamente física, sem componente psíquico.","um sinônimo de qualquer episódio de tristeza.","um transtorno sem relação com o contexto laboral."],c:1,
+cm:"A CID-11 descreve o Burnout como fenômeno ocupacional decorrente de estresse crônico no trabalho mal administrado, com três dimensões: exaustão, distanciamento mental/cinismo em relação ao trabalho e redução da eficácia profissional."},
+{id:"psi17",t:"psi_saude",e:`O 'nexo causal', no campo da saúde do trabalhador, refere-se`,
+o:["ao vínculo empregatício formal do trabalhador.","à relação entre a doença/agravo e as condições ou atividades de trabalho.","ao valor do benefício previdenciário devido.","à quantidade de horas extras realizadas.","à hierarquia entre os setores da empresa."],c:1,
+cm:"O nexo causal é a relação de causa entre o adoecimento/agravo e o trabalho. Instrumentos como o Nexo Técnico Epidemiológico Previdenciário (NTEP) auxiliam nesse reconhecimento para fins de saúde e previdência."},
+{id:"psi18",t:"psi_saude",e:`O assédio moral no ambiente de trabalho caracteriza-se, essencialmente, por`,
+o:["uma única crítica pontual sobre o desempenho.","condutas abusivas e repetitivas que expõem o trabalhador a situações humilhantes e degradantes.","qualquer cobrança legítima de metas pela chefia.","conflitos naturais e esporádicos entre colegas.","a avaliação de desempenho formal e transparente."],c:1,
+cm:"O assédio moral envolve condutas abusivas, reiteradas e prolongadas, que humilham e degradam o trabalhador, atingindo sua dignidade e saúde psíquica. Uma cobrança pontual e legítima de metas não configura, por si só, assédio."},
+{id:"psi19",t:"psi_organizacional",e:`A gestão por competências, aplicada à área de gestão de pessoas, tem como propósito`,
+o:["padronizar salários sem considerar entregas.","alinhar as competências das pessoas às estratégias e necessidades da organização, orientando seleção, desenvolvimento e avaliação.","substituir a área de RH por sistemas automatizados.","focar apenas em conhecimentos técnicos, ignorando atitudes.","eliminar a avaliação de desempenho."],c:1,
+cm:"A gestão por competências integra os subsistemas de RH (seleção, T&D, avaliação, carreira) em torno das competências necessárias à estratégia, considerando conhecimentos, habilidades e atitudes."},
+{id:"psi20",t:"psi_diagnostico",e:`As políticas de diversidade e ações afirmativas nas organizações têm como objetivo`,
+o:["homogeneizar os perfis dos trabalhadores.","promover a inclusão e a equidade de grupos histórica ou socialmente desfavorecidos no ambiente de trabalho.","reduzir a representatividade de minorias.","dispensar critérios técnicos de seleção.","restringir-se a exigências legais sem impacto na cultura."],c:1,
+cm:"Diversidade e ações afirmativas buscam inclusão e equidade, ampliando a participação de grupos sub-representados e transformando a cultura organizacional, sem abandonar critérios técnicos — combinando justiça social e efetividade."}
+];
+
+/* ---------------- ESTADO / PERSISTÊNCIA (dois perfis) ---------------- */
+const KEY="transpetro_estudos_v2";
+const NAMES={dani:"Danielle",mari:"Mariana"};
+const CARGO={dani:"ADM",mari:"PSI"};
+function freshProfile(){return {progress:{},errors:[],activity:{},log:[],meta:20};}
+function freshState(){return {active:null,profiles:{dani:freshProfile(),mari:freshProfile()}};}
+let S=load();
+function load(){
+  let raw=null;try{const r=localStorage.getItem(KEY);if(r)raw=JSON.parse(r);}catch(e){}
+  if(raw&&raw.profiles){raw.profiles.dani=Object.assign(freshProfile(),raw.profiles.dani);raw.profiles.mari=Object.assign(freshProfile(),raw.profiles.mari);if(raw.active!=="dani"&&raw.active!=="mari")raw.active=null;return raw;}
+  const st=freshState();
+  try{const old=JSON.parse(localStorage.getItem("transpetro_estudos_v1"));
+    if(old&&old.progress){for(const k in old.progress){const ar=TOPICS[k]?TOPICS[k].area:null;const tgt=(ar==="PSI")?st.profiles.mari:st.profiles.dani;tgt.progress[k]=old.progress[k];}
+      (old.errors||[]).forEach(id=>{const q=Q.find(x=>x.id===id);if(q){const ar=TOPICS[q.t].area;(ar==="PSI"?st.profiles.mari:st.profiles.dani).errors.push(id);}});}
+  }catch(e){}
+  return st;
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function P(){return S.active?S.profiles[S.active]:null;}
+function setActive(id){S.active=id;save();updateWho();}
+function updateWho(){const sub=document.getElementById("brandSub");if(sub)sub.textContent=S.active?("Estudando: "+NAMES[S.active]+" · "+(S.active==="dani"?"ADMINISTRAÇÃO":"PSICOLOGIA")):"ESCOLHA O PERFIL PARA COMEÇAR";}
+function todayStr(d){d=d||new Date();return d.toISOString().slice(0,10);}
+function daysToProva(){const now=new Date();const p=new Date(PROVA+"T00:00:00");return Math.max(0,Math.ceil((p-now)/86400000));}
+
+/* progresso por tópico (perfil ativo) */
+function bump(topic,ok){const pr=P();if(!pr)return;const p=pr.progress[topic]||(pr.progress[topic]={a:0,c:0});p.a++;if(ok)p.c++;}
+function mastery(topic){const pr=P();const p=(pr&&pr.progress[topic])||{a:0,c:0};const acc=p.a?p.c/p.a:0;let st="novo";if(p.a>0){if(acc<0.6)st="fraco";else if(acc<0.8||p.a<2)st="medio";else st="forte";}return{a:p.a,c:p.c,acc,st};}
+const ST_LABEL={forte:"Dominado",medio:"Consolidando",fraco:"Precisa ampliar",novo:"Não praticado"};
+const ST_COLOR={forte:"var(--good)",medio:"var(--warn)",fraco:"var(--crit)",novo:"var(--novo)"};
+
+/* estatísticas */
+function areaStatsOf(pr,area){const ks=Object.keys(TOPICS).filter(k=>TOPICS[k].area===area);let a=0,c=0;ks.forEach(k=>{const p=pr.progress[k];if(p){a+=p.a;c+=p.c;}});return{a,c,acc:a?c/a:0};}
+function areaStats(area){const pr=P();return pr?areaStatsOf(pr,area):{a:0,c:0,acc:0};}
+function personStats(id){const pr=S.profiles[id];const areas=["PT","EN",CARGO[id]];let a=0,c=0;areas.forEach(ar=>{const s=areaStatsOf(pr,ar);a+=s.a;c+=s.c;});return{a,c,acc:a?c/a:0};}
+function weakestOf(id){const pr=S.profiles[id];const areas=["PT","EN",CARGO[id]];let worst=null;areas.forEach(ar=>Object.keys(TOPICS).filter(k=>TOPICS[k].area===ar).forEach(k=>{const p=pr.progress[k];if(p&&p.a>0){const acc=p.c/p.a;if(!worst||acc<worst.acc)worst={k,acc};}}));return worst;}
+function totalAnswered(){const pr=P();return pr?Object.values(pr.progress).reduce((s,p)=>s+p.a,0):0;}
+function totalCorrect(){const pr=P();return pr?Object.values(pr.progress).reduce((s,p)=>s+p.c,0):0;}
+
+/* streak (perfil ativo) */
+function streak(){const pr=P();if(!pr)return 0;const act=pr.activity;let n=0;let cur=new Date();for(;;){const ds=todayStr(cur);if(act[ds]>0){n++;cur.setDate(cur.getDate()-1);}else{if(n===0){const y=new Date(cur);y.setDate(y.getDate()-1);if(act[todayStr(y)]>0){cur=y;n++;cur.setDate(cur.getDate()-1);continue;}}break;}}return n;}
+function daysStudied(){const pr=P();if(!pr)return 0;return Object.keys(pr.activity).filter(d=>pr.activity[d]>0).length;}
+
+/* ---------------- NAVEGAÇÃO ---------------- */
+const views=["painel","simulado","evolucao","rotina","data"];
+function show(v){
+  if((v==="simulado"||v==="evolucao"||v==="rotina")&&!S.active){alert("Primeiro escolha quem vai estudar: Danielle (Administração) ou Mariana (Psicologia).");v="painel";}
+  views.forEach(x=>{const el=document.getElementById("v-"+x);if(el)el.hidden=(x!==v);});
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",String(t.dataset.view===v)));
+  window.scrollTo({top:0,behavior:"instant"in window?"instant":"auto"});
+  if(v==="painel")renderPainel();if(v==="simulado")renderSetup();if(v==="evolucao")renderEvolucao();if(v==="rotina")renderRotina();if(v==="data")renderData();}
+document.getElementById("nav").addEventListener("click",e=>{const b=e.target.closest(".tab");if(b)show(b.dataset.view);});
+document.getElementById("btnData").addEventListener("click",()=>show("data"));
+
+/* ---------------- PAINEL ---------------- */
+function esc(s){return String(s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));}
+function personCard(id){
+  const st=personStats(id);const pct=Math.round(st.acc*100);const w=weakestOf(id);const activeNow=S.active===id;
+  const cargoLabel=id==="dani"?"Administração — Ênfase 1":"Psicologia — Ênfase 31";
+  return `<button class="cargo ${activeNow?'sel':''}" data-person="${id}">
+    <div class="eyebrow">${activeNow?"● Estudando agora":(id==="dani"?"Ênfase 1":"Ênfase 31")}</div>
+    <h3>${NAMES[id]}</h3>
+    <div class="small muted">${cargoLabel}</div>
+    <div class="kpi"><b>${st.a?pct:"—"}</b><span class="muted small">${st.a?"% de acerto":"sem dados ainda"}</span></div>
+    <div class="ring" style="--p:${st.a?pct:2};--c:${pct>=70?'var(--good)':pct>=50?'var(--warn)':'var(--accent)'}"><i></i></div>
+    <div class="small muted">${st.a?(w?("A reforçar: "+esc(TOPICS[w.k].label)):"Bom desempenho"):"Base própria, com Português e Inglês"}</div>
+    <span class="btn sm" style="align-self:flex-start;pointer-events:none">${activeNow?"Continuar":"Escolher"} →</span>
+  </button>`;
+}
+function renderPainel(){
+  const el=document.getElementById("v-painel");
+  const chooser=`
+    <div>
+      <div class="eyebrow">Quem vai estudar?</div>
+      <h1 style="font-size:24px;margin:6px 0 4px">Escolha o perfil</h1>
+      <p class="lead">Cada pessoa tem a sua própria base — inclusive Português e Inglês, contados separadamente. O progresso de uma não se mistura com o da outra.</p>
+    </div>
+    <div class="cargos" style="margin-top:14px">
+      ${personCard("dani")}
+      ${personCard("mari")}
+    </div>`;
+  if(!S.active){
+    el.innerHTML=`<div class="stack">${chooser}
+      <div class="card pad muted small">Toque em um perfil acima para começar. Você pode trocar de perfil a qualquer momento voltando a esta tela (ou tocando no título no topo).</div>
+    </div>`;
+  }else{
+    const id=S.active;
+    el.innerHTML=`<div class="stack">
+      ${chooser}
+      <div class="card pad">
+        <div class="eyebrow">Painel de ${esc(NAMES[id])}</div>
+        <h2 style="font-size:20px;margin-top:6px">${id==="dani"?"Administração":"Psicologia"} + Português + Inglês</h2>
+        <div class="statrow" style="margin-top:14px">
+          <div class="stat"><b>${totalAnswered()}</b><span>questões resolvidas</span></div>
+          <div class="stat"><b>${totalAnswered()?Math.round(totalCorrect()/totalAnswered()*100):0}%</b><span>acerto geral</span></div>
+          <div class="stat"><b>${streak()}</b><span>dias seguidos</span></div>
+          <div class="stat"><b>${P().errors.length}</b><span>no caderno de erros</span></div>
+        </div>
+        <div class="eyebrow" style="margin-top:18px">Começar agora</div>
+        <div class="quick" style="margin-top:12px">
+          <button class="btn" data-go="${CARGO[id]}full">Simulado completo</button>
+          <button class="btn ghost" data-go="${CARGO[id]}">Só específicas</button>
+          <button class="btn ghost" data-go="PT">Só Português</button>
+          <button class="btn ghost" data-go="EN">Só Inglês</button>
+          ${P().errors.length?`<button class="btn ghost" data-go="erros">Revisar erros (${P().errors.length})</button>`:""}
+        </div>
+      </div>
+    </div>`;
+  }
+  el.querySelectorAll("[data-person]").forEach(b=>b.addEventListener("click",()=>{setActive(b.dataset.person);renderPainel();}));
+  el.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>quickStart(b.dataset.go)));
+}
+
+/* ---------------- SIMULADO: setup ---------------- */
+let setupSel={escopo:"ADMfull",n:10};
+function countFor(escopo){return buildPool(escopo).length;}
+function buildPool(escopo){
+  if(escopo==="erros"){const pr=P();return Q.filter(q=>pr&&pr.errors.includes(q.id));}
+  let areas;
+  if(escopo==="ADMfull")areas=["PT","EN","ADM"];
+  else if(escopo==="PSIfull")areas=["PT","EN","PSI"];
+  else areas=[escopo];
+  return Q.filter(q=>areas.includes(TOPICS[q.t].area));
+}
+function renderSetup(){
+  const el=document.getElementById("v-simulado");
+  const id=S.active;const cg=CARGO[id];
+  const escopos=[[cg+"full",(id==="dani"?"Administração":"Psicologia")+" completo"],[cg,"Só específicas"],["PT","Português"],["EN","Inglês"]];
+  if(P().errors.length)escopos.push(["erros","Meus erros ("+P().errors.length+")"]);
+  if(!escopos.map(e=>e[0]).includes(setupSel.escopo))setupSel.escopo=cg+"full";
+  const avail=countFor(setupSel.escopo);
+  const opts=[10,20,"tudo"];
+  el.innerHTML=`
+  <div class="stack">
+    <div class="card pad">
+      <div class="eyebrow">Montar simulado</div>
+      <h2 style="font-size:20px;margin-top:6px">Escolha o foco e o tamanho</h2>
+      <div class="field">
+        <label>Foco do simulado</label>
+        <div class="chips" id="escChips">
+          ${escopos.map(([k,l])=>`<button class="chip" data-esc="${k}" aria-pressed="${setupSel.escopo===k}">${l}</button>`).join("")}
+        </div>
+        <div class="small muted" id="escInfo"></div>
+      </div>
+      <div class="field">
+        <label>Número de questões</label>
+        <div class="chips" id="nChips">
+          ${opts.map(o=>`<button class="chip" data-n="${o}" aria-pressed="${String(setupSel.n)===String(o)}">${o==="tudo"?"Tudo":o+" questões"}</button>`).join("")}
+        </div>
+      </div>
+      <div class="field">
+        <button class="btn" id="startBtn" style="align-self:flex-start;margin-top:6px">Iniciar simulado →</button>
+      </div>
+      <p class="small muted" style="margin-top:10px">A correção só aparece no fim: você responde como na prova e, ao finalizar, recebe o gabarito comentado e o conteúdo para estudar em cada erro. Provas de Administração e Psicologia incluem Português e Inglês, como no edital.</p>
+    </div>
+  </div>`;
+  const info=el.querySelector("#escInfo");
+  const upd=()=>{info.textContent=`Banco disponível para este foco: ${countFor(setupSel.escopo)} questões.`;};
+  upd();
+  el.querySelector("#escChips").addEventListener("click",e=>{const b=e.target.closest("[data-esc]");if(!b)return;setupSel.escopo=b.dataset.esc;el.querySelectorAll("[data-esc]").forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.esc===setupSel.escopo)));upd();});
+  el.querySelector("#nChips").addEventListener("click",e=>{const b=e.target.closest("[data-n]");if(!b)return;setupSel.n=b.dataset.n;el.querySelectorAll("[data-n]").forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.n===setupSel.n)));});
+  el.querySelector("#startBtn").addEventListener("click",()=>startSim(setupSel.escopo,setupSel.n));
+}
+function quickStart(escopo){if(!S.active)return;setupSel.escopo=escopo;show("simulado");startSim(escopo,10);}
+
+/* ---------------- SIMULADO: execução ---------------- */
+let RUN=null;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startSim(escopo,n){
+  let pool=shuffle(buildPool(escopo));
+  if(!pool.length){alert("Não há questões para este foco ainda.");return;}
+  // ordena por área para lembrar a prova (Português, Inglês, Específicas) mantendo aleatório dentro
+  if(n!=="tudo"){n=parseInt(n,10);pool=pool.slice(0,Math.min(n,pool.length));}
+  const order={PT:0,EN:1,ADM:2,PSI:2};
+  pool.sort((a,b)=>order[TOPICS[a.t].area]-order[TOPICS[b.t].area]);
+  RUN={qs:pool,ans:{},i:0,escopo};
+  renderRun();
+}
+function renderRun(){
+  const el=document.getElementById("v-simulado");
+  const q=RUN.qs[RUN.i];const area=TOPICS[q.t].area;
+  const pct=Math.round((RUN.i)/RUN.qs.length*100);
+  const answered=Object.keys(RUN.ans).length;
+  el.innerHTML=`
+  <div class="stack">
+    <div class="runbar">
+      <button class="btn ghost sm" id="abort">✕ Sair</button>
+      <div class="prog"><i style="width:${pct}%"></i></div>
+      <div class="small muted" style="font-family:var(--mono);white-space:nowrap">${RUN.i+1}/${RUN.qs.length}</div>
+    </div>
+    <div class="card pad">
+      <div class="qmeta">
+        <span class="badge">${AREAS[area].tag}</span>
+        <span class="small muted">${esc(TOPICS[q.t].label)}</span>
+      </div>
+      <div class="qtext">${esc(q.e)}</div>
+      <div class="opts" id="opts">
+        ${q.o.map((o,idx)=>`<button class="opt" data-idx="${idx}" aria-pressed="${RUN.ans[q.id]===idx}"><span class="letter">${"ABCDE"[idx]}</span><span>${esc(o)}</span></button>`).join("")}
+      </div>
+      <div class="navbtns">
+        <button class="btn ghost" id="prev" ${RUN.i===0?"disabled":""}>← Anterior</button>
+        ${RUN.i<RUN.qs.length-1?`<button class="btn" id="next">Próxima →</button>`:`<button class="btn" id="finish">Finalizar (${answered}/${RUN.qs.length})</button>`}
+        <span class="small muted" style="margin-left:auto">${answered} respondida(s)</span>
+      </div>
+      ${RUN.i===RUN.qs.length-1?`<p class="small muted" style="margin-top:10px">Você pode voltar e revisar antes de finalizar. Ao finalizar, seu desempenho é registrado na Evolução.</p>`:""}
+    </div>
+  </div>`;
+  el.querySelector("#opts").addEventListener("click",e=>{const b=e.target.closest("[data-idx]");if(!b)return;RUN.ans[q.id]=parseInt(b.dataset.idx,10);renderRun();});
+  el.querySelector("#abort").addEventListener("click",()=>{if(confirm("Sair do simulado? As respostas atuais não serão salvas."))renderSetup();});
+  const prev=el.querySelector("#prev");if(prev)prev.addEventListener("click",()=>{RUN.i--;renderRun();});
+  const next=el.querySelector("#next");if(next)next.addEventListener("click",()=>{RUN.i++;renderRun();});
+  const fin=el.querySelector("#finish");if(fin)fin.addEventListener("click",finishSim);
+}
+function finishSim(){
+  const unanswered=RUN.qs.filter(q=>RUN.ans[q.id]===undefined).length;
+  if(unanswered>0 && !confirm(unanswered+" questão(ões) sem resposta serão contadas como erro. Finalizar mesmo assim?"))return;
+  // corrige e registra
+  const pr=P();let correct=0;const perArea={};const details=[];
+  RUN.qs.forEach(q=>{
+    const a=RUN.ans[q.id];const ok=a===q.c;
+    bump(q.t,ok);
+    const ar=TOPICS[q.t].area;perArea[ar]=perArea[ar]||{a:0,c:0};perArea[ar].a++;if(ok)perArea[ar].c++;
+    if(ok){correct++;pr.errors=pr.errors.filter(x=>x!==q.id);}else{if(!pr.errors.includes(q.id))pr.errors.push(q.id);}
+    details.push({q,a,ok});
+  });
+  const td=todayStr();pr.activity[td]=(pr.activity[td]||0)+RUN.qs.length;
+  pr.log.push({date:td,escopo:RUN.escopo,score:correct,total:RUN.qs.length});
+  if(pr.log.length>60)pr.log=pr.log.slice(-60);
+  save();
+  renderResult(correct,RUN.qs.length,perArea,details);
+}
+let resultFilter="all";
+function renderResult(correct,total,perArea,details){
+  const pct=Math.round(correct/total*100);
+  const passed=pct>=50;
+  const el=document.getElementById("v-simulado");
+  const list=details.filter(d=>resultFilter==="all"?true:!d.ok);
+  el.innerHTML=`
+  <div class="stack">
+    <div class="card pad">
+      <div class="scorehead">
+        <div class="eyebrow">Resultado</div>
+        <div class="bigscore" style="color:${passed?'var(--good)':'var(--crit)'}">${pct}%</div>
+        <div class="muted">${correct} de ${total} · ${passed?"acima da linha de corte (50%)":"abaixo da linha de corte (50%)"}</div>
+      </div>
+      <div class="areabars">
+        ${Object.keys(perArea).map(ar=>{const p=perArea[ar];const pc=Math.round(p.c/p.a*100);return `<div class="areabar"><span class="lab">${AREAS[ar].tag}</span><div class="ring" style="--p:${pc};--c:${pc>=70?'var(--good)':pc>=50?'var(--warn)':'var(--crit)'}"><i></i></div><span class="num">${p.c}/${p.a}</span></div>`;}).join("")}
+      </div>
+      <div class="row" style="margin-top:16px">
+        <button class="btn" data-r="novo">Novo simulado</button>
+        ${details.some(d=>!d.ok)?`<button class="btn ghost" data-r="refazer">Refazer só os que errei</button>`:""}
+        <button class="btn ghost" data-r="evolucao">Ver evolução</button>
+      </div>
+    </div>
+    <div>
+      <div class="filterrow">
+        <strong style="font-family:var(--serif);font-size:17px">Gabarito comentado</strong>
+        <div class="chips" style="margin-left:auto">
+          <button class="chip" data-f="all" aria-pressed="${resultFilter==="all"}">Todas</button>
+          <button class="chip" data-f="wrong" aria-pressed="${resultFilter==="wrong"}">Só erros</button>
+        </div>
+      </div>
+      <div id="reviewList">
+        ${list.map(d=>reviewCard(d)).join("")||`<div class="card pad muted small">Nenhum erro neste filtro. 🎯</div>`}
+      </div>
+    </div>
+  </div>`;
+  el.querySelectorAll("[data-r]").forEach(b=>b.addEventListener("click",()=>{
+    const r=b.dataset.r;
+    if(r==="novo")renderSetup();
+    else if(r==="evolucao")show("evolucao");
+    else if(r==="refazer"){const ids=details.filter(d=>!d.ok).map(d=>d.q.id);RUN={qs:shuffle(RUN.qs.filter(q=>ids.includes(q.id))),ans:{},i:0,escopo:RUN.escopo};renderRun();}
+  }));
+  el.querySelectorAll("[data-f]").forEach(b=>b.addEventListener("click",()=>{resultFilter=b.dataset.f;renderResult(correct,total,perArea,details);}));
+  el.querySelectorAll(".qrhead").forEach(h=>h.addEventListener("click",()=>{const bd=h.nextElementSibling;bd.hidden=!bd.hidden;}));
+}
+function reviewCard(d){
+  const q=d.q;const chosen=d.a===undefined?"—":"ABCDE"[d.a];const corr="ABCDE"[q.c];
+  return `<div class="qreview">
+    <div class="qrhead">
+      <span class="ic ${d.ok?"ok":"no"}">${d.ok?"✓":"✕"}</span>
+      <span class="t"><strong>${AREAS[TOPICS[q.t].area].tag}</strong> · ${esc(TOPICS[q.t].label)}<br>${esc(q.e.split("\n")[0]).slice(0,110)}${q.e.length>110?"…":""}</span>
+    </div>
+    <div class="qrbody" hidden>
+      <div class="ans"><span class="k">Sua resposta:</span> ${chosen} &nbsp;·&nbsp; <span class="k">Gabarito:</span> ${corr}) ${esc(q.o[q.c])}</div>
+      <div class="small">${esc(q.cm)}</div>
+      ${!d.ok?`<div class="studybox"><div class="eyebrow">Conteúdo para estudar</div><div class="small" style="margin-top:6px"><strong>${esc(TOPICS[q.t].label)}.</strong> ${esc(TOPICS[q.t].estudo)}</div></div>`:""}
+    </div>
+  </div>`;
+}
+
+/* ---------------- EVOLUÇÃO ---------------- */
+function renderEvolucao(){
+  const el=document.getElementById("v-evolucao");const id=S.active;
+  const areasOrder=[CARGO[id],"PT","EN"];
+  let html=`<div class="stack"><div class="card pad">
+    <div class="eyebrow">Evolução de ${esc(NAMES[id])}</div>
+    <h2 style="font-size:20px;margin-top:6px">Domínio por conteúdo</h2>
+    <p class="small muted" style="margin-top:6px">Cada tema do edital aparece com seu status. Verde = dominado, amarelo = consolidando, vermelho = precisa ampliar, cinza = ainda não praticado. Toque em um tema para ver o que estudar.</p>`;
+  // resumo
+  const allT=Object.keys(TOPICS).filter(k=>areasOrder.includes(TOPICS[k].area));const cnt={forte:0,medio:0,fraco:0,novo:0};allT.forEach(k=>cnt[mastery(k).st]++);
+  html+=`<div class="statrow" style="margin-top:14px">
+    <div class="stat"><b style="color:var(--good)">${cnt.forte}</b><span>dominados</span></div>
+    <div class="stat"><b style="color:var(--warn)">${cnt.medio}</b><span>consolidando</span></div>
+    <div class="stat"><b style="color:var(--crit)">${cnt.fraco}</b><span>a ampliar</span></div>
+    <div class="stat"><b style="color:var(--novo)">${cnt.novo}</b><span>não praticados</span></div>
+  </div></div>`;
+  areasOrder.forEach(ar=>{
+    const ks=Object.keys(TOPICS).filter(k=>TOPICS[k].area===ar);
+    const s=areaStats(ar);
+    html+=`<div class="card pad"><div class="areahead"><h3>${AREAS[ar].label}</h3><span class="small muted" style="font-family:var(--mono)">${s.a?Math.round(s.acc*100)+"% · "+s.a+" q":"sem dados"}</span></div>`;
+    ks.forEach(k=>{const m=mastery(k);const w=m.a?Math.max(4,Math.round(m.acc*100)):4;
+      html+=`<div class="topicrow" data-topic="${k}">
+        <div class="trhead">
+          <span class="name">${esc(TOPICS[k].label)}</span>
+          <span class="pill ${m.st}">${ST_LABEL[m.st]}</span>
+        </div>
+        <div class="trbar"><i style="width:${w}%;background:${ST_COLOR[m.st]}"></i></div>
+        <div class="small muted" style="margin-top:6px">${m.a?(m.c+"/"+m.a+" acertos"):"toque para ver o que estudar"}</div>
+        <div class="trstudy" hidden>${esc(TOPICS[k].estudo)}</div>
+      </div>`;
+    });
+    html+=`</div>`;
+  });
+  html+=`</div>`;
+  el.innerHTML=html;
+  el.querySelectorAll(".topicrow").forEach(r=>r.querySelector(".trhead").addEventListener("click",()=>{const s=r.querySelector(".trstudy");s.hidden=!s.hidden;}));
+}
+
+/* ---------------- ROTINA ---------------- */
+function renderRotina(){
+  const el=document.getElementById("v-rotina");const id=S.active;const pr=P();
+  const d=daysToProva();
+  const wd=["D","S","T","Q","Q","S","S"];
+  let days="";const base=new Date();
+  for(let i=6;i>=0;i--){const dt=new Date(base);dt.setDate(dt.getDate()-i);const ds=todayStr(dt);const on=(pr.activity[ds]||0)>0;days+=`<div class="day ${on?"on":""}" title="${ds}"><small>${wd[dt.getDay()]}</small>${on?(pr.activity[ds]):""}</div>`;}
+  const planoAdm=[
+    ["Seg","Administração — específicas","Financeira, Produção, Contratação"],
+    ["Ter","Português + Inglês","Gramática e leitura + mini-simulado"],
+    ["Qua","Administração — específicas","Estratégia, Marketing, RH"],
+    ["Qui","Português + Inglês","Concordância, crase, reading"],
+    ["Sex","Administração — específicas","Projetos, Decisão, Estatística, ESG"],
+    ["Sáb","Simulado completo","Adm + PT + EN e revisar erros"],
+    ["Dom","Caderno de erros","Refazer erros e temas em vermelho"]
+  ];
+  const planoPsi=[
+    ["Seg","Psicologia — específicas","Organizacional, Motivação, Cultura/Clima"],
+    ["Ter","Português + Inglês","Gramática e leitura + mini-simulado"],
+    ["Qua","Psicologia — específicas","Diagnóstico: R&S, T&D, avaliação"],
+    ["Qui","Português + Inglês","Concordância, crase, reading"],
+    ["Sex","Psicologia — específicas","Ética, Resoluções CFP, Saúde do trabalhador"],
+    ["Sáb","Simulado completo","Psico + PT + EN e revisar erros"],
+    ["Dom","Caderno de erros","Refazer erros e temas em vermelho"]
+  ];
+  const plano=id==="dani"?planoAdm:planoPsi;
+  el.innerHTML=`<div class="stack">
+    <div class="card pad">
+      <div class="eyebrow">Rotina de ${esc(NAMES[id])}</div>
+      <div style="display:flex;align-items:baseline;gap:10px;margin-top:6px;flex-wrap:wrap">
+        <span class="bigscore" style="font-size:44px;color:var(--accent)">${d}</span>
+        <span class="muted">dias até a prova (06/12/2026)</span>
+      </div>
+      <div class="statrow" style="margin-top:14px">
+        <div class="stat"><b>${streak()}</b><span>dias seguidos</span></div>
+        <div class="stat"><b>${daysStudied()}</b><span>dias estudados</span></div>
+        <div class="stat"><b>${totalAnswered()}</b><span>questões no total</span></div>
+        <div class="stat"><b>${pr.activity[todayStr()]||0}</b><span>hoje</span></div>
+      </div>
+    </div>
+    <div class="card pad">
+      <div class="eyebrow">Meta diária</div>
+      <div class="goalset" style="margin-top:10px">
+        <span class="small">Quero resolver</span>
+        <input id="metaInput" type="number" min="5" max="200" value="${pr.meta}">
+        <span class="small">questões por dia.</span>
+        <button class="btn sm" id="metaSave">Salvar meta</button>
+      </div>
+      <div style="margin-top:14px">
+        <div class="small muted" style="margin-bottom:6px">Progresso de hoje: ${pr.activity[todayStr()]||0}/${pr.meta}</div>
+        <div class="prog"><i style="width:${Math.min(100,Math.round((pr.activity[todayStr()]||0)/pr.meta*100))}%"></i></div>
+      </div>
+      <div class="week">${days}</div>
+      <p class="small muted" style="margin-top:8px">Os quadrados acendem nos dias em que ${esc(NAMES[id])} praticou. Mantenha a sequência.</p>
+    </div>
+    <div class="card pad">
+      <div class="eyebrow">Rotina semanal sugerida</div>
+      <div style="overflow-x:auto"><table class="plan">
+        <tr><th>Dia</th><th>Foco</th><th>Temas</th></tr>
+        ${plano.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="muted">${r[2]}</td></tr>`).join("")}
+      </table></div>
+      <p class="small muted" style="margin-top:10px">Ritmo sugerido para ${esc(NAMES[id])}, alternando as específicas com Português e Inglês e reservando o fim de semana para simulado completo e revisão dos erros.</p>
+    </div>
+  </div>`;
+  el.querySelector("#metaSave").addEventListener("click",()=>{const v=parseInt(el.querySelector("#metaInput").value,10);if(v>=5&&v<=200){pr.meta=v;save();renderRotina();}});
+}
+
+/* ---------------- DADOS / BACKUP ---------------- */
+function renderData(){
+  const el=document.getElementById("v-data");
+  el.innerHTML=`<div class="stack datapanel">
+    <div class="card pad">
+      <div class="eyebrow">Backup e dados</div>
+      <h2 style="font-size:19px;margin-top:6px">Progresso das duas pessoas</h2>
+      <p class="small muted" style="margin-top:6px">O progresso de Danielle e de Mariana é salvo automaticamente neste navegador (inclusive na versão publicada no GitHub). Para levar a outro computador ou celular, copie o código abaixo e cole no campo de restauração no outro aparelho.</p>
+      <div class="field"><label>Backup completo (Danielle + Mariana)</label>
+        <textarea id="expBox" readonly>${esc(JSON.stringify(S))}</textarea>
+        <button class="btn ghost sm" id="copyBtn" style="align-self:flex-start">Copiar código</button>
+      </div>
+      <div class="field"><label>Restaurar de um código</label>
+        <textarea id="impBox" placeholder="Cole aqui um código de progresso..."></textarea>
+        <button class="btn sm" id="impBtn" style="align-self:flex-start">Restaurar progresso</button>
+      </div>
+      <div class="field">
+        <button class="btn ghost sm" id="resetBtn" style="align-self:flex-start;color:var(--crit);border-color:var(--crit)">Zerar progresso das duas</button>
+      </div>
+    </div>
+  </div>`;
+  el.querySelector("#copyBtn").addEventListener("click",()=>{const t=el.querySelector("#expBox");t.select();try{document.execCommand("copy");el.querySelector("#copyBtn").textContent="Copiado ✓";}catch(e){}});
+  el.querySelector("#impBtn").addEventListener("click",()=>{try{const o=JSON.parse(el.querySelector("#impBox").value);if(o&&o.profiles){o.profiles.dani=Object.assign(freshProfile(),o.profiles.dani);o.profiles.mari=Object.assign(freshProfile(),o.profiles.mari);if(o.active!=="dani"&&o.active!=="mari")o.active=null;S=o;save();alert("Progresso restaurado!");show("painel");}else{alert("Código inválido.");}}catch(e){alert("Código inválido.");}});
+  el.querySelector("#resetBtn").addEventListener("click",()=>{if(confirm("Isso apaga o progresso das DUAS pessoas. Continuar?")){S=freshState();save();show("painel");}});
+}
+
+/* ---------------- INIT ---------------- */
+document.getElementById("cdDays").textContent=daysToProva();
+const brandEl=document.querySelector(".brand");if(brandEl){brandEl.style.cursor="pointer";brandEl.title="Trocar de perfil";brandEl.addEventListener("click",()=>show("painel"));}
+updateWho();
+renderPainel();
+</script>
+
+</body></html>
